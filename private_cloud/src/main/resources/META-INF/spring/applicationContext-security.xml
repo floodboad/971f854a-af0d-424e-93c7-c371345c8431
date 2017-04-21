@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+	<!-- HTTP security configurations -->
+	<http auto-config="true" use-expressions="true">
+		<form-login login-processing-url="/resources/j_spring_security_check" login-page="/login"
+			authentication-failure-url="/login?login_error=t" authentication-success-handler-ref="authenticationSuccessHandler" />
+		<logout logout-url="/resources/j_spring_security_logout" />
+		<!-- Configure these elements to secure URIs in your application -->
+		<intercept-url pattern="/resources/**" access="permitAll" />
+		<intercept-url pattern="/login/**" access="permitAll" />
+		<intercept-url pattern="/user/online-cloud-manager-list" access="permitAll" />
+		<intercept-url pattern="/user/list-by-real-name" access="permitAll" />
+		<intercept-url pattern="/**" access="isAuthenticated()" />
+	</http>
+
+	<beans:bean id="authenticationSuccessHandler" class="com.sinosoft.util.security.SimpleLoginSuccessHandler">
+		<beans:property name="defaultTargetUrl_User" value="/virtual-machine/list?pageNo=1"></beans:property>
+		<beans:property name="defaultTargetUrl_Manager" value="/overview"></beans:property>
+		<beans:property name="forwardToDestination" value="false"></beans:property>
+	</beans:bean>
+
+	<!-- DataSource to database -->
+	<beans:bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver">
+		</beans:property>
+		<beans:property name="url" value="${database.url}">
+		</beans:property>
+		<beans:property name="username" value="${database.username}"></beans:property>
+		<beans:property name="password" value="${database.password}"></beans:property>
+	</beans:bean>
+
+	<!-- Configure Authentication mechanism -->
+	<authentication-manager>
+		<!-- SHA-256 values can be produced using 'echo -n your_desired_password | sha256sum' (using normal *nix environments) -->
+		<authentication-provider>
+			<!-- use jdbc-user-service to define a query to perform database authentication -->
+			<!-- the 3rd field of users-by-username-query should be enabled, here we return true for all user, and let authenticationSuccessHandler 
+				to check user status -->
+			<jdbc-user-service data-source-ref="datasource" users-by-username-query="SELECT username, password, true FROM user WHERE username = ?"
+				authorities-by-username-query="SELECT u.username, r.role_name FROM user u, role r WHERE r.role_id = u.role_id AND u.username = ?" />
+		</authentication-provider>
+		<authentication-provider>
+			<user-service>
+				<user name="admin" password="827ccb0eea8a706c4c34a16891f84e7b" authorities="ROLE_ADMIN" />
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+</beans:beans>

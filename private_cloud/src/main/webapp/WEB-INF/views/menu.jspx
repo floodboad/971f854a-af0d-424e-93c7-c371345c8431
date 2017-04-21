@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" id="menu" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
+        <menu:category id="c_user_table" z="dbDFDeXt4AFiPaUV4y23Y9Wbb+g=">
+            <menu:item id="i_user_table_new" messageCode="global_menu_new" url="/user_tables?form" z="VML0DYAbFU6IdE1zdOdzvdbOagQ="/>
+            <menu:item id="i_user_table_list" messageCode="global_menu_list" url="/user_tables?page=1&amp;size=${empty param.size ? 10 : param.size}" z="jh4NfeFHKWncfmxfx5ZSbPh/+BE="/>
+        </menu:category>
+        <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
+            <menu:item id="i_controller__loginindex_id" messageCode="global_generic" url="/login/index" z="+bAgKvV6j5ehIOcfril0sqwLmhU="/>
+            <menu:item id="i_controller__userindex_id" messageCode="global_generic" url="/user/index" z="aFvpqHl/PUUBWdOkH6ebhcUw4Qg="/>
+            <menu:item id="i_controller__diskindex_id" messageCode="global_generic" url="/disk/index" z="qsBBIsmGIePJ3zWB9fuRsTWXqUI="/>
+            <menu:item id="i_controller__physicalmachineindex_id" messageCode="global_generic" url="/physicalmachine/index" z="XlQxmkaOolpx8t+ii30eCH0NiKM="/>
+            <menu:item id="i_controller__imageindex_id" messageCode="global_generic" url="/image/index" z="8vLC90VALB9zEcUbTosv+j1SaQE="/>
+            <menu:item id="i_controller__flavorindex_id" messageCode="global_generic" url="/flavor/index" z="LMbrG7nj5cqiobOh5zXCo48yzeY="/>
+            <menu:item id="i_controller__applicationindex_id" messageCode="global_generic" url="/application/index" z="CeM/G2bDfhLTBuvVQmC4lqYS5sk="/>
+            <menu:item id="i_controller__alarmindex_id" messageCode="global_generic" url="/alarm/index" z="rMjkjI0IrRZ9uC48PHSu0qSiWx0="/>
+            <menu:item id="i_controller__snapshotindex_id" messageCode="global_generic" url="/snapshot/index" z="+SYwiisbcxJ0hUGxRfsXpOOL9Hk="/>
+            <menu:item id="i_controller__groupindex_id" messageCode="global_generic" url="/group/index" z="6Lz9bQzi9zbeIij7/wcZaIjEMmM="/>
+            <menu:item id="i_controller__networkindex_id" messageCode="global_generic" url="/network/index" z="dWkkWScv0irHgs3nJm5SvAxFvrk="/>
+            <menu:item id="i_controller__operationlogindex_id" messageCode="global_generic" url="/operationlog/index" z="mkdu8iqc3G+lTqBBzUHm65q+L5k="/>
+            <menu:item id="i_controller__overviewindex_id" messageCode="global_generic" url="/overview/index" z="wSO4GvVzjJRPCKJSlt8uCrvIyQo="/>
+        </menu:category>
+        <menu:category id="c_principal" z="FnLFWXB/U5tWagL29D8k2ZPp4KM=">
+            <menu:item id="i_principal_new" messageCode="global_menu_new" url="/security/users?form" z="6j8zS/LbvDWl/oqZ8HUh7BeNF1I="/>
+            <menu:item id="i_principal_list" messageCode="global_menu_list" url="/security/users?page=1&amp;size=${empty param.size ? 10 : param.size}" z="8dS8JWBi//b31LIKAyhANwlewho="/>
+        </menu:category>
+        <menu:category id="c_authority" z="GIU2CEy7lITDknErfBZQNPQ7WFs=">
+            <menu:item id="i_authority_new" messageCode="global_menu_new" url="/security/roles?form" z="ic1VJI/lUEk+gvBIBpev512GBag="/>
+            <menu:item id="i_authority_list" messageCode="global_menu_list" url="/security/roles?page=1&amp;size=${empty param.size ? 10 : param.size}" z="KdCWOMYIRNTbRpUaEFZQW1jX1YI="/>
+        </menu:category>
+        <menu:category id="c_authorityprincipalassignment" z="84rVDN6WJ/Uk7yg4qXPcYJtvilI=">
+            <menu:item id="i_authorityprincipalassignment_new" messageCode="global_menu_new" url="/security/assignments?form" z="aS8SQaOLVMFADzUKt/vBn1nw3aI="/>
+            <menu:item id="i_authorityprincipalassignment_list" messageCode="global_menu_list" url="/security/assignments?page=1&amp;size=${empty param.size ? 10 : param.size}" z="phqoEU9/Sjen2SjxV5//Ozel1iQ="/>
+        </menu:category>
+        <menu:category id="c_vmservice" z="SZAPQGsKSAxGJIC//VW6uYb2ESE=">
+            <menu:item id="i_vmservice_new" messageCode="global_menu_new" url="/vmservice?form" z="mlWIYieAlxLsoYngCpnM3d2bvVk="/>
+            <menu:item id="i_vmservice_list" messageCode="global_menu_list" url="/vmservice?page=1&amp;size=${empty param.size ? 10 : param.size}" z="gZEdqrMT17SAdDLo4tOmwxsEb8s="/>
+        </menu:category>
+        <menu:category id="c_disk" z="f+4mjn3Q8TXT6uG6WE8nTCeMWsE=">
+            <menu:item id="i_disk_new" messageCode="global_menu_new" url="/disk?form" z="i1rm8Nbm6SjclFaXqoqbrIVFO08="/>
+            <menu:item id="i_disk_list" messageCode="global_menu_list" url="/disk?page=1&amp;size=${empty param.size ? 10 : param.size}" z="qXWbSbbisdjg34DHrvloRIKy3Zs="/>
+        </menu:category>
+        <menu:category id="c_image" z="mSf7FGrRXXELgzAwg3iJrzzPIdc=">
+            <menu:item id="i_image_new" messageCode="global_menu_new" url="/image?form" z="D7h0JblcfKbx6ynQ5PDKtzOjLRw="/>
+            <menu:item id="i_image_list" messageCode="global_menu_list" url="/image?page=1&amp;size=${empty param.size ? 10 : param.size}" z="7MbN2A67h5jHuatmIhT2PwewPHE="/>
+        </menu:category>
+        <menu:category id="c_imagedb" z="QfhloSMPzUfWyJDWKgKrg0YsUuQ=">
+            <menu:item id="i_imagedb_new" messageCode="global_menu_new" url="/image?form" z="e/Btp63TUsGZyqLV5YXHCfgJUJs="/>
+            <menu:item id="i_imagedb_list" messageCode="global_menu_list" url="/image?page=1&amp;size=${empty param.size ? 10 : param.size}" z="G/eon4wK2+5TrYoELD5mBeC76nM="/>
+        </menu:category>
+        <menu:category id="c_users" z="Ysam8XVhG5uotPoUGGxkia1RE/s=">
+            <menu:item id="i_users_new" messageCode="global_menu_new" url="/security/users_xc?form" z="yZLD9e6Bxj3S6ktgQZK7EMd2yZA="/>
+            <menu:item id="i_users_list" messageCode="global_menu_list" url="/security/users_xc?page=1&amp;size=${empty param.size ? 10 : param.size}" z="8/4p9KHiE3RVvpJ9os2TE83VUiY="/>
+        </menu:category>
+    </menu:menu>
+</div>

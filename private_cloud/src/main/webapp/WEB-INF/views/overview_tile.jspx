@@ -1,0 +1,783 @@
+﻿
+<div class="main-content" xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page">
+
+	<spring:url value="/overview" var="overviewUrl" />
+	<spring:url value="/disk" var="diskUrl" />
+	<spring:url value="/login" var="loginUrl" />
+
+	<spring:url value="/resources/img" var="img" />
+
+	<div class="row">
+		<div class="col-md-12">
+			<ol class="breadcrumb content-shadow">
+				<li><i class="fa fa-list-alt"> <!-- ph -->
+				</i> <a href="">平台概览</a></li>
+			</ol>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2>
+						<i class="fa fa-area-chart blue"> <!-- ph -->
+						</i><strong>平台资源使用情况</strong>
+					</h2>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-4">
+								<div class="row">
+									<div class="col-md-12" style="text-align: center; font-weight: bold;">处理器使用统计（单位：颗）</div>
+									<div id="cpuQuotaDiv" class="col-md-12" style="height: 260px;">
+										<!-- dsf -->
+									</div>
+									<div class="col-md-12" align="center">
+										<table id="cpuQuotaTable" class="table" style="width: 80%">
+											<tbody>
+												<!-- ph -->
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<div class="row">
+									<div class="col-md-12" style="text-align: center; font-weight: bold;">内存使用统计（单位：GB）</div>
+									<div id="memoryQuotaDiv" class="col-md-12" style="height: 260px;">
+										<!-- dsf -->
+									</div>
+									<div class="col-md-12" align="center">
+										<table id="memoryQuotaTable" class="table" style="width: 80%">
+											<tbody>
+												<!-- ph -->
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<div class="row">
+									<div iclass="col-md-12" style="text-align: center; font-weight: bold;">存储使用统计（单位：GB）</div>
+									<div id="storageQuotaDiv" class="col-md-12" style="height: 260px;">
+										<!-- dsf -->
+									</div>
+									<div class="col-md-12" align="center">
+										<table id="storageQuotaTable" class="table" style="width: 80%">
+											<tbody>
+												<!-- ph -->
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2>
+						<i class="fa fa-area-chart blue"> <!-- ph -->
+						</i><strong>虚拟机域资源使用情况</strong>
+					</h2>
+				</div>
+				<div class="panel-body">
+					<div id="domainOverallResourceUsageMessageDiv" class="text-primary" style="margin-left: 20px">
+						<!-- ph -->
+					</div>
+					<div class="row">
+						<div id="domainOverallResourceUsageDiv" class="col-md-12">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2>
+						<i class="fa fa-area-chart blue"> <!-- ph -->
+						</i><strong>存储资源使用情况</strong>
+					</h2>
+					<sec:authorize ifAnyGranted="ROLE_MANAGER">
+						<div class="action-block">
+							<a id="openAdjustBlockStorageQuotaDialogButton" href="javascript:void(0)">调整云硬盘配额</a>
+						</div>
+					</sec:authorize>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-4">
+								<h6 id="virtualMachineStorageUsageInfo">虚拟机存储</h6>
+								<div class="progress">
+									<div id="virtualMachineStorageUsageDiv" class="progress-bar progress-bar-default" role="progressbar"
+										aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0px;">
+										<!-- ph -->
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<h6 id="imageStorageUsageInfo">镜像和快照存储</h6>
+								<div class="progress">
+									<div id="imageStorageUsageDiv" class="progress-bar progress-bar-default" role="progressbar" aria-valuenow="0"
+										aria-valuemin="0" aria-valuemax="100" style="width: 0px;">
+										<!-- ph -->
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<h6 id="blockStorageUsageInfo">云硬盘存储</h6>
+								<div class="progress">
+									<div id="blockStorageUsageDiv" class="progress-bar progress-bar-default" role="progressbar" aria-valuenow="0"
+										aria-valuemin="0" aria-valuemax="100" style="width: 0px;">
+										<!-- ph -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<sec:authorize ifAnyGranted="ROLE_MANAGER">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h2>
+							<i class="fa fa-info-circle blue"> <!-- ph -->
+							</i><strong>云硬盘到期提醒</strong>
+						</h2>
+					</div>
+					<div class="panel-body">
+						<div id="diskTableMessageDiv" class="text-primary" style="margin-left: 20px">
+							<!-- ph -->
+						</div>
+						<!-- <p class="text-info">点击硬盘名称查看详情</p> -->
+						<table id="diskTable" class="table table-striped table-condensed table-bordered table-hover">
+							<tr>
+								<th>名称</th>
+								<th>管理员</th>
+								<th>状态</th>
+								<th>过期</th>
+								<th>使用截止时间</th>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</sec:authorize>
+
+	<!-- Modal -->
+	<div class="modal fade" id="adjustBlockStorageQuotaDialog" style="top: 5%" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form id="adjustBlockStorageQuotaForm" action="">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+						<h5 class="modal-title" id="myModalLabel">
+							<strong>调整云硬盘配额</strong>
+						</h5>
+					</div>
+
+					<div class="modal-body">
+						<div class="row form-group">
+							<div class="col-md-3">
+								<label class="form-label">云硬盘容量：</label>
+							</div>
+							<div class="col-md-5">
+								<input type="text" id="gigabytesQuotaText" name="gigabytesQuotaText" class="form-control input-sm" />
+								<input type="hidden" id="gigabytesMinQuotaUsageText" />
+								<input type="hidden" id="gigabytesMaxQuotaUsageText" />
+							</div>
+							<div class="col-md-1">
+								<label class="text-danger" style="margin: 5px 0px">*</label>
+							</div>
+							<div class="col-md-3">
+								<label id="gigabytesQuotaRange" style="margin: 5px 0px">
+									<!-- ph -->
+								</label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div id="adjustBlockStorageQuotaAlertDiv" class="col-md-8 col-md-offset-2" style="display: none; color: #ba0000;">
+								<ul>
+									<!-- ph -->
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+						<button type="submit" class="btn btn-primary btn-sm">确定</button>
+					</div>
+				</form>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="ajaxWaitingDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="myModalLabel">
+						<strong>操作进行中...</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group" align="center">
+						<img alt="waiting..." src="${ img }/ajax-waiting.gif" />
+					</div>
+					<div class="row form-group">
+						<div id="ajaxWaitingMessageDiv" class="col-md-8 col-md-offset-2" align="center">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<!-- ph -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="errorDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="errorDialogTitle">
+						<strong>错误</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group">
+						<div id="errorDialogMessageDiv" class="col-md-8 col-md-offset-2 alert alert-danger alert-sm" align="center">
+							<ul>
+								<!-- ph -->
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<spring:url value="/resources/js/echarts/dist/echarts.js" var="echarts_js" />
+	<spring:url value="/resources/js/echarts/dist" var="echarts_config_path" />
+	<spring:url value="/resources/js/echarts-plain-map.js" var="echarts_plain_map_js" />
+	<spring:url value="/resources/js/draw-charts.js" var="drawCharts_js" />
+
+	<script type="text/javascript" src="${ echarts_js }">
+	<!-- d -->
+		
+	</script>
+
+	<script type="text/javascript" src="${ echarts_plain_map_js }">
+	<!-- d -->
+		
+	</script>
+
+	<script type="text/javascript" src="${ drawCharts_js }">
+	<!-- d -->
+		
+	</script>
+
+	<script type="text/javascript">
+		<![CDATA[
+		$(document).ready(function() {
+			showOverview();
+
+			$("#openAdjustBlockStorageQuotaDialogButton").click(openAdjustBlockStorageQuotaDialog);
+			validateAdjustBlockStorageQuota();
+		});
+
+		var pageDisplayResourceUsage, pageDisplayDomainOverallResourceUsage, pageDisplayStorageResourceUsage, pageDisplayExpiringDisks;
+		var showOverviewErrorMessage = new Array();
+		function showOverview() {
+			// set empty
+			showOverviewErrorMessage = [];
+
+			// clear error dialog message
+			$("#errorDialogMessageDiv ul").empty().hide();
+			$("#errorDialogMessageDiv").hide();
+
+			displayResourceUsage();
+
+			displayDomainOverallResourceUsage();
+
+			displayStorageResourceUsage();
+
+			displayExpiringDisks();
+
+			$.when(pageDisplayResourceUsage, pageDisplayDomainOverallResourceUsage, pageDisplayStorageResourceUsage,
+					pageDisplayExpiringDisks).done(function() {
+				if (showOverviewErrorMessage.length > 0) {
+					for (var i = 0; i < showOverviewErrorMessage.length; i++) {
+						$("<li>").append(showOverviewErrorMessage[i]).appendTo("#errorDialogMessageDiv ul");
+					}
+					$("#errorDialogMessageDiv ul").show();
+					$("#errorDialogMessageDiv").show();
+					$("#errorDialog").modal("show");
+				}
+			});
+		}
+
+		function displayResourceUsage() {
+			pageDisplayResourceUsage = callAjax("${ overviewUrl }/resource-usage", "GET", true, null, null,
+					displayResourceUsageSuccessHandler, null, "${ loginUrl }");
+		}
+
+		function displayResourceUsageSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				if (typeof (data.resource_usage) == "undefined") {
+					console.log("无效的平台资源使用数据");
+					return;
+				}
+				drawPartitionedResourceUsageChart(data.resource_usage.cpu, "cpuQuotaDiv", "处理器", "颗");
+				showCpuQuotaTable(data.resource_usage.cpu);
+
+				drawPartitionedResourceUsageChart(data.resource_usage.memory, "memoryQuotaDiv", "内存", "GB");
+				showMemoryQuotaTable(data.resource_usage.memory);
+
+				drawPartitionedResourceUsageChart(data.resource_usage.storage, "storageQuotaDiv", "存储", "GB");
+				showStorageQuotaTable(data.resource_usage.storage);
+			} else {
+				console.log(data.message);
+
+				showOverviewErrorMessage.push(data.message);
+			}
+		}
+
+		function showCpuQuotaTable(usage) {
+			//clear existing elments
+			$("#cpuQuotaTable tbody").empty();
+			
+			var row = $("<tr>");
+			$("<td>").text("已分配").appendTo(row);
+			$("<td>").text(usage.allocated + "（已用：" + usage.used + "，未用：" + usage.unused + "）").appendTo(row);
+			row.appendTo("#cpuQuotaTable tbody");
+
+			var row = $("<tr>");
+			$("<td>").text("未分配").appendTo(row);
+			$("<td>").text(usage.unallocated).appendTo(row);
+			row.appendTo("#cpuQuotaTable tbody");
+
+			var row = $("<tr>");
+			$("<td>").text("总计").appendTo(row);
+			$("<td>").text(usage.quota).appendTo(row);
+			row.appendTo("#cpuQuotaTable tbody");
+		}
+
+		function showMemoryQuotaTable(usage) {
+			//clear existing elments
+			$("#memoryQuotaTable tbody").empty();
+			
+			var row = $("<tr>");
+			$("<td>").text("已分配").appendTo(row);
+			$("<td>").text(usage.allocated + "（已用：" + usage.used + "，未用：" + usage.unused + "）").appendTo(row);
+			row.appendTo("#memoryQuotaTable tbody");
+
+			var row = $("<tr>");
+			$("<td>").text("未分配").appendTo(row);
+			$("<td>").text(usage.unallocated).appendTo(row);
+			row.appendTo("#memoryQuotaTable tbody");
+
+			var row = $("<tr>");
+			$("<td>").text("总计").appendTo(row);
+			$("<td>").text(usage.quota).appendTo(row);
+			row.appendTo("#memoryQuotaTable tbody");
+		}
+
+		function showStorageQuotaTable(usage) {
+			//clear existing elments
+			$("#storageQuotaTable tbody").empty();
+			
+			var row = $("<tr>");
+			$("<td>").text("已分配").appendTo(row);
+			$("<td>").text(usage.allocated + "（已用：" + usage.used + "，未用：" + usage.unused + "）").appendTo(row);
+			row.appendTo("#storageQuotaTable tbody");
+
+			var row = $("<tr>");
+			$("<td>").text("未分配").appendTo(row);
+			$("<td>").text(usage.unallocated).appendTo(row);
+			row.appendTo("#storageQuotaTable tbody");
+
+			var row = $("<tr>");
+			$("<td>").text("总计").appendTo(row);
+			$("<td>").text(usage.quota).appendTo(row);
+			row.appendTo("#storageQuotaTable tbody");
+		}
+
+		function drawDomainOverallResourceUsageChart(resourceData, resourceType, resourceChartDom) {
+			var yAxisData = new Array();
+			yAxisData.push(resourceData.domain.domain_name);
+			for (var j = 0; j < resourceData.groups.length; j++) {
+				yAxisData.push(resourceData.groups[j].group_name);
+			}
+
+			var dataList = new Array();
+			var usedData = new Array();
+			usedData.push(resourceData.domain[resourceType].used);
+			var unusedData = new Array();
+			unusedData.push(resourceData.domain[resourceType].unused);
+			var unallocatedData = new Array();
+			unallocatedData.push(resourceData.domain[resourceType].unallocated);
+			for (var j = 0; j < resourceData.groups.length; j++) {
+				usedData.push(resourceData.groups[j][resourceType].used);
+				unusedData.push(resourceData.groups[j][resourceType].unused);
+			}
+
+			var resourceObject = new Object();
+			resourceObject.legend = '已用';
+			resourceObject.data = usedData;
+			dataList.push(resourceObject);
+
+			var resourceObject = new Object();
+			resourceObject.legend = '未用';
+			resourceObject.data = unusedData;
+			dataList.push(resourceObject);
+
+			var resourceObject = new Object();
+			resourceObject.legend = '未分配';
+			resourceObject.data = unallocatedData;
+			dataList.push(resourceObject);
+
+			createDomainOverallResourceUsageBar(yAxisData, dataList, resourceChartDom);
+		}
+
+		function displayDomainOverallResourceUsage() {
+			pageDisplayDomainOverallResourceUsage = callAjax("${ overviewUrl }/domain-overall-resource-usage", "GET",
+					true, null, null, displayDomainOverallResourceUsageSuccessHandler, null, "${ loginUrl }");
+		}
+
+		function displayDomainOverallResourceUsageSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				if (data.resource_usage.length > 0) {
+					for (var i = 0; i < data.resource_usage.length; i++) {
+						// title
+						var titleSpan = $("<span>", {
+							class : "col-md-12",
+							text : "虚拟机域【" + data.resource_usage[i].domain.domain_name + "】的资源使用情况",
+							style : "margin-bottom: 10px; font-weight: bold;",
+						});
+
+						titleSpan.appendTo($("#domainOverallResourceUsageDiv"));
+
+						var divHeight = data.resource_usage[i].groups.length * 50 + 200;
+
+						// cpu
+						var cpuChartDivId = "domain_cpu_chart_div_" + i
+						var cpuChartDiv = $("<div>", {
+							id : cpuChartDivId,
+							class : "col-md-4",
+							style : "height: " + divHeight + "px",
+						});
+						cpuChartDiv.appendTo($("#domainOverallResourceUsageDiv"));
+						drawDomainOverallResourceUsageChart(data.resource_usage[i], 'cpu', cpuChartDivId);
+
+						// memory
+						var memoryChartDivId = "domain_memory_chart_div_" + i
+						var memoryChartDiv = $("<div>", {
+							id : memoryChartDivId,
+							class : "col-md-4",
+							style : "height: " + divHeight + "px",
+						});
+						memoryChartDiv.appendTo($("#domainOverallResourceUsageDiv"));
+						drawDomainOverallResourceUsageChart(data.resource_usage[i], 'memory', memoryChartDivId);
+
+						// disk
+						var diskChartDivId = "domain_disk_chart_div_" + i
+						var diskChartDiv = $("<div>", {
+							id : diskChartDivId,
+							class : "col-md-4",
+							style : "height: " + divHeight + "px",
+						});
+						diskChartDiv.appendTo($("#domainOverallResourceUsageDiv"));
+						drawDomainOverallResourceUsageChart(data.resource_usage[i], 'disk', diskChartDivId);
+
+						// cpuName
+						var cpuNameSpan = $("<div>", {
+							class : "col-md-4",
+							text : "处理器使用统计",
+							style : "margin-bottom: 20px; text-align: center; font-weight: bold;",
+						// style : "height: " + divHeight + "px",
+						});
+						cpuNameSpan.appendTo($("#domainOverallResourceUsageDiv"));
+
+						// memoryName
+						var memoryNameSpan = $("<div>", {
+							class : "col-md-4",
+							text : "内存使用统计",
+							style : "margin-bottom: 20px; text-align: center; font-weight: bold;",
+						// style : "height: " + divHeight + "px",
+						});
+						memoryNameSpan.appendTo($("#domainOverallResourceUsageDiv"));
+
+						// diskName
+						var diskNameSpan = $("<div>", {
+							class : "col-md-4",
+							text : "磁盘使用统计",
+							style : "margin-bottom: 20px; text-align: center; font-weight: bold;",
+						// style : "height: " + divHeight + "px",
+						});
+						diskNameSpan.appendTo($("#domainOverallResourceUsageDiv"));
+
+						$("#domainOverallResourceUsageMessageDiv").text("").hide();
+					}
+				} else {
+					$("#domainOverallResourceUsageMessageDiv").text("没有可用的虚拟机域").show();
+				}
+			} else {
+				console.log(data.message);
+
+				showOverviewErrorMessage.push(data.message);
+			}
+		}
+
+		function displayStorageResourceUsage() {
+			pageDisplayStorageResourceUsage = callAjax("${ overviewUrl }/storage-resource-usage", "GET", true, null,
+					null, displayStorageResourceUsageSuccessHandler, null, "${ loginUrl }");
+		}
+
+		function displayStorageResourceUsageSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				var virtualMachineUsage = data.resource_usage.virtual_machine;
+				var imageSnapshotUsage = data.resource_usage.image_snapshot;
+				var blockStorageUsage = data.resource_usage.block_storage;
+
+				// virtual machine
+				$("#virtualMachineStorageUsageInfo").text(
+						"虚拟机存储：总计" + virtualMachineUsage.quota + "GB，已用" + virtualMachineUsage.used + "GB");
+				if (virtualMachineUsage.quota > 0) {					
+					$("#virtualMachineStorageUsageDiv").width(
+							Math.round(100 * (virtualMachineUsage.used / virtualMachineUsage.quota)) + "%");
+					$("#virtualMachineStorageUsageDiv").text(
+							Math.round(100 * (virtualMachineUsage.used / virtualMachineUsage.quota)) + "%");
+				}
+
+				// image and snapshot
+				$("#imageStorageUsageInfo").text(
+						"镜像和快照存储：总计" + imageSnapshotUsage.quota + "GB，已用" + imageSnapshotUsage.used + "GB");
+				if (imageSnapshotUsage.quota > 0) {
+					$("#imageStorageUsageDiv").width(
+							Math.round(100 * (imageSnapshotUsage.used / imageSnapshotUsage.quota)) + "%");
+					$("#imageStorageUsageDiv").text(
+							Math.round(100 * (imageSnapshotUsage.used / imageSnapshotUsage.quota)) + "%");
+				}
+
+				// block storage
+				$("#blockStorageUsageInfo").text(
+						"云硬盘容量：总计" + blockStorageUsage.quota + "GB，已用" + blockStorageUsage.used + "GB");
+				if (blockStorageUsage.quota > 0) {
+					$("#blockStorageUsageDiv").width(
+							Math.round(100 * (blockStorageUsage.used / blockStorageUsage.quota)) + "%");
+					$("#blockStorageUsageDiv").text(
+							Math.round(100 * (blockStorageUsage.used / blockStorageUsage.quota)) + "%");
+				}
+			} else {
+				console.log(data.message);
+
+				showOverviewErrorMessage.push(data.message);
+			}
+		}
+
+		function displayExpiringDisks() {
+			pageDisplayExpiringDisks = callAjax("${ diskUrl }/expiring-disk-list", "GET", true, null, null,
+					displayExpiringDisksSuccessHandler, null, "${ loginUrl }");
+		}
+
+		function displayExpiringDisksSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				var disks = data.disks;
+				if (disks.length > 0) {
+					for (var i = 0; i < disks.length; i++) {
+						var row = $("<tr>");
+
+						$("<td>").append($("<a>", {
+							text : disks[i].name,
+							href : "${ diskUrl }/" + disks[i].id + "/detail",
+						})).appendTo(row);
+						$("<td>").text(disks[i].manager).appendTo(row);
+						$("<td>").text(disks[i].status).appendTo(row);
+						var col = $("<td>");
+						// boolean compare, not string compare
+						if (disks[i].expired == true) {
+							$("<label>").text("已过期").addClass("text-danger").appendTo(col);
+						} else {
+							$("<label>").text("将过期").addClass("text-warning").appendTo(col);
+						}
+						col.appendTo(row);
+						$("<td>").text(disks[i].valid_time).appendTo(row);
+
+						row.appendTo("#diskTable");
+
+						$("#diskTableMessageDiv").text("").hide();
+						$("#diskTable").show();
+					}
+				} else {
+					$("#diskTableMessageDiv").text("没有到期的云硬盘").show();
+					$("#diskTable").hide();
+				}
+			} else {
+				console.log(data.message);
+
+				showOverviewErrorMessage.push(data.message);
+			}
+		}
+
+		function openAdjustBlockStorageQuotaDialog() {
+			// remove class the jquery validation added
+			$("#adjustBlockStorageQuotaForm .form-group").removeClass("has-error").removeClass("has-success");
+
+			$("#adjustBlockStorageQuotaAlertDiv ul").empty().hide();
+			$("#adjustBlockStorageQuotaAlertDiv").hide();
+
+			$("#errorDialogMessageDiv ul").empty().hide();
+			$("#errorDialogMessageDiv").hide();
+
+			callAjax("${ overviewUrl }/block-storage-quota-range", "GET", true, null, "正在获取云硬盘配额范围...",
+					openAdjustBlockStorageQuotaDialogSuccessHandler, null, "${ loginUrl }");
+		}
+
+		function openAdjustBlockStorageQuotaDialogSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				if (0 == data.max) {
+					$("<li>").append("云平台没有空闲资源").appendTo("#errorDialogMessageDiv ul");
+					$("#errorDialogMessageDiv ul").show();
+					$("#errorDialogMessageDiv").show();
+					$("#errorDialog").modal("show");
+
+					return;
+				}
+
+				$("#gigabytesQuotaRange").text("[最小" + data.min + "，最大" + data.max + "]");
+
+				var gigabytesMinQuota = data.min;
+				var gigabytesMaxQuota = data.max;
+
+				// dynamic add jquery validation rule
+				$("#gigabytesQuotaText").rules("add", {
+					range : [ gigabytesMinQuota, gigabytesMaxQuota ]
+				});
+
+				$("#adjustBlockStorageQuotaDialog").modal("show");
+			} else {
+				console.log(data.message);
+
+				$("<li>").append(data.message).appendTo("#errorDialogMessageDiv ul");
+				$("#errorDialogMessageDiv ul").show();
+				$("#errorDialogMessageDiv").show();
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		function validateAdjustBlockStorageQuota() {
+			$("#adjustBlockStorageQuotaForm").validate({
+				// add class for control
+				validClass : "has-success",
+				errorClass : "has-error",
+
+				highlight : function(element, errorClass, validClass) {
+					$(element).closest('.form-group').addClass(errorClass).removeClass(validClass);
+				},
+				unhighlight : function(element, errorClass, validClass) {
+					$(element).closest('.form-group').removeClass(errorClass).addClass(validClass);
+				},
+
+				rules : {
+					gigabytesQuotaText : {
+						required : true,
+						number : true,
+					},
+				},
+
+				messages : {
+					// use control name as rules					
+					gigabytesQuotaText : {
+						required : "请输入云硬盘容量配额；",
+						number : "云硬盘容量配额必须是整数；",
+						range : "云硬盘容量配额必须介于{0}和{1}之间",
+					},
+				},
+
+				errorContainer : "#adjustBlockStorageQuotaAlertDiv",
+				errorLabelContainer : "#adjustBlockStorageQuotaAlertDiv ul",
+				wrapper : "li",
+
+				submitHandler : function() {
+					adjustBlockStorageQuota();
+				},
+			});
+		}
+
+		function adjustBlockStorageQuota() {
+			// set volumes = gigabytes
+			var volumes = $("#gigabytesQuotaText").val();
+			var gigabytes = $("#gigabytesQuotaText").val();
+
+			var pData = new Object();
+			pData.volumes = volumes;
+			pData.gigabytes = gigabytes;
+
+			callAjax("${ overviewUrl }/block-storage-quota", "PUT", true, pData, null,
+					adjustBlockStorageQuotaSuccessHandler, null, "${ loginUrl }");
+		}
+
+		function adjustBlockStorageQuotaSuccessHandler(data, textStatus) {
+			$("#adjustBlockStorageQuotaDialog").modal("hide");
+
+			if ("ok" == data.status) {
+				// refresh resource usage
+				displayResourceUsage();
+
+				// refresh storage resource usage
+				displayStorageResourceUsage();
+			} else {
+				console.log(data.message);
+
+				$("<li>").append(data.message).appendTo("#errorDialogMessageDiv ul");
+				$("#errorDialogMessageDiv ul").show();
+				$("#errorDialogMessageDiv").show();
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		]]>
+	</script>
+
+</div>

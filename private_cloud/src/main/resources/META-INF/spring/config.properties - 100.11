@@ -1,0 +1,76 @@
+#
+# portal properties
+#
+
+# wait operation timeout(seconds)
+portal.waitTimeout = 30
+
+# loop interval (seconds)
+portal.loopInterval = 60
+
+#
+# database properties
+#
+
+database.driverClassName=com.mysql.jdbc.Driver
+database.username=cloud
+database.url=jdbc\:mysql\://192.168.100.11\:3306/cloud?useUnicode=true&characterEncoding=UTF-8
+database.password=123456
+
+#
+# monitor properties
+#
+
+# comma seperated server list
+monitor.gangliaServers = 192.168.100.11
+
+#
+# cloud properties
+#
+
+cloud.manipulatorVersion = v2
+
+cloud.authUrl = http://192.168.100.11:5000/v2.0
+cloud.adminUsername = admin
+cloud.adminPassword = 631a1ae0e8964e3c
+cloud.publicNetworkId = a88b15e4-6d04-4960-aafa-db783b8964b8
+cloud.aodhServiceUrl = http://192.168.100.11:8042/v2/alarms
+cloud.adminProjectId = 8ba71bd972aa42339d81184045d99dcd
+
+# v3 -->>>>>>
+cloud.adminUserId = 20de005915c54ee989f3b95da7de5a35
+cloud.domainName = default
+cloud.domainId = 7e4ad5d50d344a3498184e9bd44d7976
+cloud.adminRoleName = admin
+# <<<<<<-- v3
+
+# alarm threshold rule period (seconds), >= sampling interval, to ensure alarm has data
+cloud.alarmThresholdRulePeriod = 600
+
+#
+# ceph properties
+#
+ceph.restApiUrl = http://192.168.100.11:5005/api/v0.1
+# assume the size is same for all pools
+ceph.poolReplicaSize = 2
+# preset image storage capacity, notional size in GB
+ceph.imagePoolSize = 1024
+# total journal size on all OSDs, raw size in GB, should be excluded from quota
+ceph.jounralSize = 125
+
+#
+# nagios properties
+#
+nagios.host = 192.168.100.11
+nagios.port = 80
+nagios.username = nagiosadmin
+nagios.password = 123456
+nagios.url = http://192.168.100.11/nagios
+
+#
+# message queue properties
+#
+rabbitmq.host = 192.168.100.11
+rabbitmq.username = guest
+rabbitmq.password = guest
+rabbitmq.virtualHost = /

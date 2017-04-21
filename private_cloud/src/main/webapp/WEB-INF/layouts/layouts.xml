@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name="login" template="/WEB-INF/views/cloud_login.jspx">
+	</definition>
+	
+	<definition name="base" template="/WEB-INF/views/base.jspx">
+		<put-attribute name="content"></put-attribute>
+	</definition>
+	
+	<definition name="overview_tile" extends="base">
+		<put-attribute name="content" value="/WEB-INF/views/overview_tile.jspx"></put-attribute>
+	</definition>
+	
+	<definition name="virtual_machine_list_tile" extends="base">
+		<put-attribute name="content" value="/WEB-INF/views/virtual_machine_list_tile.jspx"></put-attribute>
+	</definition>
+	
+	<definition name="virtual_machine_form_tile" extends="base">
+		<put-attribute name="content" value="/WEB-INF/views/virtual_machine_form_tile.jspx"></put-attribute>
+	</definition>
+	
+	<definition name="virtual_machine_detail_tile" extends="base">
+		<put-attribute name="content" value="/WEB-INF/views/virtual_machine_detail_tile.jspx"></put-attribute>
+	</definition>
+	
+	<definition name="disk_list_tile" extends="base">
+		<put-attribute name="content" value="/WEB-INF/views/disk_list_tile.jspx"></put-attribute>
+	</definition>
+	
+	<definition name="disk_detail_tile" extends="base">
+		<put-attribute name="content" value="/WEB-INF/views/disk_detail_tile.jspx"></put-attribute>
+	</definition>
+	
+	<definition name="snapshot_list_tile" extends="base">
+		<put-attribute name="content" value="/WEB-INF/views/snapshot_list_tile.jspx"></put-attribute>
+	</definition>
+	
+	<definition name="physical_machine_list_tile" extends="base">
+		<put-attribute name="content" value="/WEB-INF/views/physical_machine_list_tile.jspx"></put-attribute>
+	</definition>
+	
+	<definition name="physical_machine_detail_tile" extends="base">
+		<put-attribute name="content" value="/WEB-INF/views/physical_machine_detail_tile.jspx"></put-attribute>
+	</definition>
+	
+	<definition name="image_list_tile" extends="base">
+		<put-attribute name="content" value="/WEB-INF/views/image_list_tile.jspx"></put-attribute>
+	</definition>
+	
+	<definition name="external_ip_list_tile" extends="base">
+		<put-attribute name="content" value="/WEB-INF/views/external_ip_list_tile.jspx"></put-attribute>
+	</definition>
+	
+	<definition name="application_tag_list_tile" extends="base">
+		<put-attribute name="content" value="/WEB-INF/views/application_tag_list_tile.jspx"></put-attribute>
+	</definition>
+	
+	<definition name="domain_list_tile" extends="base">
+		<put-attribute name="content" value="/WEB-INF/views/domain_list_tile.jspx"></put-attribute>
+	</definition>
+	
+	<definition name="domain_detail_tile" extends="base">
+		<put-attribute name="content" value="/WEB-INF/views/domain_detail_tile.jspx"></put-attribute>
+	</definition>
+	
+	<definition name="group_detail_tile" extends="base">
+		<put-attribute name="content" value="/WEB-INF/views/group_detail_tile.jspx"></put-attribute>
+	</definition>
+	
+	<definition name="monitor_log_list_tile" extends="base">
+		<put-attribute name="content" value="/WEB-INF/views/monitor_log_list_tile.jspx"></put-attribute>
+	</definition>
+	
+	<definition name="operation_log_list_tile" extends="base">
+		<put-attribute name="content" value="/WEB-INF/views/operation_log_list_tile.jspx"></put-attribute>
+	</definition>
+	
+	<definition name="user_list_tile" extends="base">
+		<put-attribute name="content" value="/WEB-INF/views/user_list_tile.jspx"></put-attribute>
+	</definition>
+
+
+	<definition name="default" template="/WEB-INF/layouts/default.jspx">
+		<put-attribute name="header" value="/WEB-INF/views/header.jspx" />
+		<put-attribute name="menu" value="/WEB-INF/views/menu.jspx" />
+		<put-attribute name="footer" value="/WEB-INF/views/footer.jspx" />
+	</definition>
+
+	<definition name="public" template="/WEB-INF/layouts/default.jspx">
+		<put-attribute name="header" value="/WEB-INF/views/header.jspx" />
+		<put-attribute name="footer" value="/WEB-INF/views/footer.jspx" />
+	</definition>
+
+</tiles-definitions>

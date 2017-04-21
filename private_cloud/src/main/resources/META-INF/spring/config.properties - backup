@@ -1,0 +1,100 @@
+#
+# database properties
+#
+
+database.driverClassName=com.mysql.jdbc.Driver
+database.username=root
+
+# gg
+#database.url=jdbc\:mysql\://192.168.20.101\:3306/cloud?useUnicode=true&characterEncoding=UTF-8
+#database.password=2edd5b8656084c21
+
+# test 11
+# database.url=jdbc\:mysql\://192.168.100.11\:3306/cloud?useUnicode=true&characterEncoding=UTF-8
+# database.password=eea0d1d7021d47a2
+
+# test 111
+#database.url=jdbc\:mysql\://192.168.100.111\:3306/cloud?useUnicode=true&characterEncoding=UTF-8
+#database.password=c29ad0005fd54347
+
+# test 131
+ database.url=jdbc\:mysql\://192.168.100.131\:3306/cloud?useUnicode=true&characterEncoding=UTF-8
+ database.password=123456
+
+#
+# monitor properties
+#
+
+# comma seperated server list
+
+# gg
+#monitor.gangliaServers = 192.168.20.101, 192.168.20.102
+
+# test 11
+#monitor.gangliaServers = 192.168.100.11
+
+# test 111
+#monitor.gangliaServers = 192.168.100.111
+
+# test 131
+monitor.gangliaServers = 192.168.100.132
+
+#
+# cloud properties
+#
+
+cloud.manipulatorVersion = v3
+
+# v2 - gg 
+#cloud.authUrl = http://192.168.20.101:5000/v2.0/
+#cloud.adminUsername = admin
+#cloud.adminPassword = c385151317e04f79
+#cloud.adminProjectName = admin
+#cloud.publicNetworkId = 6639b816-3d4d-472d-a6b4-e6a648cc4714
+
+# v2 - test 11
+#cloud.authUrl = http://192.168.100.11:5000/v2.0/
+#cloud.adminUsername = admin
+#cloud.adminPassword = 631a1ae0e8964e3c
+#cloud.adminProjectName = admin
+#cloud.publicNetworkId = a88b15e4-6d04-4960-aafa-db783b8964b8
+
+# v2 - test 111
+#cloud.authUrl = http://192.168.100.111:5000/v2.0/
+#cloud.adminUsername = admin
+#cloud.adminPassword = f078654d697442c7
+#cloud.adminProjectName = admin
+#cloud.publicNetworkId = ead8dcae-e744-496b-a161-e601a02080d2
+
+# v3 - test 131	
+cloud.authUrl = http://192.168.100.131:5000/v3
+cloud.adminUsername = admin
+cloud.adminPassword = 123456
+cloud.publicNetworkId = 5d34da22-0ef8-476e-8553-292cd2f40e1f
+
+cloud.adminUserId = 99e8e45981344fffaaa537082f6ee973
+cloud.domainName = default
+cloud.domainId = da20ab4479414261935a69e64c78a9f6
+cloud.adminProjectId = e3eca810b4d94dffbe21ff20a7ed138e
+cloud.adminRoleName = admin
+cloud.aodhServiceUrl = http://192.168.100.131:8042/v2/alarms
+
+
+#
+# ceph properties
+#
+ceph.restApiUrl = http://192.168.100.132:5005/api/v0.1
+# assume the size is same for all pools
+ceph.poolReplicaSize = 2
+# preset image storage capacity, in GB
+ceph.imagePoolSize = 20
+
+
+#
+# nagios properties
+#
+nagios.host = 192.168.100.63
+nagios.port = 80
+nagios.username = nagiosadmin
+nagios.password = 123456
+nagios.url = http://192.168.100.63/nagios

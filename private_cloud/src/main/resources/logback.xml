@@ -1,0 +1,38 @@
+<!--60秒检查一次配置文件是否有修改，即时生效 -->
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+	<!--设置变量 -->
+	<property name="ROOT_LOG_PATH" value="/var/log/tomcat" /> <!-- /var/log/tomcat -->
+	
+	<!-- 打印到控制台的appender -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger %method - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!--打印到文件，20M滚一个，最多20个 -->
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${ROOT_LOG_PATH}/private-cloud.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>${ROOT_LOG_PATH}/private-cloud.log.%i</fileNamePattern>
+			<maxIndex>20</maxIndex>
+		</rollingPolicy>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>20MB</maxFileSize>
+		</triggeringPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger %method - %msg%n</pattern>
+		</encoder>
+	</appender>
+		
+	<!--根日志 -->
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+	</root>
+
+	<!--包的日志级别, 设置是否也打印一份到它的父logger（这里是root） -->
+	<logger name="com.sinosoft" level="DEBUG" additivity="false">
+		<appender-ref ref="FILE" />
+		<appender-ref ref="STDOUT" />
+	</logger>
+</configuration>
