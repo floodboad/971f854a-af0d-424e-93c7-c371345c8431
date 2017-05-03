@@ -26,7 +26,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
 
-import com.sinosoft.enumerator.DiskStatusEnum;
+import com.sinoparasoft.enumerator.DiskStatusEnum;
 
 @RooJavaBean
 @RooToString

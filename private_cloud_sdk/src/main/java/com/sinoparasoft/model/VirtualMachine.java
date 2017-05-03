@@ -31,8 +31,8 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
 
-import com.sinosoft.enumerator.VirtualMachineStatusEnum;
-import com.sinosoft.enumerator.VirtualMachineTaskStatusEnum;
+import com.sinoparasoft.enumerator.VirtualMachineStatusEnum;
+import com.sinoparasoft.enumerator.VirtualMachineTaskStatusEnum;
 
 @RooJavaBean
 @RooToString
@@ -130,7 +130,7 @@ public class VirtualMachine {
 	/**
 	 * fetch = FetchType.EAGER: allow to get disks in background process, such as @Async. otherwise
 	 * "org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role:
-	 * com.sinosoft.model.VirtualMachine.disks" will be thrown
+	 * com.sinoparasoft.model.VirtualMachine.disks" will be thrown
 	 */
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "virtualMachine")
 	private Set<Disk> disks = new HashSet<Disk>();

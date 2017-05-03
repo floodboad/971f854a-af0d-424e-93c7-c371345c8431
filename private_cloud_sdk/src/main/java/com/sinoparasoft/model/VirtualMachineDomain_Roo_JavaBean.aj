@@ -3,8 +3,8 @@
 
 package com.sinoparasoft.model;
 
+import com.sinoparasoft.enumerator.VirtualMachineDomainStatusEnum;
 import com.sinoparasoft.model.VirtualMachineDomain;
-import com.sinosoft.enumerator.VirtualMachineDomainStatusEnum;
 import java.util.Date;
 
 privileged aspect VirtualMachineDomain_Roo_JavaBean {

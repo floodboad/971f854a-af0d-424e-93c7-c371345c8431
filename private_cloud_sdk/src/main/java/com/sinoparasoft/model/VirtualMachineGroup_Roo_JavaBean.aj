@@ -3,8 +3,8 @@
 
 package com.sinoparasoft.model;
 
+import com.sinoparasoft.enumerator.VirtualMachineGroupStatusEnum;
 import com.sinoparasoft.model.VirtualMachineGroup;
-import com.sinosoft.enumerator.VirtualMachineGroupStatusEnum;
 import java.util.Date;
 
 privileged aspect VirtualMachineGroup_Roo_JavaBean {

@@ -13,8 +13,8 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
 
-import com.sinosoft.enumerator.ExternalIpDeviceOwnerEnum;
-import com.sinosoft.enumerator.ExternalIpStatusEnum;
+import com.sinoparasoft.enumerator.ExternalIpDeviceOwnerEnum;
+import com.sinoparasoft.enumerator.ExternalIpStatusEnum;
 
 @RooJavaBean
 @RooToString

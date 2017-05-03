@@ -3,9 +3,9 @@
 
 package com.sinoparasoft.model;
 
+import com.sinoparasoft.enumerator.SnapshotStatusEnum;
 import com.sinoparasoft.model.Snapshot;
 import com.sinoparasoft.model.VirtualMachine;
-import com.sinosoft.enumerator.SnapshotStatusEnum;
 import java.util.Date;
 
 privileged aspect Snapshot_Roo_JavaBean {

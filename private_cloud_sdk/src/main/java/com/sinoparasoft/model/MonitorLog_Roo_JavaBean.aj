@@ -3,12 +3,12 @@
 
 package com.sinoparasoft.model;
 
+import com.sinoparasoft.enumerator.AlarmSeverityEnum;
+import com.sinoparasoft.enumerator.MonitorNameEnum;
+import com.sinoparasoft.enumerator.MonitorSourceEnum;
+import com.sinoparasoft.enumerator.MonitorStatusEnum;
+import com.sinoparasoft.enumerator.MonitorTypeEnum;
 import com.sinoparasoft.model.MonitorLog;
-import com.sinosoft.enumerator.AlarmSeverityEnum;
-import com.sinosoft.enumerator.MonitorNameEnum;
-import com.sinosoft.enumerator.MonitorSourceEnum;
-import com.sinosoft.enumerator.MonitorStatusEnum;
-import com.sinosoft.enumerator.MonitorTypeEnum;
 import java.util.Date;
 
 privileged aspect MonitorLog_Roo_JavaBean {

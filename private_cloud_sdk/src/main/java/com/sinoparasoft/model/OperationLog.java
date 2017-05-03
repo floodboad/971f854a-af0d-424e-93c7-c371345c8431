@@ -20,9 +20,9 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
 
-import com.sinosoft.enumerator.OperationSeverityEnum;
-import com.sinosoft.enumerator.OperationStatusEnum;
-import com.sinosoft.enumerator.ServiceNameEnum;
+import com.sinoparasoft.enumerator.OperationSeverityEnum;
+import com.sinoparasoft.enumerator.OperationStatusEnum;
+import com.sinoparasoft.enumerator.ServiceNameEnum;
 
 @RooJavaBean
 @RooToString

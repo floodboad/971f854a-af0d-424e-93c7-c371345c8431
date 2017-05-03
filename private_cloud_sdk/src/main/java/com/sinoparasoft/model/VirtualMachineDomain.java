@@ -18,8 +18,8 @@ import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.sinosoft.enumerator.VirtualMachineDomainStatusEnum;
-import com.sinosoft.util.CustomDateSerializer;
+import com.sinoparasoft.enumerator.VirtualMachineDomainStatusEnum;
+import com.sinoparasoft.util.CustomDateSerializer;
 
 @RooJavaBean
 @RooToString

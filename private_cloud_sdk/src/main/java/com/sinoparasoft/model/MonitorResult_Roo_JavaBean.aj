@@ -3,11 +3,11 @@
 
 package com.sinoparasoft.model;
 
+import com.sinoparasoft.enumerator.MonitorNameEnum;
+import com.sinoparasoft.enumerator.MonitorSourceEnum;
+import com.sinoparasoft.enumerator.MonitorStatusEnum;
+import com.sinoparasoft.enumerator.MonitorTypeEnum;
 import com.sinoparasoft.model.MonitorResult;
-import com.sinosoft.enumerator.MonitorNameEnum;
-import com.sinosoft.enumerator.MonitorSourceEnum;
-import com.sinosoft.enumerator.MonitorStatusEnum;
-import com.sinosoft.enumerator.MonitorTypeEnum;
 import java.util.Date;
 
 privileged aspect MonitorResult_Roo_JavaBean {

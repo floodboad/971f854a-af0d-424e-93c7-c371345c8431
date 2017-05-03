@@ -3,9 +3,9 @@
 
 package com.sinoparasoft.model;
 
+import com.sinoparasoft.enumerator.UserStatusEnum;
 import com.sinoparasoft.model.Role;
 import com.sinoparasoft.model.User;
-import com.sinosoft.enumerator.UserStatusEnum;
 import java.util.Date;
 
 privileged aspect User_Roo_JavaBean {

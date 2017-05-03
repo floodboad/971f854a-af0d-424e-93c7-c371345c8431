@@ -3,9 +3,9 @@
 
 package com.sinoparasoft.model;
 
+import com.sinoparasoft.enumerator.PhysicalMachineStatusEnum;
 import com.sinoparasoft.model.PhysicalMachine;
 import com.sinoparasoft.model.PhysicalMachineType;
-import com.sinosoft.enumerator.PhysicalMachineStatusEnum;
 import java.util.Date;
 import java.util.Set;
 

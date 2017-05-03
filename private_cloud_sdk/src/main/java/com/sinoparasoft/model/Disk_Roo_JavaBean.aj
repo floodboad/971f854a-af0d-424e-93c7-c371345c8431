@@ -3,9 +3,9 @@
 
 package com.sinoparasoft.model;
 
+import com.sinoparasoft.enumerator.DiskStatusEnum;
 import com.sinoparasoft.model.Disk;
 import com.sinoparasoft.model.VirtualMachine;
-import com.sinosoft.enumerator.DiskStatusEnum;
 import java.util.Date;
 
 privileged aspect Disk_Roo_JavaBean {

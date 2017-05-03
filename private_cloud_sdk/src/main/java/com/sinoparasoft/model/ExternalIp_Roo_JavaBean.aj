@@ -3,9 +3,9 @@
 
 package com.sinoparasoft.model;
 
+import com.sinoparasoft.enumerator.ExternalIpDeviceOwnerEnum;
+import com.sinoparasoft.enumerator.ExternalIpStatusEnum;
 import com.sinoparasoft.model.ExternalIp;
-import com.sinosoft.enumerator.ExternalIpDeviceOwnerEnum;
-import com.sinosoft.enumerator.ExternalIpStatusEnum;
 
 privileged aspect ExternalIp_Roo_JavaBean {
     

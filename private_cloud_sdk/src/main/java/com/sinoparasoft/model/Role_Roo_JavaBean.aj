@@ -3,8 +3,8 @@
 
 package com.sinoparasoft.model;
 
+import com.sinoparasoft.enumerator.RoleNameEnum;
 import com.sinoparasoft.model.Role;
-import com.sinosoft.enumerator.RoleNameEnum;
 
 privileged aspect Role_Roo_JavaBean {
     

@@ -3,10 +3,10 @@
 
 package com.sinoparasoft.model;
 
+import com.sinoparasoft.enumerator.OperationSeverityEnum;
+import com.sinoparasoft.enumerator.OperationStatusEnum;
+import com.sinoparasoft.enumerator.ServiceNameEnum;
 import com.sinoparasoft.model.OperationLog;
-import com.sinosoft.enumerator.OperationSeverityEnum;
-import com.sinosoft.enumerator.OperationStatusEnum;
-import com.sinosoft.enumerator.ServiceNameEnum;
 import java.util.Date;
 
 privileged aspect OperationLog_Roo_JavaBean {

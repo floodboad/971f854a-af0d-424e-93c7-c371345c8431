@@ -26,9 +26,9 @@ import org.springframework.roo.addon.tostring.RooToString;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.sinosoft.enumerator.RoleNameEnum;
-import com.sinosoft.enumerator.UserStatusEnum;
-import com.sinosoft.util.CustomDateSerializer;
+import com.sinoparasoft.enumerator.RoleNameEnum;
+import com.sinoparasoft.enumerator.UserStatusEnum;
+import com.sinoparasoft.util.CustomDateSerializer;
 
 @RooJavaBean
 @RooToString

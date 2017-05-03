@@ -14,10 +14,10 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
 
-import com.sinosoft.enumerator.AlarmSeverityEnum;
-import com.sinosoft.enumerator.MonitorNameEnum;
-import com.sinosoft.enumerator.MonitorSourceEnum;
-import com.sinosoft.enumerator.MonitorTypeEnum;
+import com.sinoparasoft.enumerator.AlarmSeverityEnum;
+import com.sinoparasoft.enumerator.MonitorNameEnum;
+import com.sinoparasoft.enumerator.MonitorSourceEnum;
+import com.sinoparasoft.enumerator.MonitorTypeEnum;
 
 @RooJavaBean
 @RooToString

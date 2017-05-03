@@ -3,12 +3,12 @@
 
 package com.sinoparasoft.model;
 
+import com.sinoparasoft.enumerator.VirtualMachineStatusEnum;
+import com.sinoparasoft.enumerator.VirtualMachineTaskStatusEnum;
 import com.sinoparasoft.model.ApplicationTag;
 import com.sinoparasoft.model.Disk;
 import com.sinoparasoft.model.Snapshot;
 import com.sinoparasoft.model.VirtualMachine;
-import com.sinosoft.enumerator.VirtualMachineStatusEnum;
-import com.sinosoft.enumerator.VirtualMachineTaskStatusEnum;
 import java.util.Date;
 import java.util.Set;
 
