@@ -20,10 +20,12 @@ D:\GGCloud-Origin\private_cloud_sdk\src\main\java\com\sinoparasoft\common\AsyncO
 D:\GGCloud-Origin\private_cloud_sdk\src\main\java\com\sinoparasoft\common\AsyncOperationTypeEnum.java
 D:\GGCloud-Origin\private_cloud_sdk\src\main\java\com\sinoparasoft\common\BatchActionResult.java
 D:\GGCloud-Origin\private_cloud_sdk\src\main\java\com\sinoparasoft\config\AppConfig.java
+D:\GGCloud-Origin\private_cloud_sdk\src\main\java\com\sinoparasoft\config\ApplicationConfiguration.java
 D:\GGCloud-Origin\private_cloud_sdk\src\main\java\com\sinoparasoft\config\CephConfig.java
 D:\GGCloud-Origin\private_cloud_sdk\src\main\java\com\sinoparasoft\config\CloudConfig.java
 D:\GGCloud-Origin\private_cloud_sdk\src\main\java\com\sinoparasoft\config\MQConfig.java
 D:\GGCloud-Origin\private_cloud_sdk\src\main\java\com\sinoparasoft\config\NagiosConfig.java
+D:\GGCloud-Origin\private_cloud_sdk\src\main\java\com\sinoparasoft\config\StaticApplicationConfiguration.java
 D:\GGCloud-Origin\private_cloud_sdk\src\main\java\com\sinoparasoft\enumerator\AlarmSeverityEnum.java
 D:\GGCloud-Origin\private_cloud_sdk\src\main\java\com\sinoparasoft\enumerator\DiskStatusEnum.java
 D:\GGCloud-Origin\private_cloud_sdk\src\main\java\com\sinoparasoft\enumerator\ExternalIpDeviceOwnerEnum.java
@@ -146,11 +148,6 @@ D:\GGCloud-Origin\private_cloud_sdk\src\main\java\com\sinoparasoft\model\Virtual
 D:\GGCloud-Origin\private_cloud_sdk\src\main\java\com\sinoparasoft\model\VirtualMachine_Roo_Jpa_ActiveRecord.aj
 D:\GGCloud-Origin\private_cloud_sdk\src\main\java\com\sinoparasoft\model\VirtualMachine_Roo_Jpa_Entity.aj
 D:\GGCloud-Origin\private_cloud_sdk\src\main\java\com\sinoparasoft\model\VirtualMachine_Roo_ToString.aj
-D:\GGCloud-Origin\private_cloud_sdk\src\main\java\com\sinoparasoft\sdk\domain\Admin.java
-D:\GGCloud-Origin\private_cloud_sdk\src\main\java\com\sinoparasoft\sdk\domain\Admin_Roo_Configurable.aj
-D:\GGCloud-Origin\private_cloud_sdk\src\main\java\com\sinoparasoft\sdk\domain\Admin_Roo_Jpa_ActiveRecord.aj
-D:\GGCloud-Origin\private_cloud_sdk\src\main\java\com\sinoparasoft\sdk\domain\Admin_Roo_Jpa_Entity.aj
-D:\GGCloud-Origin\private_cloud_sdk\src\main\java\com\sinoparasoft\sdk\domain\Admin_Roo_ToString.aj
 D:\GGCloud-Origin\private_cloud_sdk\src\main\java\com\sinoparasoft\service\ApplicationTagService.java
 D:\GGCloud-Origin\private_cloud_sdk\src\main\java\com\sinoparasoft\service\ApplicationTagServiceImpl.java
 D:\GGCloud-Origin\private_cloud_sdk\src\main\java\com\sinoparasoft\service\DiskService.java

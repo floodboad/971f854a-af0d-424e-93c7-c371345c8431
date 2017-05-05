@@ -1,0 +1,203 @@
+2017-05-05 22:28:30,090 [main] INFO  org.springframework.context.support.FileSystemXmlApplicationContext - Refreshing org.springframework.context.support.FileSystemXmlApplicationContext@b16e202: startup date [Fri May 05 22:28:30 CST 2017]; root of context hierarchy
+2017-05-05 22:28:30,092 [main] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from file [D:\GGCloud-Origin\private_cloud_sdk\src\main\resources\META-INF\spring\applicationContext.xml]
+2017-05-05 22:28:30,186 [main] INFO  org.springframework.context.support.PropertySourcesPlaceholderConfigurer - Loading properties file from file [D:\GGCloud-Origin\private_cloud_sdk\target\classes\META-INF\spring\config.properties]
+2017-05-05 22:28:30,220 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'persistenceUnit'
+2017-05-05 22:28:30,220 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: persistenceUnit
+	...]
+2017-05-05 22:28:30,702 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2017-05-05 22:28:30,962 [main] INFO  org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2017-05-05 22:28:31,389 [main] INFO  org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2017-05-05 22:28:31,390 [main] INFO  org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000102: Fetching database metadata
+2017-05-05 22:28:31,414 [main] INFO  org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000396: Updating schema
+2017-05-05 22:28:31,488 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.application_tag
+2017-05-05 22:28:31,490 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [creator, create_time, name, description, id, version, enabled]
+2017-05-05 22:28:31,490 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:31,490 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:31,574 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.disk
+2017-05-05 22:28:31,574 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [creator, delete_time, create_time, manager, disk_name, modify_time, description, attach_point, version, host_id, capacity, attach_time, valid_time, disk_id, status]
+2017-05-05 22:28:31,575 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [fk_iqnavjwp3hfr7fg1o8u91ftd1]
+2017-05-05 22:28:31,575 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [fk_iqnavjwp3hfr7fg1o8u91ftd1, primary]
+2017-05-05 22:28:31,613 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.external_ip
+2017-05-05 22:28:31,614 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [domain_id, device_id, ip, version, device_owner, status]
+2017-05-05 22:28:31,614 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:31,614 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:31,687 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.monitor
+2017-05-05 22:28:31,687 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [default_threshold, description, monitor_source, id, severity_level, threshold_unit, monitor_type, version, monitor_name]
+2017-05-05 22:28:31,688 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:31,688 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:31,724 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.monitor_log
+2017-05-05 22:28:31,725 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [update_time, monitor_source, id, source_id, message, severity_level, monitor_type, version, check_time, monitor_name, monitor_status]
+2017-05-05 22:28:31,725 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:31,725 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:31,766 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.monitor_result
+2017-05-05 22:28:31,767 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [update_time, monitor_source, id, source_id, monitor_type, version, monitor_name, monitor_status]
+2017-05-05 22:28:31,767 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:31,767 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:31,881 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.monitor_setting
+2017-05-05 22:28:31,882 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [create_time, monitor_source, threshold, id, os_alarm_id, source_id, severity_level, threshold_unit, monitor_type, version, enabled, monitor_name]
+2017-05-05 22:28:31,882 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:31,882 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:31,967 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.operation_log
+2017-05-05 22:28:31,967 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [operation_time, service_name, operation_result, operation_status, id, severity_level, object_id, operation, version, operator]
+2017-05-05 22:28:31,967 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:31,969 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:32,006 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.physical_machine
+2017-05-05 22:28:32,007 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [create_time, verified, cpu_number, description, disk_size, hypervisor_id, ip_address, version, host_id, host_name, memory_size, status]
+2017-05-05 22:28:32,007 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:32,007 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:32,067 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.physical_machine_load
+2017-05-05 22:28:32,067 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [free_disk, bytes_out, cpu_user, bytes_in, report_time, free_memory, cpu_idle, id, cpu_system, version, host_name, cpu_load]
+2017-05-05 22:28:32,067 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:32,069 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:32,097 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.physical_machine_physical_machine_type
+2017-05-05 22:28:32,098 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [type_id, host_id]
+2017-05-05 22:28:32,098 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [fk_4o1y1ykout1ply623immaoxu6, fk_k6qnaagh5sgkg9ni2beh6wopg]
+2017-05-05 22:28:32,098 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [fk_4o1y1ykout1ply623immaoxu6, primary]
+2017-05-05 22:28:32,129 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.physical_machine_type
+2017-05-05 22:28:32,130 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [type_name, type_id, description, version]
+2017-05-05 22:28:32,130 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:32,130 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:32,157 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.role
+2017-05-05 22:28:32,157 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [role_name, role_id, description, version]
+2017-05-05 22:28:32,158 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:32,158 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:32,180 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.snapshot
+2017-05-05 22:28:32,180 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [snapshot_name, creator, delete_time, create_time, size, snapshot_id, description, version, host_id, status]
+2017-05-05 22:28:32,180 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [fk_sef57rjbc5u7148r3vyral0ee]
+2017-05-05 22:28:32,181 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [fk_sef57rjbc5u7148r3vyral0ee, primary]
+2017-05-05 22:28:32,232 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.user
+2017-05-05 22:28:32,233 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [delete_time, create_time, snapshot_quota, session_id, real_name, version, password, user_id, phone, role_id, disable_time, department, enable_time, email, status, username]
+2017-05-05 22:28:32,235 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [fk_qleu8ddawkdltal07p8e6hgva]
+2017-05-05 22:28:32,235 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [fk_qleu8ddawkdltal07p8e6hgva, primary]
+2017-05-05 22:28:32,272 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.virtual_machine
+2017-05-05 22:28:32,305 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [creator, task_status, delete_time, memory, create_time, manager, hypervisor_name, modify_time, cpu, description, version, host_id, private_ip, domain_id, image_name, disk, group_id, floating_ip, host_name, status]
+2017-05-05 22:28:32,305 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:32,306 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:32,333 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.virtual_machine_application_tag
+2017-05-05 22:28:32,334 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [app_id, host_id]
+2017-05-05 22:28:32,334 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [fk_nnatq6y72k411p3h4kukiy2km, fk_4mp5rpnyi0m6qp46t40xtol7l]
+2017-05-05 22:28:32,334 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [fk_nnatq6y72k411p3h4kukiy2km, primary]
+2017-05-05 22:28:32,382 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.virtual_machine_domain
+2017-05-05 22:28:32,382 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [domain_id, creator, disk, domain_name, delete_time, memory, create_time, instances, cpu, description, version, status]
+2017-05-05 22:28:32,383 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:32,383 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:32,422 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.virtual_machine_group
+2017-05-05 22:28:32,422 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [creator, delete_time, memory, create_time, group_name, instances, cpu, description, version, domain_id, disk, group_id, status]
+2017-05-05 22:28:32,423 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:32,423 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:32,425 [main] INFO  org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000232: Schema update complete
+2017-05-05 22:28:32,455 [main] WARN  org.hibernate.jpa.internal.EntityManagerFactoryRegistry - HHH000436: Entity manager factory name (persistenceUnit) is already registered.  If entity manager will be clustered or passivated, specify a unique value for property 'hibernate.ejb.entitymanager_factory_name'
+2017-05-05 22:28:32,455 [main] INFO  org.springframework.beans.factory.support.DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@4f66ffc8: defining beans [org.springframework.context.support.PropertySourcesPlaceholderConfigurer#0,org.springframework.context.config.internalBeanConfigurerAspect,org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,org.springframework.context.annotation.internalPersistenceAnnotationProcessor,properties,dataSource,transactionManager,org.springframework.transaction.config.internalTransactionAspect,entityManagerFactory,org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor]; root of factory hierarchy
+2017-05-05 22:28:32,462 [main] INFO  org.springframework.beans.factory.config.PropertiesFactoryBean - Loading properties file from file [D:\GGCloud-Origin\private_cloud_sdk\target\classes\META-INF\spring\config.properties]
+2017-05-05 22:28:32,651 [main] INFO  com.sinoparasoft.config.StaticApplicationConfiguration - �ɹ�������Ϣ����
+win2012-x64.raw
+win2016-x64.raw
+win2012r2-x64.raw
+win2k8-x86.raw
+win2k8r2-x64.raw
+win2k8-x64.raw
+winxp.raw
+win7-x64.raw
+win7-x86.raw
+centos7.3.raw
+centos7.2-x86_x64.raw
+centos7.2-mini.raw
+centos7.1.raw
+2017-05-05 22:28:35,625 [main] INFO  org.springframework.context.support.FileSystemXmlApplicationContext - Refreshing org.springframework.context.support.FileSystemXmlApplicationContext@5eb0a686: startup date [Fri May 05 22:28:35 CST 2017]; root of context hierarchy
+2017-05-05 22:28:35,630 [main] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from file [D:\GGCloud-Origin\private_cloud_sdk\src\main\resources\META-INF\spring\applicationContext.xml]
+2017-05-05 22:28:35,842 [main] INFO  org.springframework.context.support.PropertySourcesPlaceholderConfigurer - Loading properties file from file [D:\GGCloud-Origin\private_cloud_sdk\target\classes\META-INF\spring\config.properties]
+2017-05-05 22:28:35,878 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'persistenceUnit'
+2017-05-05 22:28:35,879 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: persistenceUnit
+	...]
+2017-05-05 22:28:36,500 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2017-05-05 22:28:36,588 [main] INFO  org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2017-05-05 22:28:36,847 [main] INFO  org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2017-05-05 22:28:36,853 [main] INFO  org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000102: Fetching database metadata
+2017-05-05 22:28:36,860 [main] INFO  org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000396: Updating schema
+2017-05-05 22:28:36,895 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.application_tag
+2017-05-05 22:28:36,895 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [creator, create_time, name, description, id, version, enabled]
+2017-05-05 22:28:36,896 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:36,896 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:36,981 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.disk
+2017-05-05 22:28:36,981 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [creator, delete_time, create_time, manager, disk_name, modify_time, description, attach_point, version, host_id, capacity, attach_time, valid_time, disk_id, status]
+2017-05-05 22:28:36,981 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [fk_iqnavjwp3hfr7fg1o8u91ftd1]
+2017-05-05 22:28:36,982 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [fk_iqnavjwp3hfr7fg1o8u91ftd1, primary]
+2017-05-05 22:28:37,102 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.external_ip
+2017-05-05 22:28:37,102 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [domain_id, device_id, ip, version, device_owner, status]
+2017-05-05 22:28:37,103 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:37,103 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:37,149 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.monitor
+2017-05-05 22:28:37,149 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [default_threshold, description, monitor_source, id, severity_level, threshold_unit, monitor_type, version, monitor_name]
+2017-05-05 22:28:37,150 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:37,150 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:37,249 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.monitor_log
+2017-05-05 22:28:37,249 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [update_time, monitor_source, id, source_id, message, severity_level, monitor_type, version, check_time, monitor_name, monitor_status]
+2017-05-05 22:28:37,249 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:37,250 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:37,318 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.monitor_result
+2017-05-05 22:28:37,319 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [update_time, monitor_source, id, source_id, monitor_type, version, monitor_name, monitor_status]
+2017-05-05 22:28:37,319 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:37,322 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:37,357 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.monitor_setting
+2017-05-05 22:28:37,357 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [create_time, monitor_source, threshold, id, os_alarm_id, source_id, severity_level, threshold_unit, monitor_type, version, enabled, monitor_name]
+2017-05-05 22:28:37,357 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:37,358 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:37,396 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.operation_log
+2017-05-05 22:28:37,396 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [operation_time, service_name, operation_result, operation_status, id, severity_level, object_id, operation, version, operator]
+2017-05-05 22:28:37,396 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:37,397 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:37,420 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.physical_machine
+2017-05-05 22:28:37,420 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [create_time, verified, cpu_number, description, disk_size, hypervisor_id, ip_address, version, host_id, host_name, memory_size, status]
+2017-05-05 22:28:37,420 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:37,420 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:37,497 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.physical_machine_load
+2017-05-05 22:28:37,497 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [free_disk, bytes_out, cpu_user, bytes_in, report_time, free_memory, cpu_idle, id, cpu_system, version, host_name, cpu_load]
+2017-05-05 22:28:37,497 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:37,497 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:37,518 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.physical_machine_physical_machine_type
+2017-05-05 22:28:37,518 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [type_id, host_id]
+2017-05-05 22:28:37,518 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [fk_4o1y1ykout1ply623immaoxu6, fk_k6qnaagh5sgkg9ni2beh6wopg]
+2017-05-05 22:28:37,518 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [fk_4o1y1ykout1ply623immaoxu6, primary]
+2017-05-05 22:28:37,616 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.physical_machine_type
+2017-05-05 22:28:37,616 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [type_name, type_id, description, version]
+2017-05-05 22:28:37,616 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:37,617 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:37,676 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.role
+2017-05-05 22:28:37,677 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [role_name, role_id, description, version]
+2017-05-05 22:28:37,677 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:37,677 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:37,698 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.snapshot
+2017-05-05 22:28:37,698 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [snapshot_name, creator, delete_time, create_time, size, snapshot_id, description, version, host_id, status]
+2017-05-05 22:28:37,698 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [fk_sef57rjbc5u7148r3vyral0ee]
+2017-05-05 22:28:37,698 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [fk_sef57rjbc5u7148r3vyral0ee, primary]
+2017-05-05 22:28:37,736 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.user
+2017-05-05 22:28:37,736 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [delete_time, create_time, snapshot_quota, session_id, real_name, version, password, user_id, phone, role_id, disable_time, department, enable_time, email, status, username]
+2017-05-05 22:28:37,736 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [fk_qleu8ddawkdltal07p8e6hgva]
+2017-05-05 22:28:37,736 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [fk_qleu8ddawkdltal07p8e6hgva, primary]
+2017-05-05 22:28:37,769 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.virtual_machine
+2017-05-05 22:28:37,769 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [creator, task_status, delete_time, memory, create_time, manager, hypervisor_name, modify_time, cpu, description, version, host_id, private_ip, domain_id, image_name, disk, group_id, floating_ip, host_name, status]
+2017-05-05 22:28:37,769 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:37,769 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:37,829 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.virtual_machine_application_tag
+2017-05-05 22:28:37,829 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [app_id, host_id]
+2017-05-05 22:28:37,829 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [fk_nnatq6y72k411p3h4kukiy2km, fk_4mp5rpnyi0m6qp46t40xtol7l]
+2017-05-05 22:28:37,829 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [fk_nnatq6y72k411p3h4kukiy2km, primary]
+2017-05-05 22:28:37,869 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.virtual_machine_domain
+2017-05-05 22:28:37,869 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [domain_id, creator, disk, domain_name, delete_time, memory, create_time, instances, cpu, description, version, status]
+2017-05-05 22:28:37,869 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:37,870 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:37,911 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.virtual_machine_group
+2017-05-05 22:28:37,912 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [creator, delete_time, memory, create_time, group_name, instances, cpu, description, version, domain_id, disk, group_id, status]
+2017-05-05 22:28:37,912 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-05 22:28:37,912 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-05 22:28:37,913 [main] INFO  org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000232: Schema update complete
+2017-05-05 22:28:37,932 [main] WARN  org.hibernate.jpa.internal.EntityManagerFactoryRegistry - HHH000436: Entity manager factory name (persistenceUnit) is already registered.  If entity manager will be clustered or passivated, specify a unique value for property 'hibernate.ejb.entitymanager_factory_name'
+2017-05-05 22:28:37,932 [main] INFO  org.springframework.beans.factory.support.DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@31f77791: defining beans [org.springframework.context.support.PropertySourcesPlaceholderConfigurer#0,org.springframework.context.config.internalBeanConfigurerAspect,org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,org.springframework.context.annotation.internalPersistenceAnnotationProcessor,properties,dataSource,transactionManager,org.springframework.transaction.config.internalTransactionAspect,entityManagerFactory,org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor]; root of factory hierarchy
+2017-05-05 22:28:37,937 [main] INFO  org.springframework.beans.factory.config.PropertiesFactoryBean - Loading properties file from file [D:\GGCloud-Origin\private_cloud_sdk\target\classes\META-INF\spring\config.properties]
+2017-05-05 22:28:38,105 [main] INFO  com.sinoparasoft.config.StaticApplicationConfiguration - �ɹ�������Ϣ����
+external_ips:[com.sinoparasoft.type.ExternalIp@5d5d3a5c, com.sinoparasoft.type.ExternalIp@6e0d16a4, com.sinoparasoft.type.ExternalIp@7e18ced7, com.sinoparasoft.type.ExternalIp@305b43ca, com.sinoparasoft.type.ExternalIp@4601047, com.sinoparasoft.type.ExternalIp@25e8e59]
+page_no:1
+external_ip_count:6
+page_count:1
