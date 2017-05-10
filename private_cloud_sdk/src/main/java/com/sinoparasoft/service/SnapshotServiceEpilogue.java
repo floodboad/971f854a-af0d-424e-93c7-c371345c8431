@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.sinoparasoft.common.ActionResult;
 import com.sinoparasoft.common.ActionResultLogLevelEnum;
-import com.sinoparasoft.common.AppConfig;
+import com.sinoparasoft.config.AppConfig;
 import com.sinoparasoft.common.AsyncOperationRequest;
 import com.sinoparasoft.enumerator.OperationSeverityEnum;
 import com.sinoparasoft.enumerator.OperationStatusEnum;

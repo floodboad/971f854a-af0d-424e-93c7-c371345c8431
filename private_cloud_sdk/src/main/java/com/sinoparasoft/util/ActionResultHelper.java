@@ -1,10 +1,11 @@
 package com.sinoparasoft.util;
 
 import org.slf4j.Logger;
+import org.springframework.stereotype.Component;
 
 import com.sinoparasoft.common.ActionResult;
 import com.sinoparasoft.common.ActionResultLogLevelEnum;
-
+@Component
 public class ActionResultHelper {
 	/**
 	 * create action result and log the message.

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.sinoparasoft.ceph.CephStatus;
 import com.sinoparasoft.ceph.CephStorage;
-import com.sinoparasoft.common.AppConfig;
+import com.sinoparasoft.config.AppConfig;
 import com.sinoparasoft.model.VirtualMachineDomain;
 import com.sinoparasoft.openstack.CloudManipulator;
 import com.sinoparasoft.openstack.CloudManipulatorFactory;

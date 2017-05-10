@@ -9,11 +9,12 @@ import org.openstack4j.model.storage.block.Volume.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
 import com.sinoparasoft.common.ActionResult;
 import com.sinoparasoft.common.ActionResultLogLevelEnum;
-import com.sinoparasoft.common.AppConfig;
+import com.sinoparasoft.config.AppConfig;
 import com.sinoparasoft.common.AsyncOperationRequest;
 import com.sinoparasoft.enumerator.DiskStatusEnum;
 import com.sinoparasoft.enumerator.OperationSeverityEnum;
@@ -30,9 +31,6 @@ public class DiskServiceEpilogue {
 	private static Logger logger = LoggerFactory.getLogger(DiskServiceEpilogue.class);
 
 	@Autowired
-	CloudConfig cloudConfig;
-
-	@Autowired
 	AppConfig appConfig;
 
 	@Autowired
@@ -40,6 +38,9 @@ public class DiskServiceEpilogue {
 
 	@Autowired
 	ActionResultHelper actionResultHelper;
+	
+	@Autowired
+	CloudConfig cloudConfig;
 
 	/**
 	 * create disk epilogue operation

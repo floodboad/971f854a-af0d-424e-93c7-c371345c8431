@@ -1,5 +1,8 @@
 package com.sinoparasoft.config;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class AppConfig {
 	private int portalWaitTimeout;
 	private int portalLoopInterval;

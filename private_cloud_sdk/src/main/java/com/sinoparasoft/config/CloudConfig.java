@@ -1,5 +1,8 @@
 package com.sinoparasoft.config;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class CloudConfig {
   private String cloudManipulatorVersion;
   private String authUrl;

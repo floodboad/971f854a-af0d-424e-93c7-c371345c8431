@@ -1,5 +1,8 @@
 package com.sinoparasoft.config;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class CephConfig {
 	private String restApiUrl;
 

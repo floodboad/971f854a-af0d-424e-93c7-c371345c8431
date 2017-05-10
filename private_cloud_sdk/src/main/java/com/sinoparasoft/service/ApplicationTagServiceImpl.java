@@ -48,7 +48,6 @@ public class ApplicationTagServiceImpl implements ApplicationTagService {
 			recordCount = 0;
 		}
 		pageTotal = recordCount / pageSize + 1;
-
 		List<ApplicationTag> tags = ApplicationTag.getApplicationTagEntries((pageNo - 1) * pageSize, pageSize,
 				"createTime", "DESC");
 

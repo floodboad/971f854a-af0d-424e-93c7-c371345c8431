@@ -43,10 +43,28 @@
         The most commonly used annotation is @Autowired, which instructs Spring to
         dependency inject an object into your class.
     -->
-    <context:component-scan base-package="com.sinoparasoft.sdk">
+    
+    <context:component-scan base-package="com.sinoparasoft">
         <context:exclude-filter expression=".*_Roo_.*" type="regex"/>
         <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
     </context:component-scan>
+    <context:annotation-config />    
+    
+    <bean id="properties"  class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+    <property name="locations">
+    <list>
+      <value>classpath:META-INF/spring/*.properties</value>
+    </list>
+    </property>
+  </bean>
+  
+  <!-- 加载 Client Jar中类-->
+ 
+  <bean class="com.sinoparasoft.openstack.type.CloudConfig"></bean>
+  <bean class="com.sinoparasoft.nagios.NagiosConfig "></bean> 
+   <!-- 
+  
+    -->
     <bean class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="dataSource">
         <property name="driverClassName" value="${database.driverClassName}"/>
         <property name="url" value="${database.url}"/>
@@ -68,4 +86,6 @@
         <property name="persistenceUnitName" value="persistenceUnit"/>
         <property name="dataSource" ref="dataSource"/>
     </bean>
+    
+
 </beans>

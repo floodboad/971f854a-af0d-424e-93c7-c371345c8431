@@ -1,28 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-  <wb-module deploy-name="sinoparasoft-0.1.0.BUILD-SNAPSHOT">
-        <dependent-module archiveName="private-cloud-sdk-0.1.0.BUILD-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/private_cloud_sdk/private_cloud_sdk">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="openstack-client-2.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jungfrau/jungfrau">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="ceph-client-1.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ladakh/ladakh">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="nagios-client-1.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/cuenca/cuenca">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="mq-client-1.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/tarnovo/tarnovo">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-    <property name="context-root" value="sinoparasoft"/>
+  <wb-module deploy-name="private_cloud_se-0.1.0">
     <wb-resource deploy-path="/" source-path="src/main/webapp"/>
+        <dependent-module archiveName="private-cloud-0.1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/private_cloud_sdk/private_cloud_sdk">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     <property name="java-output-path" value="/target/classes"/>
+        <property name="context-root" value="private_cloud_se"/>
     <wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/resources"/>
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
   </wb-module>
 </project-modules>
