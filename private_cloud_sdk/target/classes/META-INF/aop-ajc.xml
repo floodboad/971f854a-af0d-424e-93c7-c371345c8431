@@ -7,6 +7,7 @@
 <aspect name="com.sinoparasoft.model.OperationLog_Roo_Jpa_Entity"/>
 <aspect name="com.sinoparasoft.model.PhysicalMachineLoad_Roo_Configurable"/>
 <aspect name="com.sinoparasoft.model.VirtualMachineGroup_Roo_Jpa_Entity"/>
+<aspect name="com.sinoparasoft.sdk.domain.Admin_Roo_ToString"/>
 <aspect name="com.sinoparasoft.model.Snapshot_Roo_ToString"/>
 <aspect name="com.sinoparasoft.model.MonitorSetting_Roo_Jpa_ActiveRecord"/>
 <aspect name="com.sinoparasoft.model.ExternalIp_Roo_JavaBean"/>
@@ -16,6 +17,7 @@
 <aspect name="com.sinoparasoft.model.Disk_Roo_JavaBean"/>
 <aspect name="com.sinoparasoft.model.OperationLog_Roo_Configurable"/>
 <aspect name="com.sinoparasoft.model.Disk_Roo_Configurable"/>
+<aspect name="com.sinoparasoft.sdk.domain.Admin_Roo_Jpa_Entity"/>
 <aspect name="com.sinoparasoft.model.VirtualMachine_Roo_JavaBean"/>
 <aspect name="com.sinoparasoft.model.Disk_Roo_Jpa_Entity"/>
 <aspect name="com.sinoparasoft.model.ApplicationTag_Roo_JavaBean"/>
@@ -44,6 +46,7 @@
 <aspect name="com.sinoparasoft.model.User_Roo_Jpa_ActiveRecord"/>
 <aspect name="com.sinoparasoft.model.ApplicationTag_Roo_Jpa_ActiveRecord"/>
 <aspect name="com.sinoparasoft.model.MonitorLog_Roo_Configurable"/>
+<aspect name="com.sinoparasoft.sdk.domain.Admin_Roo_Jpa_ActiveRecord"/>
 <aspect name="com.sinoparasoft.model.MonitorResult_Roo_Configurable"/>
 <aspect name="com.sinoparasoft.model.VirtualMachineDomain_Roo_Jpa_Entity"/>
 <aspect name="com.sinoparasoft.model.PhysicalMachineType_Roo_Jpa_ActiveRecord"/>
@@ -60,6 +63,7 @@
 <aspect name="com.sinoparasoft.model.PhysicalMachine_Roo_ToString"/>
 <aspect name="com.sinoparasoft.model.OperationLog_Roo_JavaBean"/>
 <aspect name="com.sinoparasoft.model.VirtualMachineDomain_Roo_ToString"/>
+<aspect name="com.sinoparasoft.sdk.domain.Admin_Roo_Configurable"/>
 <aspect name="com.sinoparasoft.model.ExternalIp_Roo_ToString"/>
 <aspect name="com.sinoparasoft.model.ApplicationTag_Roo_ToString"/>
 <aspect name="com.sinoparasoft.model.VirtualMachine_Roo_ToString"/>

@@ -92,6 +92,7 @@ public class ImageServiceImpl implements ImageService {
 			if (image.isSnapshot() == true) {
 				continue;
 			}
+
 			com.sinoparasoft.type.Image imageValue = buildImageValue(image);
 			imageList.add(imageValue);
 		}
