@@ -1,460 +1,96 @@
-2017-05-10 17:53:59,664 [main] INFO  org.springframework.context.support.FileSystemXmlApplicationContext - Refreshing org.springframework.context.support.FileSystemXmlApplicationContext@17b6d426: startup date [Wed May 10 17:53:59 CST 2017]; root of context hierarchy
-2017-05-10 17:53:59,667 [main] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from file [D:\GGCloud-Origin\private_cloud_sdk\src\main\resources\META-INF\spring\applicationContext.xml]
-2017-05-10 17:54:01,434 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:01,583 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:01,742 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:02,011 [main] INFO  org.springframework.context.support.PropertySourcesPlaceholderConfigurer - Loading properties file from file [D:\GGCloud-Origin\private_cloud_sdk\target\classes\META-INF\spring\config.properties]
-2017-05-10 17:54:02,072 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'persistenceUnit'
-2017-05-10 17:54:02,074 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [
-	name: persistenceUnit
+2017-05-17 15:58:57,254 [main] INFO  org.springframework.context.support.FileSystemXmlApplicationContext - Refreshing org.springframework.context.support.FileSystemXmlApplicationContext@2e53b094: startup date [Wed May 17 15:58:57 CST 2017]; root of context hierarchy
+2017-05-17 15:58:57,258 [main] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from file [D:\GGCloud-Origin\private_cloud_sdk\src\main\resources\META-INF\spring\applicationContext.xml]
+2017-05-17 15:58:57,816 [main] INFO  org.springframework.context.support.PropertySourcesPlaceholderConfigurer - Loading properties file from file [D:\GGCloud-Origin\private_cloud_sdk\target\classes\META-INF\spring\config.properties]
+2017-05-17 15:58:57,850 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'persistenceUnit-sdk'
+2017-05-17 15:58:57,854 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: persistenceUnit-sdk
 	...]
-2017-05-10 17:54:02,192 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:02,302 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:02,431 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:02,592 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:02,634 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-2017-05-10 17:54:02,756 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:02,854 [main] INFO  org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
-2017-05-10 17:54:02,922 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:03,071 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:03,153 [main] INFO  org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000228: Running hbm2ddl schema update
-2017-05-10 17:54:03,153 [main] INFO  org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000102: Fetching database metadata
-2017-05-10 17:54:03,165 [main] INFO  org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000396: Updating schema
-2017-05-10 17:54:03,187 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:03,215 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.application_tag
-2017-05-10 17:54:03,215 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [creator, create_time, name, description, id, version, enabled]
-2017-05-10 17:54:03,215 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
-2017-05-10 17:54:03,215 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
-2017-05-10 17:54:03,280 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.disk
-2017-05-10 17:54:03,281 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [creator, delete_time, create_time, manager, disk_name, modify_time, description, attach_point, version, host_id, capacity, attach_time, valid_time, disk_id, status]
-2017-05-10 17:54:03,281 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [fk_iqnavjwp3hfr7fg1o8u91ftd1]
-2017-05-10 17:54:03,281 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [fk_iqnavjwp3hfr7fg1o8u91ftd1, primary]
-2017-05-10 17:54:03,286 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:03,321 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.external_ip
-2017-05-10 17:54:03,321 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [domain_id, device_id, ip, version, device_owner, status]
-2017-05-10 17:54:03,321 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
-2017-05-10 17:54:03,321 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
-2017-05-10 17:54:03,359 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:03,375 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.monitor
-2017-05-10 17:54:03,375 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [default_threshold, description, monitor_source, id, severity_level, threshold_unit, monitor_type, version, monitor_name]
-2017-05-10 17:54:03,375 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
-2017-05-10 17:54:03,375 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
-2017-05-10 17:54:03,424 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.monitor_log
-2017-05-10 17:54:03,424 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [update_time, monitor_source, id, source_id, message, severity_level, monitor_type, version, check_time, monitor_name, monitor_status]
-2017-05-10 17:54:03,424 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
-2017-05-10 17:54:03,424 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
-2017-05-10 17:54:03,459 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:03,483 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.monitor_result
-2017-05-10 17:54:03,483 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [update_time, monitor_source, id, source_id, monitor_type, version, monitor_name, monitor_status]
-2017-05-10 17:54:03,483 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
-2017-05-10 17:54:03,483 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
-2017-05-10 17:54:03,529 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.monitor_setting
-2017-05-10 17:54:03,529 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [create_time, monitor_source, threshold, id, os_alarm_id, source_id, severity_level, threshold_unit, monitor_type, version, enabled, monitor_name]
-2017-05-10 17:54:03,530 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
-2017-05-10 17:54:03,530 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
-2017-05-10 17:54:03,533 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:03,646 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.operation_log
-2017-05-10 17:54:03,646 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [operation_time, service_name, operation_result, operation_status, id, severity_level, object_id, operation, version, operator]
-2017-05-10 17:54:03,647 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
-2017-05-10 17:54:03,647 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
-2017-05-10 17:54:03,669 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:03,689 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.physical_machine
-2017-05-10 17:54:03,689 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [create_time, verified, cpu_number, description, disk_size, hypervisor_id, ip_address, version, host_id, host_name, memory_size, status]
-2017-05-10 17:54:03,689 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
-2017-05-10 17:54:03,696 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
-2017-05-10 17:54:03,755 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.physical_machine_load
-2017-05-10 17:54:03,756 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [free_disk, bytes_out, cpu_user, bytes_in, report_time, free_memory, cpu_idle, id, cpu_system, version, host_name, cpu_load]
-2017-05-10 17:54:03,756 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
-2017-05-10 17:54:03,756 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
-2017-05-10 17:54:03,761 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:03,794 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.physical_machine_physical_machine_type
-2017-05-10 17:54:03,794 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [type_id, host_id]
-2017-05-10 17:54:03,794 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [fk_4o1y1ykout1ply623immaoxu6, fk_k6qnaagh5sgkg9ni2beh6wopg]
-2017-05-10 17:54:03,794 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [fk_4o1y1ykout1ply623immaoxu6, primary]
-2017-05-10 17:54:03,879 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.physical_machine_type
-2017-05-10 17:54:03,879 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [type_name, type_id, description, version]
-2017-05-10 17:54:03,879 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
-2017-05-10 17:54:03,880 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
-2017-05-10 17:54:03,882 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:03,911 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.role
-2017-05-10 17:54:03,911 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [role_name, role_id, description, version]
-2017-05-10 17:54:03,911 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
-2017-05-10 17:54:03,911 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
-2017-05-10 17:54:03,992 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:04,000 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.snapshot
-2017-05-10 17:54:04,000 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [snapshot_name, creator, delete_time, create_time, size, snapshot_id, description, version, host_id, status]
-2017-05-10 17:54:04,000 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [fk_sef57rjbc5u7148r3vyral0ee]
-2017-05-10 17:54:04,000 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [fk_sef57rjbc5u7148r3vyral0ee, primary]
-2017-05-10 17:54:04,089 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.user
-2017-05-10 17:54:04,089 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [delete_time, create_time, snapshot_quota, session_id, real_name, version, password, user_id, phone, role_id, disable_time, department, enable_time, email, status, username]
-2017-05-10 17:54:04,089 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [fk_qleu8ddawkdltal07p8e6hgva]
-2017-05-10 17:54:04,089 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [fk_qleu8ddawkdltal07p8e6hgva, primary]
-2017-05-10 17:54:04,118 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:04,129 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.virtual_machine
-2017-05-10 17:54:04,129 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [creator, task_status, delete_time, memory, create_time, manager, hypervisor_name, modify_time, cpu, description, version, host_id, private_ip, domain_id, image_name, disk, group_id, floating_ip, host_name, status]
-2017-05-10 17:54:04,129 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
-2017-05-10 17:54:04,129 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
-2017-05-10 17:54:04,196 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.virtual_machine_application_tag
-2017-05-10 17:54:04,196 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [app_id, host_id]
-2017-05-10 17:54:04,196 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [fk_nnatq6y72k411p3h4kukiy2km, fk_4mp5rpnyi0m6qp46t40xtol7l]
-2017-05-10 17:54:04,196 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [fk_nnatq6y72k411p3h4kukiy2km, primary]
-2017-05-10 17:54:04,212 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:04,250 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.virtual_machine_domain
-2017-05-10 17:54:04,250 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [domain_id, creator, disk, domain_name, delete_time, memory, create_time, instances, cpu, description, version, status]
-2017-05-10 17:54:04,250 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
-2017-05-10 17:54:04,250 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
-2017-05-10 17:54:04,271 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:04,287 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.virtual_machine_group
-2017-05-10 17:54:04,287 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [creator, delete_time, memory, create_time, group_name, instances, cpu, description, version, domain_id, disk, group_id, status]
-2017-05-10 17:54:04,287 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
-2017-05-10 17:54:04,287 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
-2017-05-10 17:54:04,290 [main] INFO  org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000232: Schema update complete
-2017-05-10 17:54:04,308 [main] WARN  org.hibernate.jpa.internal.EntityManagerFactoryRegistry - HHH000436: Entity manager factory name (persistenceUnit) is already registered.  If entity manager will be clustered or passivated, specify a unique value for property 'hibernate.ejb.entitymanager_factory_name'
-2017-05-10 17:54:04,309 [main] INFO  org.springframework.beans.factory.support.DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@73fb1d7f: defining beans [org.springframework.context.support.PropertySourcesPlaceholderConfigurer#0,org.springframework.context.config.internalBeanConfigurerAspect,appConfig,applicationConfiguration,cephConfig,cloudConfig,MQConfig,nagiosConfig,applicationTagServiceImpl,diskServiceEpilogue,diskServiceImpl,imageServiceImpl,monitorLogServiceImpl,monitorResultServiceImpl,monitorSettingServiceImpl,networkServiceImpl,operationLogServiceImpl,overviewServiceImpl,physicalMachineServiceImpl,snapshotServiceEpilogue,snapshotServiceImpl,userServiceImpl,virtualMachineDomainServiceImpl,virtualMachineGroupServiceImpl,virtualMachineServiceEpilogue,virtualMachineServiceImpl,asyncOperationCommand,asyncOperationWorker,monitorAlarmWorker,actionResultHelper,org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,org.springframework.context.annotation.internalPersistenceAnnotationProcessor,properties,com.sinoparasoft.openstack.type.CloudConfig#0,com.sinoparasoft.nagios.NagiosConfig#0,dataSource,transactionManager,org.springframework.transaction.config.internalTransactionAspect,entityManagerFactory,org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor,mqConfig,messageProducer]; root of factory hierarchy
-2017-05-10 17:54:04,391 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:04,542 [main] INFO  com.sinoparasoft.config.ApplicationConfiguration - �ɹ�������Ϣ����
-2017-05-10 17:54:04,874 [main] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 
-2017-05-10 17:54:05,063 [main] INFO  org.springframework.beans.factory.config.PropertiesFactoryBean - Loading properties file from file [D:\GGCloud-Origin\private_cloud_sdk\target\classes\META-INF\spring\config.properties]
-2017-05-10 17:54:05,126 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:05,473 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:05,544 [ThreadPoolTaskExecutor-2] ERROR com.sinoparasoft.task.MonitorAlarmWorker - �����������ط��������󣬱���ڵ㸺�ط�������
-java.lang.NullPointerException
-	at com.sinoparasoft.task.GangliaMonitor.getMetrics(GangliaMonitor.java:32)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad_aroundBody0(MonitorAlarmWorker.java:564)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask$AjcClosure1.run(MonitorAlarmWorker.java:1)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96cproceed(AbstractTransactionAspect.aj:59)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect$AbstractTransactionAspect$1.proceedWithInvocation(AbstractTransactionAspect.aj:65)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
-	at org.springframework.transaction.aspectj.AbstractTransactionAspect.ajc$around$org_springframework_transaction_aspectj_AbstractTransactionAspect$1$2a73e96c(AbstractTransactionAspect.aj:63)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.savePhysicalMachineLoad(MonitorAlarmWorker.java:561)
-	at com.sinoparasoft.task.MonitorAlarmWorker$PhysicalMachineMonitorTask.run(MonitorAlarmWorker.java:539)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-2017-05-10 17:54:05,616 [main] INFO  com.sinoparasoft.config.StaticApplicationConfiguration - �ɹ�������Ϣ����
+2017-05-17 15:58:58,593 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2017-05-17 15:58:58,679 [main] INFO  org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2017-05-17 15:58:58,876 [main] INFO  org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2017-05-17 15:58:58,877 [main] INFO  org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000102: Fetching database metadata
+2017-05-17 15:58:58,907 [main] INFO  org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000396: Updating schema
+2017-05-17 15:58:59,065 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.application_tag
+2017-05-17 15:58:59,065 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [creator, create_time, name, description, id, version, enabled]
+2017-05-17 15:58:59,065 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-17 15:58:59,065 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-17 15:58:59,144 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.disk
+2017-05-17 15:58:59,144 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [creator, delete_time, create_time, manager, disk_name, modify_time, description, attach_point, version, host_id, capacity, attach_time, valid_time, disk_id, status]
+2017-05-17 15:58:59,144 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [fk_iqnavjwp3hfr7fg1o8u91ftd1]
+2017-05-17 15:58:59,145 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [fk_iqnavjwp3hfr7fg1o8u91ftd1, primary]
+2017-05-17 15:58:59,274 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.external_ip
+2017-05-17 15:58:59,274 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [domain_id, device_id, ip, version, device_owner, status]
+2017-05-17 15:58:59,274 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-17 15:58:59,274 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-17 15:58:59,749 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.monitor
+2017-05-17 15:58:59,749 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [default_threshold, description, monitor_source, id, severity_level, threshold_unit, monitor_type, version, monitor_name]
+2017-05-17 15:58:59,750 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-17 15:58:59,750 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-17 15:58:59,790 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.monitor_log
+2017-05-17 15:58:59,790 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [update_time, monitor_source, id, source_id, message, severity_level, monitor_type, version, check_time, monitor_name, monitor_status]
+2017-05-17 15:58:59,790 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-17 15:58:59,790 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-17 15:58:59,811 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.monitor_result
+2017-05-17 15:58:59,811 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [update_time, monitor_source, id, source_id, monitor_type, version, monitor_name, monitor_status]
+2017-05-17 15:58:59,812 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-17 15:58:59,812 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-17 15:58:59,837 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.monitor_setting
+2017-05-17 15:58:59,837 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [create_time, monitor_source, threshold, id, os_alarm_id, source_id, severity_level, threshold_unit, monitor_type, version, enabled, monitor_name]
+2017-05-17 15:58:59,838 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-17 15:58:59,838 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-17 15:58:59,906 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.operation_log
+2017-05-17 15:58:59,906 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [operation_time, service_name, operation_result, operation_status, id, severity_level, object_id, operation, version, operator]
+2017-05-17 15:58:59,906 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-17 15:58:59,906 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-17 15:59:00,006 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.physical_machine
+2017-05-17 15:59:00,007 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [create_time, verified, cpu_number, description, disk_size, hypervisor_id, ip_address, version, host_id, host_name, memory_size, status]
+2017-05-17 15:59:00,007 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-17 15:59:00,009 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-17 15:59:00,119 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.physical_machine_load
+2017-05-17 15:59:00,119 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [free_disk, bytes_out, cpu_user, bytes_in, report_time, free_memory, cpu_idle, id, cpu_system, version, host_name, cpu_load]
+2017-05-17 15:59:00,119 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-17 15:59:00,119 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-17 15:59:00,190 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.physical_machine_physical_machine_type
+2017-05-17 15:59:00,190 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [type_id, host_id]
+2017-05-17 15:59:00,190 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [fk_4o1y1ykout1ply623immaoxu6, fk_k6qnaagh5sgkg9ni2beh6wopg]
+2017-05-17 15:59:00,190 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [fk_4o1y1ykout1ply623immaoxu6, primary]
+2017-05-17 15:59:00,215 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.physical_machine_type
+2017-05-17 15:59:00,215 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [type_name, type_id, description, version]
+2017-05-17 15:59:00,216 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-17 15:59:00,216 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-17 15:59:00,239 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.role
+2017-05-17 15:59:00,239 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [role_name, role_id, description, version]
+2017-05-17 15:59:00,239 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-17 15:59:00,239 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-17 15:59:00,280 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.snapshot
+2017-05-17 15:59:00,281 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [snapshot_name, creator, delete_time, create_time, size, snapshot_id, description, version, host_id, status]
+2017-05-17 15:59:00,281 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [fk_sef57rjbc5u7148r3vyral0ee]
+2017-05-17 15:59:00,281 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [fk_sef57rjbc5u7148r3vyral0ee, primary]
+2017-05-17 15:59:00,300 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.user
+2017-05-17 15:59:00,300 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [delete_time, create_time, snapshot_quota, session_id, real_name, version, password, user_id, phone, role_id, disable_time, department, enable_time, email, status, username]
+2017-05-17 15:59:00,300 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [fk_qleu8ddawkdltal07p8e6hgva]
+2017-05-17 15:59:00,300 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [fk_qleu8ddawkdltal07p8e6hgva, primary]
+2017-05-17 15:59:00,320 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.virtual_machine
+2017-05-17 15:59:00,321 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [creator, task_status, delete_time, memory, create_time, manager, hypervisor_name, modify_time, cpu, description, version, host_id, private_ip, domain_id, image_name, disk, group_id, floating_ip, host_name, status]
+2017-05-17 15:59:00,321 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-17 15:59:00,321 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-17 15:59:00,339 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.virtual_machine_application_tag
+2017-05-17 15:59:00,340 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [app_id, host_id]
+2017-05-17 15:59:00,340 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: [fk_nnatq6y72k411p3h4kukiy2km, fk_4mp5rpnyi0m6qp46t40xtol7l]
+2017-05-17 15:59:00,340 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [fk_nnatq6y72k411p3h4kukiy2km, primary]
+2017-05-17 15:59:00,528 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.virtual_machine_domain
+2017-05-17 15:59:00,528 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [domain_id, creator, disk, domain_name, delete_time, memory, create_time, instances, cpu, description, version, status]
+2017-05-17 15:59:00,528 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-17 15:59:00,528 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-17 15:59:00,562 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: sdk.virtual_machine_group
+2017-05-17 15:59:00,562 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [creator, delete_time, memory, create_time, group_name, instances, cpu, description, version, domain_id, disk, group_id, status]
+2017-05-17 15:59:00,562 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2017-05-17 15:59:00,562 [main] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2017-05-17 15:59:00,563 [main] INFO  org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000232: Schema update complete
+2017-05-17 15:59:00,595 [main] WARN  org.hibernate.jpa.internal.EntityManagerFactoryRegistry - HHH000436: Entity manager factory name (persistenceUnit-sdk) is already registered.  If entity manager will be clustered or passivated, specify a unique value for property 'hibernate.ejb.entitymanager_factory_name'
+2017-05-17 15:59:00,595 [main] INFO  org.springframework.beans.factory.support.DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@6dbcf214: defining beans [org.springframework.context.support.PropertySourcesPlaceholderConfigurer#0,org.springframework.context.config.internalBeanConfigurerAspect,appConfig,applicationConfiguration,cephConfig,cloudConfig,MQConfig,nagiosConfig,applicationTagServiceImpl,diskServiceEpilogue,diskServiceImpl,imageServiceImpl,monitorLogServiceImpl,monitorResultServiceImpl,monitorSettingServiceImpl,networkServiceImpl,operationLogServiceImpl,overviewServiceImpl,physicalMachineServiceImpl,snapshotServiceEpilogue,snapshotServiceImpl,userServiceImpl,virtualMachineDomainServiceImpl,virtualMachineGroupServiceImpl,virtualMachineServiceEpilogue,virtualMachineServiceImpl,asyncOperationCommand,asyncOperationWorker,monitorAlarmWorker,actionResultHelper,excelOperate,org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,org.springframework.context.annotation.internalPersistenceAnnotationProcessor,properties,com.sinoparasoft.openstack.type.CloudConfig#0,com.sinoparasoft.nagios.NagiosConfig#0,dataSource,transactionManager,org.springframework.transaction.config.internalTransactionAspect,entityManagerFactory,org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor,mqConfig,messageProducer]; root of factory hierarchy
+2017-05-17 15:59:00,771 [main] INFO  com.sinoparasoft.config.ApplicationConfiguration - �ɹ�������Ϣ����
+2017-05-17 15:59:00,977 [main] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 
+2017-05-17 15:59:00,983 [main] INFO  org.springframework.beans.factory.config.PropertiesFactoryBean - Loading properties file from file [D:\GGCloud-Origin\private_cloud_sdk\target\classes\META-INF\spring\config.properties]
+2017-05-17 15:59:01,075 [main] INFO  com.sinoparasoft.config.StaticApplicationConfiguration - �ɹ�������Ϣ����
 http://192.168.100.81:5005/api/v0.1

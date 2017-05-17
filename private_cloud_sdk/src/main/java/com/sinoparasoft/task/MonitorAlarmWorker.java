@@ -253,7 +253,7 @@ public class MonitorAlarmWorker {
 				}
 
 				try {
-					saveVirtualMachineMonitorResult();
+					//saveVirtualMachineMonitorResult();
 				} catch (Exception e) {
 					logger.error("虚拟机告警服务发生错误，保存节点监控结果发生错误", e);
 				}
@@ -536,13 +536,13 @@ public class MonitorAlarmWorker {
 				}
 
 				try {
-					savePhysicalMachineLoad();
+					//savePhysicalMachineLoad();
 				} catch (Exception e) {
 					logger.error("物理服务器监控服务发生错误，保存节点负载发生错误", e);
 				}
 
 				try {
-					savePhysicalMachineMonitorHistory();
+					//savePhysicalMachineMonitorHistory();
 				} catch (Exception e) {
 					logger.error("物理服务器监控服务发生错误，保存节点监控历史发生错误", e);
 				}
@@ -944,7 +944,7 @@ public class MonitorAlarmWorker {
 				}
 
 				try {
-					savePhysicalMachineMonitorResult();
+					//savePhysicalMachineMonitorResult();
 				} catch (Exception e) {
 					logger.error("物理服务器告警服务发生错误，保存节点监控历史发生错误", e);
 				}

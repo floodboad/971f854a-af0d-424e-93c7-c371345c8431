@@ -23,9 +23,43 @@
         <bean class="org.springframework.web.servlet.theme.ThemeChangeInterceptor"/>
         <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" p:paramName="lang"/>
     </mvc:interceptors>
+    
+    <mvc:annotation-driven conversion-service="applicationConversionService"/>
+    
+    	<mvc:interceptors>
+		<!-- session超时 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.sinoparasoft.interceptor.RequestInterceptor">
+				<property name="allowUrls">
+					<list>
+						<!-- 如果请求中包含以下路径，则不进行拦截 -->
+						<value>/user/list-by-real-name</value>
+						<value>/user/online-cloud-manager-list</value>
+						<value>/resources</value>
+						<value>/resourceNotFound</value>
+						<value>/uncaughtException</value>
+					</list>
+				</property>
+
+				<property name="loginUrl">
+					<value>/login</value>
+				</property>
+				<property name="userTargetUrl">
+					<value>/virtual-machine/list</value>
+				</property>
+				<property name="managerTargetUrl">
+					<value>/overview</value>
+				</property>
+				<property name="sessionTimedoutCode">
+					<value>901</value>
+				</property>
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 
     <!-- Selects a static view for rendering without the need for an explicit controller -->
-    <mvc:view-controller path="/" view-name="index"/>
+    <mvc:view-controller path="/login" view-name="login"/>
     <mvc:view-controller path="/uncaughtException"/>
     <mvc:view-controller path="/resourceNotFound"/>
     <mvc:view-controller path="/dataAccessFailure"/>
@@ -72,4 +106,7 @@
       </list>
     </property>
   </bean>
+  
+   <bean class="com.sinoparasoft.web.ApplicationConversionServiceFactoryBean" id="applicationConversionService" />
+   <bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"></bean>  
 </beans>

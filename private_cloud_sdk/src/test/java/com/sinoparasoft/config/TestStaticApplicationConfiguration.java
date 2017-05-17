@@ -29,13 +29,13 @@ public class TestStaticApplicationConfiguration {
 	
 	public TestStaticApplicationConfiguration() {
 		// TODO Auto-generated constructor stub
-		
+		ApplicationContext ctx = new FileSystemXmlApplicationContext("src/main/resources/META-INF/spring/applicationContext.xml"); 
 	}
 	
 	public void initConfiguration() {
 		// TODO Auto-generated constructor stub
 		
-		ApplicationContext ctx = new FileSystemXmlApplicationContext("src/main/resources/META-INF/spring/applicationContext.xml"); 
+		
 		
 		Properties properties=new Properties();		
 		try {
@@ -69,6 +69,9 @@ public class TestStaticApplicationConfiguration {
 	
 	public static void main(String[] args) {
 		TestStaticApplicationConfiguration test=new TestStaticApplicationConfiguration();
-		test.TestStaticConfiguration();
+		test.TestStaticConfiguration();		
+		System.out.println(appconfig.getGangliaServers().length);
+		
+		
 	}
 }

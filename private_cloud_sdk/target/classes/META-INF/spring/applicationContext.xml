@@ -58,14 +58,12 @@
     </property>
   </bean>
   
-  <!-- 加载 Client Jar中类-->
- 
+  <!-- 加载 Client Jar中类--> 
   <bean class="com.sinoparasoft.openstack.type.CloudConfig"></bean>
   <bean class="com.sinoparasoft.nagios.NagiosConfig "></bean> 
-   <!-- 
   
-    -->
-    <bean class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="dataSource">
+  
+  <bean class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="dataSource">
         <property name="driverClassName" value="${database.driverClassName}"/>
         <property name="url" value="${database.url}"/>
         <property name="username" value="${database.username}"/>
@@ -83,9 +81,7 @@
     </bean>
     <tx:annotation-driven mode="aspectj" transaction-manager="transactionManager"/>
     <bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="entityManagerFactory">
-        <property name="persistenceUnitName" value="persistenceUnit"/>
+        <property name="persistenceUnitName" value="persistenceUnit-sdk"/>
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    
-
 </beans>

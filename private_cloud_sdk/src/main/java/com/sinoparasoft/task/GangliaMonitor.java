@@ -28,7 +28,7 @@ public class GangliaMonitor {
 	@SuppressWarnings("unchecked")
 	public Map<String, GangliaMetric> getMetrics() throws DocumentException, UnknownHostException, IOException {
 		Map<String, GangliaMetric> metrics = new HashMap<String, GangliaMetric>();
-	
+			
 		for (int index = 0; index < serverIps.length; index++) {
 			String xml = this.getGangliaXML(serverIps[index]);
 			if (xml == null) {

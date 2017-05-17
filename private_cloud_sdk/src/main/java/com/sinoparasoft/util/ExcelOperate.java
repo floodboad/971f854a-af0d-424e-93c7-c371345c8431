@@ -9,6 +9,8 @@ import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.springframework.stereotype.Component;
+
 import com.sinoparasoft.type.MonitorLog;
 import com.sinoparasoft.type.OperationLog;
 
@@ -18,7 +20,7 @@ import com.sinoparasoft.type.OperationLog;
  * @author xc
  *
  */
-
+@Component(value = "excelOperate")
 public class ExcelOperate {
 	public boolean createOperationLogsExcel(String filePath, List<OperationLog> operationLogList)
 			throws IOException {

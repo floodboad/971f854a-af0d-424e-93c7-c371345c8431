@@ -47,13 +47,16 @@
         <context:exclude-filter expression=".*_Roo_.*" type="regex"/>
         <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
     </context:component-scan>
-    
+    <!-- 
     <context:component-scan base-package="com.sinoparasoft.config">
     </context:component-scan>
     <context:component-scan base-package="com.sinoparasoft.model">
     </context:component-scan>
     <context:component-scan base-package="com.sinoparasoft.service">
     </context:component-scan>
+     -->
+  <bean class="com.sinoparasoft.openstack.type.CloudConfig"></bean>
+  <bean class="com.sinoparasoft.nagios.NagiosConfig"></bean> 
     
     <bean class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="dataSource">
         <property name="driverClassName" value="${database.driverClassName}"/>
@@ -69,8 +72,6 @@
         <property name="validationQuery" value="SELECT 1"/>
     </bean>
     
-    
-    
 
 	<bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
@@ -78,7 +79,7 @@
 	
 	<tx:annotation-driven mode="aspectj" transaction-manager="transactionManager" />
 	<bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="entityManagerFactory">
-		<property name="persistenceUnitName" value="persistenceUnit" />
+		<property name="persistenceUnitName" value="persistenceUnit-sdk" />
 		<property name="dataSource" ref="dataSource" />
 	</bean>
         

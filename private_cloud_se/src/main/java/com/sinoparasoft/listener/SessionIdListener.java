@@ -11,24 +11,20 @@ public class SessionIdListener implements HttpSessionListener {
 
 	@Override
 	public void sessionCreated(HttpSessionEvent arg0) {
-		System.out.println("Session Created!");		
-		
-		ApplicationConfiguration configuration=new ApplicationConfiguration();
-		//System.out.println(configuration.initMessageProducer(null));
-		
+		System.out.println("Session Created!");				
 		return;
 	}
 
 	@Override
 	public void sessionDestroyed(HttpSessionEvent arg0) {
-//		HttpSession session = arg0.getSession();
-//		User user = User.getUserBySessionId(session.getId());
-//		if (null != user) {
-//			user.setSessionId("");
-//			user.merge();
-//			user.flush();
-//			user.clear();
-//		}
+		HttpSession session = arg0.getSession();
+		User user = User.getUserBySessionId(session.getId());
+		if (null != user) {
+			user.setSessionId("");
+			user.merge();
+			user.flush();
+			user.clear();
+		}
 	}
 
 }
