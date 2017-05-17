@@ -1,0 +1,1520 @@
+﻿
+<div class="main-content" xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page">
+
+	<spring:url value="/physical-machine" var="physicalMachineUrl" />
+	<spring:url value="/virtual-machine" var="virtualMachineUrl" />
+	<spring:url value="/login" var="loginUrl" />
+	<spring:url value="/monitor-log" var="monitorLogUrl" />
+
+	<spring:url value="/resources/img" var="img" />
+
+	<div class="row">
+		<div class="col-md-12">
+			<ol class="breadcrumb content-shadow">
+				<li><i class="fa fa-list-alt"> <!-- ph -->
+				</i> <a href="${ physicalMachineUrl }/list">物理机列表</a></li>
+				<li><i class="fa fa-server"> <!-- ph -->
+				</i> <a id="machineNameLink" href="">
+						<!-- ph -->
+					</a></li>
+			</ol>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2>
+						<i class="fa fa-cogs blue"> <!-- ph -->
+						</i><strong>配置信息</strong>
+					</h2>
+				</div>
+				<div class="panel-body">
+					<table id="machineBasicInfoTable" class="table table-striped table-condensed table-bordered">
+						<tbody>
+							<!-- ph -->
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2>
+						<i class="fa fa-bell blue"> <!-- ph -->
+						</i><strong>负载监控</strong>
+					</h2>
+
+					<div class="action-block">
+						<sec:authorize ifAnyGranted="ROLE_MANAGER">
+							<a id="openSetLoadMonitorSettingsDialogButton" href="javascript:void(0)">调整负载阈值</a>
+							<a id="showLoadMonitorResultsDialogButton" href="javascript:void(0)" style="display: none">查看全部</a>
+						</sec:authorize>
+					</div>
+				</div>
+				<div class="panel-body height-constraint-block-350">
+					<table id="loadMonitorTable" class="table table-striped table-condensed table-bordered">
+						<tbody>
+							<tr>
+								<th class="col-md-4">监控项</th>
+								<th class="col-md-2">状态</th>
+								<th class="col-md-6">更新时间</th>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2>
+						<i class="fa fa-bell blue"> <!-- ph -->
+						</i><strong>服务监控</strong>
+					</h2>
+
+					<div class="action-block">
+						<sec:authorize ifAnyGranted="ROLE_MANAGER">
+							<a id="showServiceMonitorResultsDialogButton" href="javascript:void(0)" style="display: none">查看全部</a>
+						</sec:authorize>
+					</div>
+				</div>
+				<div class="panel-body height-constraint-block-350">
+					<table id="serviceMonitorTable" class="table table-striped table-condensed table-bordered">
+						<tbody>
+							<tr>
+								<th class="col-md-4">监控项</th>
+								<th class="col-md-2">状态</th>
+								<th class="col-md-6">更新时间</th>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="instancesDiv" class="row" style="display: none">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2>
+						<i class="fa fa-server blue"> <!-- ph -->
+						</i><strong>虚拟机</strong>
+					</h2>
+
+					<div class="action-block">
+						<sec:authorize ifAnyGranted="ROLE_MANAGER">
+							<p id="openBatchMigrateDialogButtonDiv" align="right" style="display: none">
+								<a id="openBatchMigrateDialogButton" href="javascript:void(0)">批量迁移</a>
+							</p>
+						</sec:authorize>
+					</div>
+				</div>
+				<div class="panel-body">
+					<div id="instancesTableMessageDiv" class="text-primary" style="margin-left: 20px">
+						<!-- ph -->
+					</div>
+					<table id="instancesTable" class="table table-striped table-condensed table-bordered">
+						<tbody>
+							<tr>
+								<th class="col-md-2">主机名</th>
+								<th class="col-md-2">业务系统</th>
+								<th class="col-md-2">访问地址</th>
+								<th class="col-md-1">处理器</th>
+								<th class="col-md-1">内存</th>
+								<th class="col-md-1">磁盘</th>
+								<th class="col-md-1">状态</th>
+								<th class="col-md-2">创建时间</th>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2>
+						<i class="fa fa-bell blue"> <!-- ph -->
+						</i><strong>监控日志</strong>
+					</h2>
+				</div>
+				<div class="panel-body">
+					<div id="monitorLogTableMessageDiv" class="text-primary" style="margin-left: 20px">
+						<!-- ph -->
+					</div>
+					<table id="monitorLogTable" class="table table-striped table-condensed table-bordered">
+						<tbody>
+							<tr>
+								<th>监控ID</th>
+								<th>监控类别</th>
+								<th>监控名称</th>
+								<th>监控状态</th>
+								<th>状态切换时间</th>
+							</tr>
+						</tbody>
+					</table>
+
+					<!-- start pagination -->
+					<div style="align: right">
+						<ul id="monitorLogPagination" class="pagination" style="position: static; float: right;">
+							<li><a href="javascript:void(0)">上一页</a></li>
+							<li><a href="javascript:void(0)">下一页</a></li>
+						</ul>
+					</div>
+					<!-- end pagination -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2>
+						<i class="fa fa-area-chart blue"> <!-- ph -->
+						</i><strong>负载曲线</strong>
+					</h2>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-12" style="margin-bottom: 10px">
+							<div id="cpuLoadChartDiv" class="col-md-6" style="height: 250px;">
+								<!-- placeholder -->
+							</div>
+							<div id="freeMemoryChartDiv" class="col-md-6" style="height: 250px;">
+								<!-- placeholder -->
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12">
+							<div id="freeDiskChartDiv" class="col-md-6" style="height: 250px;">
+								<!-- placeholder -->
+							</div>
+							<div id="networkUsageChartDiv" class="col-md-6" style="height: 250px;">
+								<!-- placeholder -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="setLoadMonitorSettingsDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<form id="setLoadMonitorSettingsForm" action="">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+						<h5 class="modal-title" id="myModalLabel">
+							<strong>调整物理机监控设置</strong>
+						</h5>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-3 col-md-offset-1">
+								<label class="text-primary" style="margin: 5px 0px">监控指标</label>
+							</div>
+							<div class="col-md-2">
+								<label class="text-primary" style="margin: 5px 0px">监控状态</label>
+							</div>
+							<div class="col-md-3 form-group">
+								<label class="text-primary" style="margin: 5px 0px">告警阈值</label>
+							</div>
+							<div class="col-md-2">
+								<label class="text-primary" style="margin: 5px 0px">告警级别</label>
+							</div>
+							<div class="col-md-1">
+								<!-- ph -->
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-3 col-md-offset-1">
+								<label style="margin: 5px 0px">处理器利用率</label>
+							</div>
+							<div class="col-md-2">
+								<label class="switch switch-success">
+									<input type="checkbox" class="switch-input load-monitor-settings-checkbox" id="cpuUtilCheckbox" />
+									<span class="switch-label" data-on="On" data-off="Off">
+										<!-- ph -->
+									</span>
+									<span class="switch-handle">
+										<!-- ph -->
+									</span>
+								</label>
+							</div>
+							<div class="col-md-3 form-group">
+								<div class="input-group input-group-sm">
+									<input type="text" id="cpuUtilThresholdText" name="cpuUtilThresholdText"
+										class="form-control load-monitor-settings-text" placeholder="处理器利用率..." disabled="disabled" />
+									<span id="cpuUtilThresholdUnitSpan" class="input-group-addon">%</span>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="input-group input-group-sm">
+									<select id="cpuUtilSeveritySelect" class="form-control load-monitor-settings-select">
+										<option value="LOWEST">最低</option>
+										<option value="BELOW_NORMAL">较低</option>
+										<option value="NORMAL" selected="selected">中等</option>
+										<option value="ABOVE_NORMAL">较高</option>
+										<option value="HIGHEST">最高</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-1">
+								<!-- ph -->
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-3 col-md-offset-1">
+								<label style="margin: 5px 0px">內存利用率</label>
+							</div>
+							<div class="col-md-2">
+								<label class="switch switch-success">
+									<input type="checkbox" class="switch-input load-monitor-settings-checkbox" id="memoryUsageCheckbox" />
+									<span class="switch-label" data-on="On" data-off="Off">
+										<!-- ph -->
+									</span>
+									<span class="switch-handle">
+										<!-- ph -->
+									</span>
+								</label>
+							</div>
+							<div class="col-md-3 form-group">
+								<div class="input-group input-group-sm">
+									<input type="text" id="memoryUsageThresholdText" name="memoryUsageThresholdText"
+										class="form-control load-monitor-settings-text" placeholder="內存利用率..." disabled="disabled" />
+									<span id="memoryUsageThresholdUnitSpan" class="input-group-addon">%</span>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="input-group input-group-sm">
+									<select id="memoryUsageSeveritySelect" class="form-control load-monitor-settings-select">
+										<option value="LOWEST">最低</option>
+										<option value="BELOW_NORMAL">较低</option>
+										<option value="NORMAL" selected="selected">中等</option>
+										<option value="ABOVE_NORMAL">较高</option>
+										<option value="HIGHEST">最高</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-1">
+								<!-- ph -->
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-3 col-md-offset-1">
+								<label style="margin: 5px 0px">网络流出速率</label>
+							</div>
+							<div class="col-md-2">
+								<label class="switch switch-success">
+									<input type="checkbox" class="switch-input load-monitor-settings-checkbox" id="networkOutgoingCheckbox" />
+									<span class="switch-label" data-on="On" data-off="Off">
+										<!-- ph -->
+									</span>
+									<span class="switch-handle">
+										<!-- ph -->
+									</span>
+								</label>
+							</div>
+							<div class="col-md-3 form-group">
+								<div class="input-group input-group-sm">
+									<input type="text" id="networkOutgoingThresholdText" name="networkOutgoingThresholdText"
+										class="form-control load-monitor-settings-text" placeholder="网络流出速率..." disabled="disabled" />
+									<span id="networkOutgoingThresholdUnitSpan" class="input-group-addon">KB/s</span>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="input-group input-group-sm">
+									<select id="networkOutgoingSeveritySelect" class="form-control load-monitor-settings-select">
+										<option value="LOWEST">最低</option>
+										<option value="BELOW_NORMAL">较低</option>
+										<option value="NORMAL" selected="selected">中等</option>
+										<option value="ABOVE_NORMAL">较高</option>
+										<option value="HIGHEST">最高</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-1">
+								<!-- ph -->
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-3 col-md-offset-1">
+								<label style="margin: 5px 0px">网络流入速率</label>
+							</div>
+							<div class="col-md-2">
+								<label class="switch switch-success">
+									<input type="checkbox" class="switch-input load-monitor-settings-checkbox" id="networkIncomingCheckbox" />
+									<span class="switch-label" data-on="On" data-off="Off">
+										<!-- ph -->
+									</span>
+									<span class="switch-handle">
+										<!-- ph -->
+									</span>
+								</label>
+							</div>
+							<div class="col-md-3 form-group">
+								<div class="input-group input-group-sm">
+									<input type="text" id="networkIncomingThresholdText" name="networkIncomingThresholdText"
+										class="form-control load-monitor-settings-text" placeholder="网络流入速率..." disabled="disabled" />
+									<span id="networkIncomingThresholdUnitSpan" class="input-group-addon">KB/s</span>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="input-group input-group-sm">
+									<select id="networkIncomingSeveritySelect" class="form-control load-monitor-settings-select">
+										<option value="LOWEST">最低</option>
+										<option value="BELOW_NORMAL">较低</option>
+										<option value="NORMAL" selected="selected">中等</option>
+										<option value="ABOVE_NORMAL">较高</option>
+										<option value="HIGHEST">最高</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-1">
+								<!-- ph -->
+							</div>
+						</div>
+
+						<div class="row">
+							<div id="setLoadMonitorSettingsAlertDiv" class="col-md-8 col-md-offset-1" style="display: none; color: #ba0000;">
+								<ul>
+									<!-- ph -->
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+						<button type="submit" class="btn btn-primary btn-sm" id="setLoadMonitorSettingsButton">保存</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="batchMigrateDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="myModalLabel">
+						<strong>虚拟机批量迁移</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group">
+						<div class="col-md-8 col-md-offset-2">
+							<table id="batchMigratePolicyTable" class="table table-condensed table-bordered">
+								<tbody>
+									<tr>
+										<th class="col-md-6">虚拟机</th>
+										<th class="col-md-6">状态</th>
+										<th class="col-md-6">目的物理服务器</th>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div id="batchMigrateAlertDiv" class="col-md-8 col-md-offset-2 alert alert-danger alert-sm" style="display: none">
+							<ul>
+								<!-- ph -->
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary btn-sm" id="batchMigrateButton">迁移</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="loadMonitorResultsDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="myModalLabel">
+						<strong>负载监控</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<table id="allLoadMonitorResultsTable" class="table table-striped table-condensed table-bordered">
+						<tbody>
+							<tr>
+								<td class="col-md-4">监控项</td>
+								<td class="col-md-2">状态</td>
+								<td class="col-md-6">更新时间</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="serviceMonitorResultsDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="myModalLabel">
+						<strong>服务监控</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<table id="allServiceMonitorResultsTable" class="table table-striped table-condensed table-bordered">
+						<tbody>
+							<tr>
+								<td class="col-md-4">监控项</td>
+								<td class="col-md-2">状态</td>
+								<td class="col-md-6">更新时间</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="monitorLogDetailDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="myModalLabel">
+						<strong>监控信息</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group">
+						<div class="col-md-3 col-md-offset-2">
+							<label style="margin: 5px 0px">对象类别</label>
+						</div>
+						<div class="col-md-6">
+							<label id="monitorSourceLabel" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+
+
+					<div class="row form-group">
+						<div class="col-md-3 col-md-offset-2">
+							<label style="margin: 5px 0px">对象名称</label>
+						</div>
+						<div class="col-md-6">
+							<label id="sourceNameLabel" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-3 col-md-offset-2">
+							<label style="margin: 5px 0px">监控类别</label>
+						</div>
+						<div class="col-md-6">
+							<label id="monitorTypeLabel" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-3 col-md-offset-2">
+							<label style="margin: 5px 0px">监控名称</label>
+						</div>
+						<div class="col-md-6">
+							<label id="monitorNameLabel" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-3 col-md-offset-2">
+							<label style="margin: 5px 0px">监控状态</label>
+						</div>
+						<div class="col-md-6">
+							<label id="monitorStatusLabel" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-3 col-md-offset-2">
+							<label style="margin: 5px 0px">监控消息</label>
+						</div>
+						<div class="col-md-6">
+							<label id="messageLabel" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-3 col-md-offset-2">
+							<label style="margin: 5px 0px">状态切换时间</label>
+						</div>
+						<div class="col-md-6">
+							<label id="updateTimeLabel" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-3 col-md-offset-2">
+							<label style="margin: 5px 0px">检查时间</label>
+						</div>
+						<div class="col-md-6">
+							<label id="checkTimeLabel" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="ajaxWaitingDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="myModalLabel">
+						<strong>操作进行中...</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group" align="center">
+						<img alt="waiting..." src="${ img }/ajax-waiting.gif" />
+					</div>
+					<div class="row form-group">
+						<div id="ajaxWaitingMessageDiv" class="col-md-8 col-md-offset-2" align="center">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<!-- ph -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="errorDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="errorDialogTitle">
+						<strong>错误</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group">
+						<div id="errorDialogMessageDiv" class="col-md-8 col-md-offset-2 alert alert-danger alert-sm" align="center">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<spring:url value="/resources/js/pagination.js" var="pagination_js" />
+	<spring:url value="/resources/js/echarts/dist/echarts.js" var="echarts_js" />
+	<spring:url value="/resources/js/echarts/dist" var="echarts_config_path" />
+	<spring:url value="/resources/js/draw-charts.js" var="drawCharts_js" />
+
+	<script type="text/javascript" src="${ pagination_js }">
+	<!-- d -->
+		
+	</script>
+
+	<script type="text/javascript" src="${ echarts_js }">
+	<!-- d -->
+		
+	</script>
+
+	<script type="text/javascript" src="${ drawCharts_js }">
+	<!-- d -->
+		
+	</script>
+
+	<script type="text/javascript">
+		var pagePhysicalMachine;
+		var pageLoadMonitorResults;
+		var pageServiceMonitorResults;
+
+		<![CDATA[
+		$(document).ready(function() {
+			showMachineDetail();
+
+			$("#openSetLoadMonitorSettingsDialogButton").click(openSetLoadMonitorSettingsDialog);
+
+			$("#cpuUtilCheckbox").click(toggleCpuUtilControls);
+			$("#memoryUsageCheckbox").click(toggleMemoryControls);
+			$("#networkOutgoingCheckbox").click(toggleNetworkOutgoingControls);
+			$("#networkIncomingCheckbox").click(toggleNetworkIncomingControls);
+
+			validateLoadMonitorSettings();
+
+			$("#openBatchMigrateDialogButton").click(openMigrateDialog);
+			$("#batchMigrateButton").click(batchMigrate);
+
+			$("#showLoadMonitorResultsDialogButton").click(showLoadMonitorResultsDialog);
+			$("#showServiceMonitorResultsDialogButton").click(showServiceMonitorResultsDialog);
+		});
+
+		var pageCallShowMachineInfo, pageCallShowMonitorLogPage, pageCallShowMachineMetric;
+		function showMachineDetail() {
+			$("#ajaxWaitingMessageDiv").text("页面加载中...");
+			$("#ajaxWaitingDialog").modal("show");
+
+			showMachineInfo();
+
+			showMonitorLogPage(1);
+
+			showMachineMetric();
+
+			// use Deferred Object to show dialog when do multiple ajax call.
+			$.when(pageCallShowMachineInfo, pageCallShowMonitorLogPage, pageCallShowMachineMetric).always(function() {
+				$("#ajaxWaitingDialog").modal("hide");
+			});
+		}
+
+		function showMachineInfo() {
+			var id = getIdFromUrl();
+
+			pageCallShowMachineInfo = callAjax("${ physicalMachineUrl }/" + id + "/json-detail", "GET", true, null,
+					null, showMachineDetailSuccessHandler, null, "${ loginUrl }");
+		}
+
+		function showMachineDetailSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				pagePhysicalMachine = data.machine;
+				pageLoadMonitorResults = data.loadMonitorRecords;
+				pageServiceMonitorResults = data.serviceMonitorRecords;
+
+				$("#machineNameLink").text(pagePhysicalMachine.name);
+
+				showMachineBasicInfo();
+				showLoadMonitorResults();
+				showServiceMonitorResults();
+
+				if (data.machine.types.indexOf("COMPUTE_NODE") != -1) {
+					$("#instancesDiv").show();
+					showVirtualMachines(data.instances)
+				}
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		function showMachineBasicInfo() {
+			var machine = pagePhysicalMachine;
+
+			var row = $("<tr>");
+
+			$("<th>").text("主机名").addClass("col-md-2").appendTo(row);
+			$("<td>").text(machine.name).addClass("col-md-4").appendTo(row);
+			row.appendTo("#machineBasicInfoTable tbody");
+
+			$("<th>").text("地址").addClass("col-md-2").appendTo(row);
+			$("<td>").text(machine.ip).addClass("col-md-4").appendTo(row);
+			row.appendTo("#machineBasicInfoTable tbody");
+
+			var row = $("<tr>");
+
+			$("<th>").text("监控状态").addClass("col-md-2").appendTo(row);
+			$("<td>").text(machine.monitor_status).addClass("col-md-4").appendTo(row);
+			row.appendTo("#machineBasicInfoTable tbody");
+
+			$("<th>").text("监控时间").addClass("col-md-2").appendTo(row);
+			$("<td>").text(machine.update_time).addClass("col-md-4").appendTo(row);
+			row.appendTo("#machineBasicInfoTable tbody");
+
+			var row = $("<tr>");
+
+			$("<th>").text("配置").addClass("col-md-2").appendTo(row);
+			$("<td>").text(machine.cpu + "颗处理器" + "/" + machine.memory + "MB內存" + "/" + machine.disk + "GB硬盘")
+					.addClass("col-md-4").appendTo(row);
+			row.appendTo("#machineBasicInfoTable tbody");
+
+			if (machine.types.indexOf("COMPUTE_NODE") != -1) {
+				$("<th>").text("已用处理器").addClass("col-md-2").appendTo(row);
+				$("<td>").text(machine.used_cpu + "颗").addClass("col-md-4").appendTo(row);
+				row.appendTo("#machineBasicInfoTable tbody");
+			} else {
+				$("<th>").text("").addClass("col-md-2").appendTo(row);
+				$("<td>").text("").addClass("col-md-4").appendTo(row);
+				row.appendTo("#machineBasicInfoTable tbody");
+			}
+		}
+
+		function showLoadMonitorResults() {
+			var monitorResults = pageLoadMonitorResults;
+
+			var showSize = monitorResults.length;
+			if (showSize > 6) {
+				showSize = 6;
+				$("#showLoadMonitorResultsDialogButton").show();
+			}
+
+			for (var i = 0; i < showSize; i++) {
+				var monitorResult = monitorResults[i];
+
+				var row = $("<tr>");
+				$("<td>").text(monitorResult.monitorName).addClass("col-md-4").appendTo(row);
+				var col = $("<td>", {
+					class : "col-md-2"
+				});
+				if (monitorResult.monitorStatus == "正常") {
+					$("<label>").text(monitorResult.monitorStatus).addClass("text-success").appendTo(col);
+				} else if (monitorResult.monitorStatus == "告警") {
+					$("<label>").text(monitorResult.monitorStatus).addClass("text-danger").appendTo(col);
+				} else {
+					$("<label>").text(monitorResult.monitorStatus).appendTo(col);
+				}
+				col.appendTo(row);
+				$("<td>").text(monitorResult.updateTime).addClass("col-md-6").appendTo(row);
+				row.appendTo("#loadMonitorTable tbody");
+			}
+		}
+
+		function showServiceMonitorResults() {
+			var monitorResults = pageServiceMonitorResults;
+
+			var showSize = monitorResults.length;
+			if (showSize > 6) {
+				showSize = 6;
+				$("#showServiceMonitorResultsDialogButton").show();
+			}
+
+			for (var i = 0; i < showSize; i++) {
+				var monitorResult = monitorResults[i];
+
+				var row = $("<tr>");
+				$("<td>").text(monitorResult.monitorName).addClass("col-md-4").appendTo(row);
+				var col = $("<td>", {
+					class : "col-md-2"
+				});
+				if (monitorResult.monitorStatus == "正常") {
+					$("<label>").text(monitorResult.monitorStatus).addClass("text-success").appendTo(col);
+				} else if (monitorResult.monitorStatus == "告警") {
+					$("<label>").text(monitorResult.monitorStatus).addClass("text-danger").appendTo(col);
+				} else {
+					$("<label>").text(monitorResult.monitorStatus).appendTo(col);
+				}
+				col.appendTo(row);
+				$("<td>").text(monitorResult.updateTime).addClass("col-md-6").appendTo(row);
+				row.appendTo("#serviceMonitorTable tbody");
+			}
+		}
+
+		function showLoadMonitorResultsDialog() {
+			$("#allLoadMonitorResultsTable tbody").empty();
+
+			for (var i = 0; i < pageLoadMonitorResults.length; i++) {
+				var monitorResult = pageLoadMonitorResults[i];
+
+				var row = $("<tr>");
+				$("<td>").text(monitorResult.monitorName).addClass("col-md-4").appendTo(row);
+				var col = $("<td>", {
+					class : "col-md-2"
+				});
+				if (monitorResult.monitorStatus == "正常") {
+					$("<label>").text(monitorResult.monitorStatus).addClass("text-success").appendTo(col);
+				} else if (monitorResult.monitorStatus == "告警") {
+					$("<label>").text(monitorResult.monitorStatus).addClass("text-danger").appendTo(col);
+				} else {
+					$("<label>").text(monitorResult.monitorStatus).appendTo(col);
+				}
+				col.appendTo(row);
+				$("<td>").text(monitorResult.updateTime).addClass("col-md-6").appendTo(row);
+				row.appendTo("#allLoadMonitorResultsTable tbody");
+			}
+
+			$("#loadMonitorResultsDialog").modal("show");
+		}
+
+		function showServiceMonitorResultsDialog() {
+			$("#allServiceMonitorResultsTable tbody").empty();
+
+			for (var i = 0; i < pageServiceMonitorResults.length; i++) {
+				var monitorResult = pageServiceMonitorResults[i];
+
+				var row = $("<tr>");
+				$("<td>").text(monitorResult.monitorName).addClass("col-md-4").appendTo(row);
+				var col = $("<td>", {
+					class : "col-md-2"
+				});
+				if (monitorResult.monitorStatus == "正常") {
+					$("<label>").text(monitorResult.monitorStatus).addClass("text-success").appendTo(col);
+				} else if (monitorResult.monitorStatus == "告警") {
+					$("<label>").text(monitorResult.monitorStatus).addClass("text-danger").appendTo(col);
+				} else {
+					$("<label>").text(monitorResult.monitorStatus).appendTo(col);
+				}
+				col.appendTo(row);
+				$("<td>").text(monitorResult.updateTime).addClass("col-md-6").appendTo(row);
+				row.appendTo("#allServiceMonitorResultsTable tbody");
+			}
+
+			$("#serviceMonitorResultsDialog").modal("show");
+		}
+
+		function showVirtualMachines(instances) {
+			if (instances.length > 0) {
+				$("#openBatchMigrateDialogButtonDiv").show();
+
+				$("#instancesTableMessageDiv").text("").hide();
+
+				$("#instancesTable tbody tr:gt(0)").empty();
+
+				for (var i = 0; i < instances.length; i++) {
+					var machine = instances[i];
+
+					var row = $("<tr>");
+					$("<td>").addClass("col-md-2").append($("<a>", {
+						text : machine.name,
+						href : "${ virtualMachineUrl }/" + machine.id + "/detail"
+					})).appendTo(row);
+					var applicationNameList = "";
+					for (var j = 0; j < machine.applications.length; j++) {
+						applicationNameList += machine.applications[j].name + ",";
+					}
+					$("<td>").addClass("col-md-2").text(applicationNameList).appendTo(row);
+					$("<td>").addClass("col-md-2").text(machine.floating_ip).appendTo(row);
+					$("<td>").addClass("col-md-1").text(machine.cpu + "颗").appendTo(row);
+					$("<td>").addClass("col-md-1").text(machine.memory + "GB").appendTo(row);
+					$("<td>").addClass("col-md-1").text(machine.disk + "GB").appendTo(row);
+
+					if ("运行中" == machine.status) {
+						$("<td>").text(machine.status).addClass("col-md-1 text-success").appendTo(row);
+					} else if (("删除中" == machine.status) || ("在线迁移中" == machine.status) || ("关机中" == machine.status)
+							|| ("开机中" == machine.status) || ("重启中" == machine.status) || ("创建中" == machine.status)
+							|| ("快照中" == machine.status)) {
+						$("<td>").text(machine.status).addClass("col-md-1 text-warning").appendTo(row);
+					} else {
+						$("<td>").text(machine.status).addClass("col-md-1 text-danger").appendTo(row);
+					}
+
+					$("<td>").addClass("col-md-2").text(machine.create_time).appendTo(row);
+					$("#instancesTable tbody").append(row);
+				}
+
+				$("#instancesTable").show();
+			} else {
+				$("#instancesTableMessageDiv").text("当前物理服务器没有运行虚拟机").show();
+				$("#instancesTable").hide();
+			}
+		}
+
+		function showMonitorLogPage(pageNo) {
+			var hostId = getIdFromUrl();
+
+			var pData = new Object();
+			pData.pageNo = pageNo;
+			pData.pageSize = 10;
+			pData.monitorSource = "";
+			pData.monitorType = "";
+			pData.monitorName = "";
+			pData.monitorStatus = "";
+			pData.sourceId = hostId;
+			pData.beginningUpdateTime = "";
+			pData.endUpdateTime = "";
+
+			pageCallShowMonitorLogPage = callAjax("${ monitorLogUrl }/json-list", "GET", true, pData, null,
+					showMonitorLogPageSuccessHandler, null, "${ loginUrl }");
+		}
+
+		var pageMonitorLogs;
+		function showMonitorLogPageSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				pageMonitorLogs = data.monitor_logs;
+
+				if (pageMonitorLogs.length > 0) {
+					$("#monitorLogTableMessageDiv").text("").hide();
+
+					showMonitorLogTable(data);
+
+					// show navigation
+					showPagination("monitorLogPagination", data.pageNo, data.pageTotal, showMonitorLogPage);
+				} else {
+					$("#monitorLogTableMessageDiv").text("当前物理服务器没有监控日志").show();
+					$("#monitorLogTable").hide();
+				}
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		function showMonitorLogTable(data) {
+			$("#monitorLogTable tbody tr:gt(0)").empty();
+
+			var monitorLogs = data.monitor_logs;
+			for (var i = 0; i < monitorLogs.length; i++) {
+				var monitorLog = monitorLogs[i];
+
+				var row = $("<tr>");
+				var monitorLogLink = $("<a>", {
+					href : "javascript:showMonitorLog(" + i + ")",
+					text : monitorLog.id
+				})
+				$("<td>").append(monitorLogLink).appendTo(row);
+
+				$("<td>").append(monitorLog.monitor_type).appendTo(row);
+				$("<td>").append(monitorLog.monitor_name).appendTo(row);
+				if ("正常" == monitorLog.monitor_status) {
+					$("<td>").text(monitorLog.monitor_status).addClass("text-success").appendTo(row);
+				} else if ("告警" == monitorLog.monitor_status) {
+					$("<td>").text(monitorLog.monitor_status).addClass("text-danger").appendTo(row);
+				} else {
+					$("<td>").text(monitorLog.monitor_status).appendTo(row);
+				}
+				$("<td>").append(monitorLog.update_time).appendTo(row);
+
+				row.appendTo($("#monitorLogTable tbody"));
+			}
+		}
+
+		function showMonitorLog(index) {
+			var monitorLog = pageMonitorLogs[index];
+			$("#monitorSourceLabel").text(monitorLog.monitor_source);
+			$("#sourceNameLabel").text(monitorLog.source_name);
+			$("#monitorTypeLabel").text(monitorLog.monitor_type);
+			$("#monitorNameLabel").text(monitorLog.monitor_name);
+			$("#monitorStatusLabel").text(monitorLog.monitor_status);
+			$("#messageLabel").text(monitorLog.message);
+			$("#updateTimeLabel").text(monitorLog.update_time);
+			$("#checkTimeLabel").text(monitorLog.check_time);
+
+			$("#monitorLogDetailDialog").modal("show");
+		}
+
+		function showMachineMetric() {
+			var hostId = getIdFromUrl();
+			pageCallShowMachineMetric = callAjax("${ physicalMachineUrl }/" + hostId + "/metric", "GET", true, null,
+					null, showMachineMetricSuccessHandler, null, "${ loginUrl }");
+		}
+
+		function showMachineMetricSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				var timeSeries = data.time_series;
+
+				var cpuLoad = data.cpu_load;
+				createLine("${ echarts_config_path }", "cpuLoadChartDiv", "处理器使用率", timeSeries, cpuLoad, "%");
+
+				var freeMemory = data.free_memory;
+				createLine("${ echarts_config_path }", "freeMemoryChartDiv", "内存剩余量", timeSeries, freeMemory, "MB");
+
+				var freeDisk = data.free_disk;
+				createLine("${ echarts_config_path }", "freeDiskChartDiv", "硬盘剩余量", timeSeries, freeDisk, "GB");
+
+				var networkUsage = data.network_usage;
+				createLine("${ echarts_config_path }", "networkUsageChartDiv", "网络传输速率", timeSeries, networkUsage,
+						"KB/S");
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		function openSetLoadMonitorSettingsDialog() {
+			// remove class the jquery validation added
+			$("#setLoadMonitorSettingsForm .form-group").removeClass("has-error").removeClass("has-success");
+
+			$(".load-monitor-settings-checkbox").prop("checked", false);
+			$(".load-monitor-settings-text").attr("disabled", "disabled");
+			$(".load-monitor-settings-text").val("");
+			$(".load-monitor-settings-select").attr("disabled", "disabled");
+			$(".load-monitor-settings-select").val("NORMAL");
+
+			$("#setLoadMonitorSettingsAlertDiv ul").empty();
+			$("#setLoadMonitorSettingsAlertDiv").hide();
+
+			$("#setLoadMonitorSettingsButton").prop("disabled", false);
+
+			var hostId = pagePhysicalMachine.id;
+
+			callAjax("${ physicalMachineUrl }/" + hostId + "/load-monitor-settings", "GET", true, null,
+					"正在获取物理服务器告警设置...", openSetLoadMonitorSettingsDialogSuccessHandler, null, "${ loginUrl }");
+		}
+
+		function openSetLoadMonitorSettingsDialogSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				var monitorSettings = data.monitor_settings;
+
+				// requrire CDATA wrapper for javascript, otherwise Roo will report internal error
+				for (var i = 0; i < monitorSettings.length; i++) {
+					var monitorSetting = monitorSettings[i];
+
+					if (monitorSetting.enabled == true) {
+						switch (monitorSetting.monitor_name) {
+						case "PM_CPU_UTIL":
+							$("#cpuUtilCheckbox").prop("checked", true);
+							$("#cpuUtilThresholdText").removeAttr("disabled");
+							$("#cpuUtilThresholdText").val(monitorSetting.threshold);
+							$("#cpuUtilSeveritySelect").removeAttr("disabled");
+							$("#cpuUtilSeveritySelect").val(monitorSetting.severity_level);
+							break;
+						case "PM_MEMORY_USAGE":
+							$("#memoryUsageCheckbox").prop("checked", true);
+							$("#memoryUsageThresholdText").removeAttr("disabled");
+							$("#memoryUsageThresholdText").val(monitorSetting.threshold);
+							$("#memoryUsageSeveritySelect").removeAttr("disabled");
+							$("#memoryUsageSeveritySelect").val(monitorSetting.severity_level);
+							break;
+						case "PM_DISK_READ_BYTES_RATE":
+							break;
+						case "PM_DISK_WRITE_BYTES_RATE":
+							break;
+						case "PM_NETWORK_OUTGOING_BYTES_RATE":
+							$("#networkOutgoingCheckbox").prop("checked", true);
+							$("#networkOutgoingThresholdText").removeAttr("disabled");
+							$("#networkOutgoingThresholdText").val(monitorSetting.threshold);
+							$("#networkOutgoingSeveritySelect").removeAttr("disabled");
+							$("#networkOutgoingSeveritySelect").val(monitorSetting.severity_level);
+							break;
+						case "PM_NETWORK_INCOMING_BYTES_RATE":
+							$("#networkIncomingCheckbox").prop("checked", true);
+							$("#networkIncomingThresholdText").removeAttr("disabled");
+							$("#networkIncomingThresholdText").val(monitorSetting.threshold);
+							$("#networkIncomingSeveritySelect").removeAttr("disabled");
+							$("#networkIncomingSeveritySelect").val(monitorSetting.severity_level);
+							break;
+						default:
+							break;
+						}
+					}
+				}
+
+				$("#setLoadMonitorSettingsDialog").modal("show");
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		function toggleCpuUtilControls() {
+			if ($("#cpuUtilCheckbox").is(":checked")) {
+				$("#cpuUtilThresholdText").removeAttr("disabled");
+				$("#cpuUtilSeveritySelect").removeAttr("disabled");
+			} else {
+				$("#cpuUtilThresholdText").attr("disabled", "disabled");
+				$("#cpuUtilSeveritySelect").attr("disabled", "disabled");
+			}
+
+			return;
+		}
+
+		function toggleMemoryControls() {
+			if ($("#memoryUsageCheckbox").is(":checked")) {
+				$("#memoryUsageThresholdText").removeAttr("disabled");
+				$("#memoryUsageSeveritySelect").removeAttr("disabled");
+			} else {
+				$("#memoryUsageThresholdText").attr("disabled", "disabled");
+				$("#memoryUsageSeveritySelect").attr("disabled", "disabled");
+			}
+
+			return;
+		}
+
+		function toggleNetworkOutgoingControls() {
+			if ($("#networkOutgoingCheckbox").is(":checked")) {
+				$("#networkOutgoingThresholdText").removeAttr("disabled");
+				$("#networkOutgoingSeveritySelect").removeAttr("disabled");
+			} else {
+				$("#networkOutgoingThresholdText").attr("disabled", "disabled");
+				$("#networkOutgoingSeveritySelect").attr("disabled", "disabled");
+			}
+
+			return;
+		}
+
+		function toggleNetworkIncomingControls() {
+			if ($("#networkIncomingCheckbox").is(":checked")) {
+				$("#networkIncomingThresholdText").removeAttr("disabled");
+				$("#networkIncomingSeveritySelect").removeAttr("disabled");
+			} else {
+				$("#networkIncomingThresholdText").attr("disabled", "disabled");
+				$("#networkIncomingSeveritySelect").attr("disabled", "disabled");
+			}
+
+			return;
+		}
+
+		function validateLoadMonitorSettings() {
+			$("#setLoadMonitorSettingsForm").validate({
+				// add class for control
+				validClass : "has-success",
+				errorClass : "has-error",
+
+				highlight : function(element, errorClass, validClass) {
+					$(element).closest('.form-group').addClass(errorClass).removeClass(validClass);
+				},
+				unhighlight : function(element, errorClass, validClass) {
+					$(element).closest('.form-group').removeClass(errorClass).addClass(validClass);
+				},
+
+				rules : {
+					// use control name as rules
+					cpuUtilThresholdText : {
+						required : "#cpuUtilCheckbox:checked", // dependency-expression
+						number : true,
+						range : [ 1, 100 ]
+					},
+
+					memoryUsageThresholdText : {
+						required : "#memoryUsageCheckbox:checked",
+						number : true,
+						range : [ 1, 100 ]
+					},
+
+					networkOutgoingThresholdText : {
+						required : "#networkOutgoingCheckbox:checked",
+						number : true,
+						min : 1
+					},
+
+					networkIncomingThresholdText : {
+						required : "#networkIncomingCheckbox:checked",
+						number : true,
+						min : 1
+					},
+				},
+
+				messages : {
+					// use control name as rules
+					cpuUtilThresholdText : {
+						required : "请输入处理器利用率阈值；",
+						number : "处理器利用率阈值必须是整数；",
+						range : "处理器利用率阈值必须介于{0}和{1}之间；",
+					},
+
+					memoryUsageThresholdText : {
+						required : "请输入内存利用率阈值；",
+						number : "内存利用率阈值必须是整数；",
+						range : "内存利用率阈值必须介于{0}和{1}之间；",
+					},
+
+					networkOutgoingThresholdText : {
+						required : "请输入网络流出速率阈值；",
+						number : "网络流出速率阈值必须是整数；",
+						min : "网络流出速率必须大于{0}；",
+					},
+
+					networkIncomingThresholdText : {
+						required : "请输入网络流入速率阈值；",
+						number : "网络流入速率阈值必须是整数；",
+						min : "网络流入速率必须大于{0}；",
+					},
+				},
+
+				errorContainer : "#setLoadMonitorSettingsAlertDiv",
+				errorLabelContainer : "#setLoadMonitorSettingsAlertDiv ul",
+				wrapper : "li",
+
+				submitHandler : function() {
+					setLoadMonitorSettings();
+				},
+
+			});
+
+			return;
+		}
+
+		function setLoadMonitorSettings() {
+			$("#setLoadMonitorSettingsButton").prop("disabled", true);
+
+			// save user input into setting array
+			var alarmSettings = new Array();
+			var alarmSetting;
+
+			alarmSetting = new Object();
+			if ($("#cpuUtilCheckbox").is(":checked")) {
+				alarmSetting.alarmName = "PM_CPU_UTIL";
+				alarmSetting.enabled = "true";
+				alarmSetting.alarmThreshold = $("#cpuUtilThresholdText").val();
+				alarmSetting.thresholdUnit = $("#cpuUtilThresholdUnitSpan").text();
+				alarmSetting.severityLevel = $("#cpuUtilSeveritySelect").val();
+			} else {
+				alarmSetting.alarmName = "PM_CPU_UTIL";
+				alarmSetting.enabled = "false";
+			}
+			alarmSettings.push(alarmSetting);
+
+			alarmSetting = new Object();
+			if ($("#memoryUsageCheckbox").is(":checked")) {
+				alarmSetting.alarmName = "PM_MEMORY_USAGE";
+				alarmSetting.enabled = "true";
+				alarmSetting.alarmThreshold = $("#memoryUsageThresholdText").val();
+				alarmSetting.thresholdUnit = $("#memoryUsageThresholdUnitSpan").text();
+				alarmSetting.severityLevel = $("#memoryUsageSeveritySelect").val();
+			} else {
+				alarmSetting.alarmName = "PM_MEMORY_USAGE";
+				alarmSetting.enabled = "false";
+			}
+			alarmSettings.push(alarmSetting);
+
+			alarmSetting = new Object();
+			if ($("#networkOutgoingCheckbox").is(":checked")) {
+				alarmSetting.alarmName = "PM_NETWORK_OUTGOING_BYTES_RATE";
+				alarmSetting.enabled = "true";
+				alarmSetting.alarmThreshold = $("#networkOutgoingThresholdText").val();
+				alarmSetting.thresholdUnit = $("#networkOutgoingThresholdUnitSpan").text();
+				alarmSetting.severityLevel = $("#networkOutgoingSeveritySelect").val();
+			} else {
+				alarmSetting.alarmName = "PM_NETWORK_OUTGOING_BYTES_RATE";
+				alarmSetting.enabled = "false";
+			}
+			alarmSettings.push(alarmSetting);
+
+			alarmSetting = new Object();
+			if ($("#networkIncomingCheckbox").is(":checked")) {
+				alarmSetting.alarmName = "PM_NETWORK_INCOMING_BYTES_RATE";
+				alarmSetting.enabled = "true";
+				alarmSetting.alarmThreshold = $("#networkIncomingThresholdText").val();
+				alarmSetting.thresholdUnit = $("#networkIncomingThresholdUnitSpan").text();
+				alarmSetting.severityLevel = $("#networkIncomingSeveritySelect").val();
+			} else {
+				alarmSetting.alarmName = "PM_NETWORK_INCOMING_BYTES_RATE";
+				alarmSetting.enabled = "false";
+			}
+			alarmSettings.push(alarmSetting);
+
+			var hostId = pagePhysicalMachine.id;
+
+			// put new setting into server
+			// must set [contentType : "application/json",] to pass the complex setting data, callAjax not support this now
+			$.ajax({
+				url : "${ physicalMachineUrl }/" + hostId + "/load-monitor-settings",
+				type : "PUT",
+				data : JSON.stringify(alarmSettings),
+				contentType : "application/json",
+				success : function(data, textStatus) {
+					if ("ok" == data.status) {
+						location.reload(true);
+					} else {
+						console.log(data.message);
+
+						$("#setLoadMonitorSettingsAlertDiv ul").empty();
+						$("<li>").append(data.message).appendTo("#setLoadMonitorSettingsAlertDiv ul");
+						$("#setLoadMonitorSettingsAlertDiv").show();
+						$("#setLoadMonitorSettingsAlertDiv ul").show();
+					}
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					console.log(XMLHttpRequest);
+					console.log(textStatus);
+					console.log(errorThrown);
+
+					$("#setLoadMonitorSettingsAlertDiv ul").empty();
+					$("<li>").append("访问WEB服务发生异常").appendTo("#setLoadMonitorSettingsAlertDiv ul");
+					$("#setLoadMonitorSettingsAlertDiv").show();
+					$("#setLoadMonitorSettingsAlertDiv ul").show();
+				},
+				statusCode : {
+					901 : function() {
+						location.href = "${ loginUrl }";
+					}
+				}
+			});
+		}
+
+		var pageMigrationPolicies;
+		function openMigrateDialog() {
+			$("#batchMigratePolicyTable tr:gt(0)").remove();
+
+			$("#batchMigrateAlertDiv ul").empty().hide();
+			$("#batchMigrateAlertDiv").hide();
+
+			var id = getIdFromUrl();
+
+			callAjax("${ physicalMachineUrl }/" + id + "/migration-policies", "GET", true, null, "正在计算虚拟机迁移策略...",
+					openMigrateDialogSuccessHandler, null, "${ loginUrl }");
+		}
+
+		function openMigrateDialogSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				if (data.policies != null) {
+					pageMigrationPolicies = data.policies;
+
+					for (var i = 0; i < pageMigrationPolicies.length; i++) {
+						var migrationPolicy = pageMigrationPolicies[i];
+						var migrateRow = $("<tr>");
+						$("<td>").text(migrationPolicy.virtual_machine.name).appendTo(migrateRow);
+						if ("运行中" != migrationPolicy.virtual_machine.status) {
+							$("<td>").text(migrationPolicy.virtual_machine.status).addClass("text-danger").appendTo(
+									migrateRow);
+						} else {
+							$("<td>").text(migrationPolicy.virtual_machine.status).appendTo(migrateRow);
+						}
+						$("<td>").text(migrationPolicy.host_name).appendTo(migrateRow);
+						migrateRow.appendTo("#batchMigratePolicyTable")
+					}
+				}
+
+				$("#batchMigrateButton").prop("disabled", false);
+				$("#batchMigrateDialog").modal("show");
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		function batchMigrate() {
+			// ensure all virtual machines are shutoff
+			var inactiveVirtualMachines = getInactiveVirtualMachines();
+			if (0 < inactiveVirtualMachines.length) {
+				var message = "当前物理服务器上存在非运行状态的虚拟机，不允许进行批量在线迁移，请启动这些虚拟机，然后重试。非运行状态的虚拟机有：";
+				for (var i = 0; i < inactiveVirtualMachines.length; i++) {
+					message += inactiveVirtualMachines[i] + "，";
+				}
+				message = message.substring(0, message.length - 1);
+
+				$("#batchMigrateAlertDiv ul").empty();
+				$("<li>").append(message).appendTo("#batchMigrateAlertDiv ul");
+				$("#batchMigrateAlertDiv").show();
+				$("#batchMigrateAlertDiv ul").show();
+
+				return;
+			}
+
+			var id = getIdFromUrl();
+
+			$("#batchMigrateButton").prop("disabled", true);
+
+			// put new setting into server
+			// must set [contentType : "application/json",] to pass the complex setting data, callAjax not support this now
+			$.ajax({
+				url : "${ physicalMachineUrl }/" + id + "/batch-migrate",
+				type : "PUT",
+				data : JSON.stringify(pageMigrationPolicies),
+				contentType : "application/json",
+				success : function(data, textStatus) {
+					if ("ok" == data.status) {
+						location.reload(true);
+					} else {
+						console.log(data.message);
+
+						$("#batchMigrateAlertDiv ul").empty();
+						$("<li>").append(data.message).appendTo("#batchMigrateAlertDiv ul");
+						$("#batchMigrateAlertDiv").show();
+						$("#batchMigrateAlertDiv ul").show();
+					}
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					console.log(XMLHttpRequest);
+					console.log(textStatus);
+					console.log(errorThrown);
+
+					$("#batchMigrateAlertDiv ul").empty();
+					$("<li>").append("访问WEB服务发生异常").appendTo("#batchMigrateAlertDiv ul");
+					$("#batchMigrateAlertDiv").show();
+					$("#batchMigrateAlertDiv ul").show();
+				},
+				statusCode : {
+					901 : function() {
+						location.href = "${ loginUrl }";
+					}
+				}
+			});
+		}
+
+		function getInactiveVirtualMachines() {
+			var inactiveVirtualMachines = new Array();
+
+			for (var i = 0; i < pageMigrationPolicies.length; i++) {
+				var migrationPolicy = pageMigrationPolicies[i];
+				if ("运行中" != migrationPolicy.virtual_machine.status) {
+					inactiveVirtualMachines.push(migrationPolicy.virtual_machine.name);
+				}
+			}
+
+			return inactiveVirtualMachines;
+		}
+
+		//
+		// helper function
+		//
+
+		function getIdFromUrl() {
+			var slices = $(location).attr("pathname").split("/");
+			var id = slices[slices.length - 2];
+
+			return id;
+		}
+
+		]]>
+	</script>
+
+</div>

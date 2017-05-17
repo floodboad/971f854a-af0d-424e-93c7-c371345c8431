@@ -1,0 +1,1150 @@
+﻿
+<div class="main-content" xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page">
+
+	<spring:url value="/domain" var="domainUrl" />
+	<spring:url value="/domain/group" var="groupUrl" />
+	<spring:url value="/user" var="userUrl" />
+	<spring:url value="/login" var="loginUrl" />
+
+	<spring:url value="/resources/img" var="img" />
+
+	<div class="row">
+		<div class="col-md-12">
+			<ol class="breadcrumb content-shadow">
+				<li><i class="fa fa-list-alt"> <!-- ph -->
+				</i> <a href="${ domainUrl }/list">虚拟机域列表</a></li>
+				<li><i class="fa fa-object-ungroup"> <!-- ph -->
+				</i> <a id="domainNameLink" href="">
+						<!-- ph -->
+					</a></li>
+			</ol>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2>
+						<i class="fa fa-info-circle blue"> <!-- ph -->
+						</i><strong>基本信息</strong>
+					</h2>
+				</div>
+				<div class="panel-body">
+					<p align="right">
+						<button class="btn btn-primary btn-sm" type="button" id="openModifyDomainDialogButton">编辑</button>
+						<button class="btn btn-danger btn-sm last-button" type="button" id="openDeleteDomainDialogButton">删除</button>
+					</p>
+
+					<table id="domainDetailTable" class="table table-striped table-condensed table-bordered table-hover">
+						<tbody>
+							<tr>
+								<th>名称</th>
+								<th>处理器</th>
+								<th>内存</th>
+								<th>硬盘</th>
+								<th>创建时间</th>
+								<th>创建者</th>
+								<th>描述</th>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2>
+						<i class="fa fa-area-chart blue"> <!-- ph -->
+						</i><strong>域资源使用情况</strong>
+					</h2>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-4">
+								<div class="row">
+									<div class="col-md-12" style="text-align: center; font-weight: bold;">处理器使用统计（单位：颗）</div>
+									<div id="cpuUsageChartDiv" class="col-md-12" style="height: 260px;">
+										<!-- dsf -->
+									</div>
+									<div class="col-md-12" align="center">
+										<table id="cpuUsageTable" class="table" style="width: 80%">
+											<tbody>
+												<!-- ph -->
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<div class="row">
+									<div class="col-md-12" style="text-align: center; font-weight: bold;">内存使用统计（单位：GB）</div>
+									<div id="memoryUsageChartDiv" class="col-md-12" style="height: 260px;">
+										<!-- dsf -->
+									</div>
+									<div class="col-md-12" align="center">
+										<table id="memoryUsageTable" class="table" style="width: 80%">
+											<tbody>
+												<!-- ph -->
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<div class="row">
+									<div class="col-md-12" style="text-align: center; font-weight: bold;">磁盘使用统计（单位：GB）</div>
+									<div id="diskUsageChartDiv" class="col-md-12" style="height: 260px;">
+										<!-- dsf -->
+									</div>
+									<div class="col-md-12" align="center">
+										<table id="diskUsageTable" class="table" style="width: 80%">
+											<tbody>
+												<!-- ph -->
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2>
+						<i class="fa fa-info-circle blue"> <!-- ph -->
+						</i><strong>虚拟机组列表</strong>
+					</h2>
+				</div>
+				<div class="panel-body">
+					<p align="right">
+						<button class="btn btn-success btn-sm last-button" type="button" id="openCreateGroupDialogButton">新建</button>
+					</p>
+
+					<div id="groupListTableMessageDiv" class="text-primary" style="margin-left: 20px">
+						<!-- ph -->
+					</div>
+					<table id="groupListTable" class="table table-striped table-condensed table-bordered table-hover">
+						<tbody>
+							<tr>
+								<th>名称</th>
+								<th>处理器</th>
+								<th>内存</th>
+								<th>硬盘</th>
+								<th>创建时间</th>
+								<th>创建者</th>
+								<th>描述</th>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="modifyDomainDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<form id="modifyDomainForm" action="">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+						<h5 class="modal-title" id="myModalLabel">
+							<strong>编辑虚拟机域</strong>
+						</h5>
+					</div>
+					<div class="modal-body">
+						<div class="row form-group">
+							<div class="col-md-3" align="right">
+								<label class="form-label">名称</label>
+							</div>
+							<div class="col-md-5">
+								<input type="text" id="domainNameText" name="domainNameText" class="form-control input-sm" />
+							</div>
+							<div class="col-md-1">
+								<label class="text-danger" style="margin: 5px 0px">*</label>
+							</div>
+							<div class="col-md-3">
+								<!-- ph -->
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-3" align="right">
+								<label class="form-label">处理器</label>
+							</div>
+							<div class="col-md-5">
+								<div class="input-group  input-group-sm">
+									<input type="text" id="domainCpuText" name="domainCpuText" class="form-control input-sm" placeholder="处理器配额" />
+									<span class="input-group-addon">颗</span>
+								</div>
+							</div>
+							<div class="col-md-1">
+								<label class="text-danger" style="margin: 5px 0px">*</label>
+							</div>
+							<div class="col-md-3" id="domainCpuBoundDiv">
+								<!-- ph -->
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-3" align="right">
+								<label class="form-label">内存</label>
+							</div>
+							<div class="col-md-5">
+								<div class="input-group  input-group-sm">
+									<input type="text" id="domainMemoryText" name="domainMemoryText" class="form-control input-sm"
+										placeholder="内存配额" />
+									<span class="input-group-addon">GB</span>
+								</div>
+							</div>
+							<div class="col-md-1">
+								<label class="text-danger" style="margin: 5px 0px">*</label>
+							</div>
+							<div class="col-md-3" id="domainMemoryBoundDiv">
+								<!-- ph -->
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-3" align="right">
+								<label class="form-label">硬盘</label>
+							</div>
+							<div class="col-md-5">
+								<div class="input-group  input-group-sm">
+									<input type="text" id="domainHarddiskText" name="domainHarddiskText" class="form-control input-sm"
+										placeholder="硬盘配额" />
+									<span class="input-group-addon">GB</span>
+								</div>
+							</div>
+							<div class="col-md-1">
+								<label class="text-danger" style="margin: 5px 0px">*</label>
+							</div>
+							<div class="col-md-3" id="domainDiskBoundDiv">
+								<!-- ph -->
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-3" align="right">
+								<label class="form-label">描述</label>
+							</div>
+							<div class="col-md-5">
+								<input type="text" id="domainDescriptionText" class="form-control input-sm" />
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div id="modifyDomainAlertDiv" class="col-md-8 col-md-offset-2" style="display: none; color: #ba0000;">
+								<ul>
+									<!-- ph -->
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+						<button type="submit" class="btn btn-primary btn-sm" id="modifyDomainButton">确定</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="deleteDomainDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="myModalLabel">
+						<strong>删除虚拟机域</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group">
+						<div class="col-md-3">
+							<label class="form-label">输入登录密码</label>
+						</div>
+						<div class="col-md-6">
+							<input id="passwordText" class="form-control input-sm" type="password" />
+						</div>
+						<div class="col-md-3">
+							<label class="text-danger" style="margin: 5px 0px">*</label>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div id="deleteDomainAlertDiv" class="col-md-10 col-md-offset-1 alert alert-danger alert-sm" style="display: none">
+							<ul>
+								<!-- ph -->
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-danger btn-sm" id="deleteDomainButton">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<!-- use ui-draggable class and jquery-ui.js draggable() method for draggable dialog box -->
+	<div class="modal fade ui-draggable" id="createGroupDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<form id="createGroupForm" action="">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+						<h5 class="modal-title" id="myModalLabel">
+							<strong>新建虚拟机组</strong>
+						</h5>
+					</div>
+					<div class="modal-body">
+						<div class="row form-group">
+							<div class="col-md-3" align="right">
+								<label class="form-label">名称</label>
+							</div>
+							<div class="col-md-5">
+								<input type="text" id="groupNameText" name="groupNameText" class="form-control input-sm" />
+							</div>
+							<div class="col-md-1">
+								<label class="text-danger" style="margin: 5px 0px">*</label>
+							</div>
+							<div class="col-md-3">
+								<!-- ph -->
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-3" align="right">
+								<label class="form-label">处理器</label>
+							</div>
+							<div class="col-md-5">
+								<div class="input-group  input-group-sm">
+									<input type="text" id="groupCpuText" name="groupCpuText" class="form-control input-sm" placeholder="处理器配额" />
+									<span class="input-group-addon">颗</span>
+								</div>
+							</div>
+							<div class="col-md-1">
+								<label class="text-danger" style="margin: 5px 0px">*</label>
+							</div>
+							<div class="col-md-3" id="groupCpuBoundDiv">
+								<!-- ph -->
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-3" align="right">
+								<label class="form-label">内存</label>
+							</div>
+							<div class="col-md-5">
+								<div class="input-group  input-group-sm">
+									<input type="text" id="groupMemoryText" name="groupMemoryText" class="form-control input-sm" placeholder="内存配额" />
+									<span class="input-group-addon">GB</span>
+								</div>
+							</div>
+							<div class="col-md-1">
+								<label class="text-danger" style="margin: 5px 0px">*</label>
+							</div>
+							<div class="col-md-3" id="groupMemBoundDiv">
+								<!-- ph -->
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-3" align="right">
+								<label class="form-label">硬盘</label>
+							</div>
+							<div class="col-md-5">
+								<div class="input-group  input-group-sm">
+									<input type="text" id="groupHarddiskText" name="groupHarddiskText" class="form-control input-sm"
+										placeholder="硬盘配额" />
+									<span class="input-group-addon">GB</span>
+								</div>
+							</div>
+							<div class="col-md-1">
+								<label class="text-danger" style="margin: 5px 0px">*</label>
+							</div>
+							<div class="col-md-3" id="groupDiskBoundDiv">
+								<!-- ph -->
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-3" align="right">
+								<label class="form-label">描述</label>
+							</div>
+							<div class="col-md-5">
+								<input type="text" id="groupDescriptionText" class="form-control input-sm" />
+							</div>
+							<div class="col-md-1">
+								<!-- ph -->
+							</div>
+							<div class="col-md-3">
+								<!-- ph -->
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div id="createGroupAlertDiv" class="col-md-8 col-md-offset-2" style="display: none; color: #ba0000;">
+								<ul>
+									<!-- ph -->
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+						<button type="submit" class="btn btn-primary btn-sm" id="createGroupButton">确定</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="ajaxWaitingDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="myModalLabel">
+						<strong>操作进行中...</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group" align="center">
+						<img alt="waiting..." src="${ img }/ajax-waiting.gif" />
+					</div>
+					<div class="row form-group">
+						<div id="ajaxWaitingMessageDiv" class="col-md-8 col-md-offset-2" align="center">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<!-- ph -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="errorDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="errorDialogTitle">
+						<strong>错误</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group">
+						<div id="errorDialogMessageDiv" class="col-md-8 col-md-offset-2 alert alert-danger alert-sm" align="center">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<spring:url value="/resources/js/echarts/dist/echarts.js" var="echarts_js" />
+	<spring:url value="/resources/js/echarts/dist" var="echarts_config_path" />
+	<spring:url value="/resources/js/echarts-plain-map.js" var="echarts_plain_map_js" />
+	<spring:url value="/resources/js/draw-charts.js" var="drawCharts_js" />
+	<spring:url value="/resources/js/jquery-ui/jquery-ui.min.js" var="jquery_ui_js" />
+
+	<script type="text/javascript" src="${ echarts_js }">
+	<!-- d -->
+		
+	</script>
+
+	<script type="text/javascript" src="${ echarts_plain_map_js }">
+	<!-- d -->
+		
+	</script>
+
+	<script type="text/javascript" src="${ drawCharts_js }">
+	<!-- d -->
+		
+	</script>
+
+	<script type="text/javascript" src="${ jquery_ui_js }">
+	<!-- d -->
+		
+	</script>
+
+	<script type="text/javascript">
+		<![CDATA[
+		$(document).ready(function() {
+			jQuery.validator.addMethod("trimMinLength", function(value, element, param) {
+				return this.optional(element) || value.trim().length >= param;
+			}, "长度不足");
+
+			showDomainDetail();
+
+			$("#openModifyDomainDialogButton").click(openModifyDomainDialog);
+			validateDomainInput();
+
+			$("#openDeleteDomainDialogButton").click(openDeleteDomainDialog);
+			$("#deleteDomainButton").click(deleteDomain);
+
+			$("#openCreateGroupDialogButton").click(openCreateGroupDialog);
+			validateGroupInput();
+
+			// allow dialog draggable
+			$("#createGroupDialog").draggable({
+				handle : ".modal-header"
+			});
+		});
+
+		function showDomainDetail() {
+			showDomainInfo();
+
+			displayResourceUsageChart();
+
+			showGroupList();
+		}
+
+		var pageDomain;
+		function showDomainInfo() {
+			var id = getIdFromUrl();
+			callAjax("${ domainUrl }/" + id + "/domain-info", "GET", true, null, null, showDomainInfoSuccessHandler,
+					null, "${ loginUrl }");
+		}
+
+		function showDomainInfoSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				pageDomain = data.domain;
+				$("#domainNameLink").text(pageDomain.domainName);
+				showDomainInfoTable(data);
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		function showDomainInfoTable(data) {
+			$("#domainDetailTable tbody tr:gt(0)").empty();
+
+			var domain = data.domain;
+			var row = $("<tr>");
+
+			$("<td>").append(domain.domainName).appendTo(row);
+			$("<td>").append(domain.cpu + "颗").appendTo(row);
+			$("<td>").append(domain.memory + "GB").appendTo(row);
+			$("<td>").append(domain.disk + "GB").appendTo(row);
+			$("<td>").append(domain.createTime).appendTo(row);
+			$("<td>").append(domain.creator).appendTo(row);
+			$("<td>").append(domain.description).appendTo(row);
+
+			row.appendTo($("#domainDetailTable tbody"));
+		}
+
+		function displayResourceUsageChart() {
+			callAjax("${ domainUrl }/" + getIdFromUrl() + "/reource-usage", "GET", true, null, null,
+					displayResourceUsageChartSuccessHandler, null, "${ loginUrl }");
+		}
+
+		function displayResourceUsageChartSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				drawPartitionedResourceUsageChart(data.resource_usage.cpu, "cpuUsageChartDiv", "处理器", "颗");
+				showCpuUsageTable(data.resource_usage.cpu);
+
+				drawPartitionedResourceUsageChart(data.resource_usage.memory, "memoryUsageChartDiv", "内存", "GB");
+				showMemoryUsageTable(data.resource_usage.memory);
+
+				drawPartitionedResourceUsageChart(data.resource_usage.disk, "diskUsageChartDiv", "磁盘", "GB");
+				showDiskUsageTable(data.resource_usage.disk);
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		function showCpuUsageTable(usage) {
+			var row = $("<tr>");
+			$("<td>").text("已分配").appendTo(row);
+			$("<td>").text(usage.allocated + "（已用：" + usage.used + "，未用：" + usage.unused + "）").appendTo(row);
+			row.appendTo("#cpuUsageTable tbody");
+
+			var row = $("<tr>");
+			$("<td>").text("未分配").appendTo(row);
+			$("<td>").text(usage.unallocated).appendTo(row);
+			row.appendTo("#cpuUsageTable tbody");
+
+			var row = $("<tr>");
+			$("<td>").text("总计").appendTo(row);
+			$("<td>").text(usage.quota).appendTo(row);
+			row.appendTo("#cpuUsageTable tbody");
+		}
+
+		function showMemoryUsageTable(usage) {
+			var row = $("<tr>");
+			$("<td>").text("已分配").appendTo(row);
+			$("<td>").text(usage.allocated + "（已用：" + usage.used + "，未用：" + usage.unused + "）").appendTo(row);
+			row.appendTo("#memoryUsageTable tbody");
+
+			var row = $("<tr>");
+			$("<td>").text("未分配").appendTo(row);
+			$("<td>").text(usage.unallocated).appendTo(row);
+			row.appendTo("#memoryUsageTable tbody");
+
+			var row = $("<tr>");
+			$("<td>").text("总计").appendTo(row);
+			$("<td>").text(usage.quota).appendTo(row);
+			row.appendTo("#memoryUsageTable tbody");
+		}
+
+		function showDiskUsageTable(usage) {
+			var row = $("<tr>");
+			$("<td>").text("已分配").appendTo(row);
+			$("<td>").text(usage.allocated + "（已用：" + usage.used + "，未用：" + usage.unused + "）").appendTo(row);
+			row.appendTo("#diskUsageTable tbody");
+
+			var row = $("<tr>");
+			$("<td>").text("未分配").appendTo(row);
+			$("<td>").text(usage.unallocated).appendTo(row);
+			row.appendTo("#diskUsageTable tbody");
+
+			var row = $("<tr>");
+			$("<td>").text("总计").appendTo(row);
+			$("<td>").text(usage.quota).appendTo(row);
+			row.appendTo("#diskUsageTable tbody");
+		}
+
+		var pageVirtualMachineGroupList;
+		function showGroupList() {
+			var domainId = getIdFromUrl();
+			var pData = new Object();
+			pData.domainId = domainId;
+			callAjax("${ groupUrl }/json-list", "GET", true, pData, null, showGroupListSuccessHandler, null,
+					"${ loginUrl }");
+		}
+
+		function showGroupListSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				showGroupListTable(data);
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		function showGroupListTable(data) {
+			$("#groupListTable tbody tr:gt(0)").empty();
+
+			var groups = data.groups;
+			pageVirtualMachineGroupList = groups;
+			if (groups.length > 0) {
+				for (var i = 0; i < groups.length; i++) {
+					var group = groups[i];
+					var row = $("<tr>");
+
+					var groupLink = $("<a>", {
+						href : "${ groupUrl }/" + group.groupId + "/detail",
+						text : group.groupName
+					})
+					$("<td>").append(groupLink).appendTo(row);
+					$("<td>").append(group.cpu + "颗").appendTo(row);
+					$("<td>").append(group.memory + "GB").appendTo(row);
+					$("<td>").append(group.disk + "GB").appendTo(row);
+					$("<td>").append(group.createTime).appendTo(row);
+					$("<td>").append(group.creator).appendTo(row);
+					$("<td>").append(group.description).appendTo(row);
+
+					row.appendTo($("#groupListTable tbody"));
+				}
+
+				$("#groupListTableMessageDiv").text("").hide();
+				$("#groupListTable").show();
+			} else {
+				$("#groupListTableMessageDiv").text("当前虚拟机域没有包含虚拟机组").show();
+				$("#groupListTable").hide();
+			}
+		}
+
+		function openModifyDomainDialog() {
+			// remove class the jquery validation added
+			$("#modifyDomainForm .form-group").removeClass("has-error").removeClass("has-success");
+
+			$("#domainNameText").val(pageDomain.domainName);
+			$("#domainCpuText").val(pageDomain.cpu);
+			$("#domainMemoryText").val(pageDomain.memory);
+			$("#domainHarddiskText").val(pageDomain.disk);
+			$("#domainDescriptionText").val(pageDomain.description);
+
+			$("#modifyDomainAlertDiv ul").empty().hide();
+			$("#modifyDomainAlertDiv").hide();
+
+			$("#modifyDomainButton").prop("disabled", false);
+
+			var pData = new Object();
+			pData.domainId = getIdFromUrl();
+			callAjax("${ domainUrl }/adjust-domain-resource-bound", "GET", true, pData, "正在计算可用资源范围...",
+					openModifyDomainDialogSuccessHandler, null, "${ loginUrl }");
+		}
+
+		function openModifyDomainDialogSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				$("#domainCpuBoundDiv").text("[最小" + data.min_cpu + "，最大" + data.max_cpu + "]");
+				$("#domainMemoryBoundDiv").text("[最小" + data.min_memory + "，最大" + data.max_memory + "]");
+				$("#domainDiskBoundDiv").text("[最小" + data.min_disk + "，最大" + data.max_disk + "]");
+
+				// dynamic add jquery validation rule
+				$("#domainCpuText").rules("add", {
+					range : [ data.min_cpu, data.max_cpu ]
+				});
+				$("#domainMemoryText").rules("add", {
+					range : [ data.min_memory, data.max_memory ]
+				});
+				$("#domainHarddiskText").rules("add", {
+					range : [ data.min_disk, data.max_disk ]
+				});
+
+				$("#modifyDomainDialog").modal("show");
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		function validateDomainInput() {
+			$("#modifyDomainForm").validate({
+				// add class for control
+				validClass : "has-success",
+				errorClass : "has-error",
+
+				highlight : function(element, errorClass, validClass) {
+					$(element).closest('.form-group').addClass(errorClass).removeClass(validClass);
+				},
+				unhighlight : function(element, errorClass, validClass) {
+					$(element).closest('.form-group').removeClass(errorClass).addClass(validClass);
+				},
+
+				rules : {
+					// use control name as rules					
+					domainNameText : {
+						required : true,
+						trimMinLength : 3,
+					},
+
+					domainCpuText : {
+						required : true,
+						number : true,
+					},
+
+					domainMemoryText : {
+						required : true,
+						number : true,
+					},
+
+					domainHarddiskText : {
+						required : true,
+						number : true,
+					},
+				},
+
+				messages : {
+					// use control name as rules				
+					domainNameText : {
+						required : "请输入域名；",
+						trimMinLength : "域名长度至少为{0}；",
+					},
+
+					domainCpuText : {
+						required : "请输入处理器配额；",
+						number : "处理器配额必须是整数；",
+						range : "处理器配额必须介于{0}和{1}之间",
+					},
+
+					domainMemoryText : {
+						required : "请输入内存配额；",
+						number : "内存配额必须是整数；",
+						range : "内存配额必须介于{0}和{1}之间",
+					},
+
+					domainHarddiskText : {
+						required : "请输入磁盘配额；",
+						number : "磁盘配额必须是整数；",
+						range : "磁盘配额必须介于{0}和{1}之间",
+					},
+				},
+
+				errorContainer : "#modifyDomainAlertDiv",
+				errorLabelContainer : "#modifyDomainAlertDiv ul",
+				wrapper : "li",
+
+				submitHandler : function() {
+					modifyDomain();
+				},
+			});
+
+			return;
+		}
+
+		function modifyDomain() {
+			$("#modifyDomainAlertDiv ul").empty().hide();
+			$("#modifyDomainAlertDiv").hide();
+
+			$("#modifyDomainButton").prop("disabled", true);
+
+			var domainId = getIdFromUrl();
+			var pData = new Object();
+			pData.domainName = $("#domainNameText").val();
+			pData.description = $("#domainDescriptionText").val();
+			pData.cpu = $("#domainCpuText").val();
+			pData.memory = $("#domainMemoryText").val();
+			pData.disk = $("#domainHarddiskText").val();
+
+			callAjax("${ domainUrl }/" + domainId, "PUT", true, pData, null, modifyDomainSuccessHandler,
+					modifyDomainErrorHandler, "${ loginUrl }");
+		}
+
+		function modifyDomainSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				location.reload(true);
+			} else {
+				console.log(data.message);
+
+				$("#modifyDomainAlertDiv ul").empty();
+				$("<li>").text(data.message).appendTo($("#modifyDomainAlertDiv ul"));
+				$("#modifyDomainAlertDiv").show();
+				$("#modifyDomainAlertDiv ul").show();
+
+				$("#modifyDomainButton").prop("disabled", false);
+			}
+		}
+
+		function modifyDomainErrorHandler(XMLHttpRequest, textStatus, errorThrown) {
+			$("#modifyDomainAlertDiv ul").empty();
+			$("<li>").append("访问WEB服务发生异常").appendTo("#modifyDomainAlertDiv ul");
+			$("#modifyDomainAlertDiv").show();
+			$("#modifyDomainAlertDiv ul").show();
+		}
+
+		function openDeleteDomainDialog() {
+			if (0 < pageVirtualMachineGroupList.length) {
+				var message = "当前虚拟机域中包含有虚拟机组。不允许删除非空的虚拟机域，请首先删除域中的虚拟机组，然后再次重试";
+
+				$("#errorDialogMessageDiv").text(message);
+				$("#errorDialog").modal("show");
+
+				return;
+			}
+
+			$("#passwordText").val("");
+
+			$("#deleteDomainAlertDiv ul").empty().hide();
+			$("#deleteDomainAlertDiv").hide();
+
+			$("#deleteDomainButton").prop("disabled", false);
+			$("#deleteDomainDialog").modal("show");
+		}
+
+		function checkPassword() {
+			var checkResult;
+
+			var password = $("#passwordText").val();
+			var md5Password = $.md5(password);
+
+			// use synchronous call so the return value will not be "undefined"
+			$.ajax({
+				type : 'GET',
+				url : '${ userUrl }/password-validation',
+				async : false,
+				data : {
+					password : md5Password,
+				},
+				dataType : 'json',
+				success : function(data, textStatus) {
+					if ("ok" == data.status) {
+						if (data.match == false) {
+							$("#deleteDomainAlertDiv ul").empty();
+							$("<li>").text("密码错误").appendTo($("#deleteDomainAlertDiv ul"));
+							$("#deleteDomainAlertDiv").show();
+							$("#deleteDomainAlertDiv ul").show();
+
+							checkResult = false;
+						} else {
+							checkResult = true;
+						}
+					} else {
+						$("#deleteDomainAlertDiv ul").empty();
+						$("<li>").text(data.message).appendTo($("#deleteDomainAlertDiv ul"));
+						$("#deleteDomainAlertDiv").show();
+						$("#deleteDomainAlertDiv ul").show();
+
+						checkResult = false;
+					}
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					$("#deleteDomainAlertDiv ul").empty();
+					$("<li>").text("访问WEB服务发生异常").appendTo($("#deleteDomainAlertDiv ul"));
+					$("#deleteDomainAlertDiv").show();
+					$("#deleteDomainAlertDiv ul").show();
+
+					checkResult = false;
+				},
+				statusCode : {
+					901 : function() {
+						location.href = "${ loginUrl }";
+					}
+				}
+			});
+
+			return checkResult;
+		}
+
+		function deleteDomain() {
+			if ($("#passwordText").val() == "") {
+				$("#deleteDomainAlertDiv ul").empty();
+				$("<li>").text("请输入密码进行确认").appendTo($("#deleteDomainAlertDiv ul"));
+				$("#deleteDomainAlertDiv").show();
+				$("#deleteDomainAlertDiv ul").show();
+				return;
+			}
+
+			var checkResult = checkPassword();
+			if (checkResult == false) {
+				return;
+			}
+
+			$("#deleteDomainButton").prop("disabled", true);
+
+			var domainId = getIdFromUrl();
+			callAjax("${ domainUrl }/" + domainId, "DELETE", true, null, "正在删除虚拟机域...", deleteDomainSuccessHandler,
+					deleteDomainErrorHandler, "${ loginUrl }");
+		}
+
+		function deleteDomainSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				$(location).attr("href", "${ domainUrl }/list");
+			} else {
+				console.log(data.message);
+
+				$("#deleteDomainAlertDiv ul").empty();
+				$("<li>").text(data.message).appendTo($("#deleteDomainAlertDiv ul"));
+				$("#deleteDomainAlertDiv").show();
+				$("#deleteDomainAlertDiv ul").show();
+
+				$("#deleteDomainButton").prop("disabled", false);
+			}
+		}
+
+		function deleteDomainErrorHandler(XMLHttpRequest, textStatus, errorThrown) {
+			$("#deleteDomainAlertDiv ul").empty();
+			$("<li>").append("访问WEB服务发生异常").appendTo("#deleteDomainAlertDiv ul");
+			$("#deleteDomainAlertDiv").show();
+			$("#deleteDomainAlertDiv ul").show();
+		}
+
+		function openCreateGroupDialog() {
+			// remove class the jquery validation added
+			$("#createGroupForm .form-group").removeClass("has-error").removeClass("has-success");
+
+			$("#groupNameText").val("");
+			$("#groupCpuText").val("");
+			$("#groupHarddiskText").val("");
+			$("#groupMemoryText").val("");
+			$("#groupDescriptionText").val("");
+
+			$("#createGroupAlertDiv ul").empty().hide();
+			$("#createGroupAlertDiv").hide();
+
+			$("#createGroupButton").prop("disabled", false);
+
+			var pData = new Object();
+			pData.domainId = getIdFromUrl();
+			callAjax("${ groupUrl }/new-group-resource-bound", "GET", true, pData, "正在计算可用资源范围...",
+					openCreateGroupDialogSuccessHandler, null, "${ loginUrl }");
+		}
+
+		function openCreateGroupDialogSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				$("#groupCpuBoundDiv").text("[最小" + data.min_cpu + "，最大" + data.max_cpu + "]");
+				$("#groupMemBoundDiv").text("[最小" + data.min_memory + "，最大" + data.max_memory + "]");
+				$("#groupDiskBoundDiv").text("[最小" + data.min_disk + "，最大" + data.max_disk + "]");
+
+				// dynamic add jquery validation rule
+				$("#groupCpuText").rules("add", {
+					range : [ data.min_cpu, data.max_cpu ]
+				});
+				$("#groupMemoryText").rules("add", {
+					range : [ data.min_memory, data.max_memory ]
+				});
+				$("#groupHarddiskText").rules("add", {
+					range : [ data.min_disk, data.max_disk ]
+				});
+
+				$("#createGroupDialog").modal("show");
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		function validateGroupInput() {
+			$("#createGroupForm").validate({
+				// add class for control
+				validClass : "has-success",
+				errorClass : "has-error",
+
+				highlight : function(element, errorClass, validClass) {
+					$(element).closest('.form-group').addClass(errorClass).removeClass(validClass);
+				},
+				unhighlight : function(element, errorClass, validClass) {
+					$(element).closest('.form-group').removeClass(errorClass).addClass(validClass);
+				},
+
+				rules : {
+					// use control name as rules					
+					groupNameText : {
+						required : true,
+						trimMinLength : 3,
+					},
+
+					groupCpuText : {
+						required : true,
+						number : true,
+					},
+
+					groupMemoryText : {
+						required : true,
+						number : true,
+					},
+
+					groupHarddiskText : {
+						required : true,
+						number : true,
+					},
+				},
+
+				messages : {
+					// use control name as rules				
+					groupNameText : {
+						required : "请输入组名；",
+						trimMinLength : "组名长度至少为{0}；",
+					},
+
+					groupCpuText : {
+						required : "请输入处理器配额；",
+						number : "处理器配额必须是整数；",
+						range : "处理器配额必须介于{0}和{1}之间",
+					},
+
+					groupMemoryText : {
+						required : "请输入内存配额；",
+						number : "内存配额必须是整数；",
+						range : "内存配额必须介于{0}和{1}之间",
+					},
+
+					groupHarddiskText : {
+						required : "请输入磁盘配额；",
+						number : "磁盘配额必须是整数；",
+						range : "磁盘配额必须介于{0}和{1}之间",
+					},
+				},
+
+				errorContainer : "#createGroupAlertDiv",
+				errorLabelContainer : "#createGroupAlertDiv ul",
+				wrapper : "li",
+
+				submitHandler : function() {
+					createGroup();
+				},
+
+			});
+
+			return;
+		}
+
+		function createGroup() {
+			$("#createGroupAlertDiv ul").empty().hide();
+			$("#createGroupAlertDiv").hide();
+
+			$("#createGroupButton").prop("disabled", true);
+
+			var pData = new Object();
+			pData.domainId = getIdFromUrl();
+			pData.groupName = $("#groupNameText").val();
+			pData.description = $("#groupDescriptionText").val();
+			pData.cpu = $("#groupCpuText").val();
+			pData.memory = $("#groupMemoryText").val();
+			pData.disk = $("#groupHarddiskText").val();
+
+			callAjax("${ groupUrl }", "POST", true, pData, "正在创建虚拟机组...", createGroupSuccessHandler,
+					createGroupErrorHandler, "${ loginUrl }");
+		}
+
+		function createGroupSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				location.reload(true);
+			} else {
+				console.log(data.message);
+
+				$("#createGroupAlertDiv ul").empty();
+				$("<li>").text(data.message).appendTo($("#createGroupAlertDiv ul"));
+				$("#createGroupAlertDiv").show();
+				$("#createGroupAlertDiv ul").show();
+
+				$("#createGroupButton").prop("disabled", false);
+			}
+		}
+
+		function createGroupErrorHandler(XMLHttpRequest, textStatus, errorThrown) {
+			$("#createGroupAlertDiv ul").empty();
+			$("<li>").append("访问WEB服务发生异常").appendTo("#createGroupAlertDiv ul");
+			$("#createGroupAlertDiv").show();
+			$("#createGroupAlertDiv ul").show();
+		}
+
+		function getIdFromUrl() {
+			var slices = $(location).attr("pathname").split("/");
+			var id = slices[slices.length - 2];
+
+			return id;
+		}
+
+		]]>
+	</script>
+
+</div>

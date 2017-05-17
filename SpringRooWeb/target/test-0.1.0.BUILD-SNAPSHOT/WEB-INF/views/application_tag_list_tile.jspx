@@ -1,0 +1,705 @@
+﻿
+<div class="main-content" xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page">
+
+	<spring:url value="/application-tag" var="applicationTagUrl" />
+	<spring:url value="/login" var="loginUrl" />
+
+	<spring:url value="/resources/img" var="img" />
+
+	<div class="row">
+		<div class="col-md-12">
+			<ol class="breadcrumb content-shadow">
+				<li><i class="fa fa-list-alt"> <!-- ph -->
+				</i> <a href="">业务系统标签列表</a></li>
+			</ol>
+		</div>
+	</div>
+
+	<div class="row">
+		<div id="buttonsNav" class="col-md-12">
+			<div class="col-md-4 col-md-offset-8" style="padding-right: 0px" align="right">
+				<button id="openAddApplicationTagDialogButton" class="btn btn-success btn-sm" type="button">添加标签</button>
+				<button id="openDeleteApplicationTagDialogButton" class="btn btn-default btn-sm last-button" type="button"
+					disabled="disabled">删除标签</button>
+			</div>
+		</div>
+
+		<div class="col-md-12">
+			<div class="content-block height-constraint-block-600 content-shadow">
+				<table id="applicationTagListTable" class="table table-striped table-condensed table-bordered table-hover">
+					<thead>
+						<tr>
+							<th><input type="checkbox" id="selectAllCheckbox" /></th>
+							<th>标签名称</th>
+							<th>标签描述</th>
+							<th>关联虚拟机</th>
+							<th>创建人</th>
+							<th>创建时间</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- ph -->
+					</tbody>
+				</table>
+				<div style="margin: 20px">
+					<span id="applicationTagCountSpan">
+						<!-- ph -->
+					</span>
+				</div>
+
+				<!-- start pagination -->
+				<div>
+					<ul id="applicationTagPagination" class="pagination">
+						<li><a href="javascript:void(0)">上一页</a></li>
+						<li><a href="javascript:void(0)">下一页</a></li>
+					</ul>
+				</div>
+				<!-- end pagination -->
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="addApplicationTagDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<form id="addApplicationTagForm" action="">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+						<h5 class="modal-title" id="myModalLabel">
+							<strong>添加业务系统标签</strong>
+						</h5>
+					</div>
+					<div class="modal-body">
+						<div class="row form-group">
+							<div class="col-md-3" align="right">
+								<label class="form-label">标签名称</label>
+							</div>
+							<div class="col-md-6">
+								<input type="text" id="addApplicationTagNameText" name="addApplicationTagNameText" class="form-control input-sm"
+									placeholder="标签名称..." />
+							</div>
+							<div class="col-md-3">
+								<label class="text-danger" style="margin: 5px 0px">*</label>
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-3" align="right">
+								<label class="form-label">标签描述</label>
+							</div>
+							<div class="col-md-6">
+								<input type="text" id="addApplicationTagDescriptionText" name="addApplicationTagDescriptionText"
+									class="form-control input-sm" placeholder="标签描述..." />
+							</div>
+							<div class="col-md-3">
+								<!-- ph -->
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div id="addApplicationTagAlertDiv" class="col-md-8 col-md-offset-2 alert alert-danger alert-sm"
+								style="display: none">
+								<ul>
+									<!-- ph -->
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+						<button type="submit" class="btn btn-primary btn-sm" id="addApplicationTagButton">添加</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="showApplicationTagDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<form id="modifyApplicationTagForm" action="">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+						<h5 class="modal-title" id="myModalLabel">
+							<strong>修改业务系统标签</strong>
+						</h5>
+					</div>
+					<div class="modal-body">
+						<div class="row form-group">
+							<div class="col-md-3" align="right">
+								<label class="form-label">标签名称</label>
+							</div>
+							<div class="col-md-6">
+								<input type="text" id="showApplicationTagNameText" name="showApplicationTagNameText"
+									class="form-control input-sm" />
+							</div>
+							<div class="col-md-3">
+								<label class="text-danger" style="margin: 5px 0px">*</label>
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-3" align="right">
+								<label class="form-label">标签描述</label>
+							</div>
+							<div class="col-md-6">
+								<input type="text" id="showApplicationTagDescriptionText" name="showApplicationTagDescriptionText"
+									class="form-control input-sm" />
+							</div>
+							<div class="col-md-3">
+								<!-- ph -->
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div id="showApplicationTagAlertDiv" class="col-md-8 col-md-offset-2 alert alert-danger alert-sm"
+								style="display: none">
+								<ul>
+									<!-- ph -->
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+						<button type="submit" class="btn btn-primary btn-sm" id="modifyApplicationTagButton">修改</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="deleteApplicationTagDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="myModalLabel">
+						<strong>删除业务系统标签</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group">
+						<div id="deleteApplicationTagAlertDiv" class="col-md-8 col-md-offset-2 alert alert-danger alert-sm" align="center">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-danger btn-sm" id="deleteApplicationTagButton">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="ajaxWaitingDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="myModalLabel">
+						<strong>操作进行中...</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group" align="center">
+						<img alt="waiting..." src="${ img }/ajax-waiting.gif" />
+					</div>
+					<div class="row form-group">
+						<div id="ajaxWaitingMessageDiv" class="col-md-8 col-md-offset-2" align="center">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<!-- ph -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="errorDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="errorDialogTitle">
+						<strong>错误</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group">
+						<div id="errorDialogMessageDiv" class="col-md-8 col-md-offset-2 alert alert-danger alert-sm" align="center">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<spring:url value="/resources/js/pagination.js" var="pagination_js" />
+
+	<script type="text/javascript" src="${ pagination_js }">
+	<!-- d -->
+		
+	</script>
+
+	<script type="text/javascript">
+		<![CDATA[
+
+		$(document).ready(function() {
+			// 					$("#openAddApplicationTagDialogButton").attr("data-toggle", "modal").attr("data-target",
+			// 							"#addApplicationTagDialog");
+			// 					$("#addApplicationTagDialog").on("shown.bs.modal", openAddApplicationTagDialog);
+
+			jQuery.validator.addMethod("trimMinLength", function(value, element, param) {
+				return this.optional(element) || value.trim().length >= param;
+			}, "长度不足");
+
+			showApplicationTagListPage(1);
+
+			$('#selectAllCheckbox').click(function() {
+				// jquery 1.9+, use prop istead of attr
+				// var checkFlag = $(this).prop("checked");
+				var checkFlag = $(this).is(":checked");
+				$(".item-checkbox:enabled").prop("checked", checkFlag);
+
+				initButtonStatus(checkFlag);
+				if (checkFlag == true) {
+					changeButtonStatus();
+				}
+
+				changeButtonColor();
+			});
+
+			$("#openAddApplicationTagDialogButton").click(openAddApplicationTagDialog);
+			validateAddApplicationTagInput();
+
+			validateModifyApplicationTagInput();
+
+			$("#openDeleteApplicationTagDialogButton").click(openDeleteApplicationTagDialog);
+			$("#deleteApplicationTagButton").click(deleteApplicationTag);
+		});
+
+		// set initial button enable status
+		function initButtonStatus(enabled) {
+			$("#openDeleteApplicationTagDialogButton").prop("disabled", !enabled);
+		}
+
+		// change button enable status after initialization, if necessary
+		function changeButtonStatus() {
+			var enableDelete = true;
+
+			var tagNames = "";
+			$(".item-checkbox:checked").each(function() {
+				var bindMachine = $(this).parent().siblings(".bind-machine").text();
+				if (bindMachine != "") {
+					enableDelete = false;
+					// tagNames += $(this).parent().siblings(".tag-name").text() + ", ";
+				}
+			});
+
+			$("#openDeleteApplicationTagDialogButton").prop("disabled", !enableDelete);
+		}
+
+		// change button color after set button status
+		function changeButtonColor() {
+			if ($("#openDeleteApplicationTagDialogButton").prop("disabled") == true) {
+				$("#openDeleteApplicationTagDialogButton").removeClass("btn-danger").addClass("btn-default");
+			} else {
+				$("#openDeleteApplicationTagDialogButton").removeClass("btn-default").addClass("btn-danger");
+			}
+		}
+
+		function showApplicationTagListPage(pageNo) {
+			var pData = new Object();
+			pData.pageNo = pageNo;
+			pData.pageSize = 10;
+
+			callAjax("${ applicationTagUrl }/pagination-json-list", "GET", true, pData, null,
+					showApplicationTagListPageSuccessHandler, null, "${ loginUrl }");
+		}
+
+		var pageApplicationTags;
+		function showApplicationTagListPageSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				pageApplicationTags = data.application_tags;
+
+				showApplicationTagListTable(data);
+
+				$("#applicationTagCountSpan").text("业务系统标签数：" + data.total_application_tag_count + "个");
+
+				// showNaviationPanel(data);
+				// show navigation
+				showPagination("applicationTagPagination", data.pageNo, data.pageTotal, showApplicationTagListPage);
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		function showApplicationTagListTable(data) {
+			$("#applicationTagListTable tbody").empty();
+
+			var applicationTags = pageApplicationTags;
+			for (var i = 0; i < applicationTags.length; i++) {
+				var applicationTag = applicationTags[i];
+
+				var row = $("<tr>");
+				var applicationTagCheckbox = $("<input>", {
+					type : "checkbox",
+					class : "item-checkbox",
+					name : "checkbox",
+					value : applicationTag.id
+				});
+				$("<td>").append(applicationTagCheckbox).appendTo(row);
+
+				var applicationTagLink = $("<a>", {
+					href : "javascript:showApplicationTag('" + i + "')",
+					text : applicationTag.name
+				})
+				$("<td>").addClass("tag-name").append(applicationTagLink).appendTo(row);
+
+				$("<td>").append(applicationTag.description).appendTo(row);
+
+				var virtualMachineNameList = "";
+				for (var j = 0; j < applicationTag.virtual_machines.length; j++) {
+					virtualMachineNameList += applicationTag.virtual_machines[j].name + ", ";
+				}
+				$("<td>").addClass("bind-machine").append(virtualMachineNameList).appendTo(row);
+
+				$("<td>").append(applicationTag.creator).appendTo(row);
+				$("<td>").append(applicationTag.create_time).appendTo(row);
+
+				row.appendTo($("#applicationTagListTable tbody"));
+			}
+
+			$(".item-checkbox").click(function() {
+				if ($(".item-checkbox:checked").length == 0) {
+					initButtonStatus(false);
+				} else {
+					initButtonStatus(true);
+
+					changeButtonStatus();
+				}
+
+				changeButtonColor();
+			});
+		}
+
+		function showNaviationPanel(data) {
+			// remove current page links
+			$(".pageBox").remove();
+
+			// add page links
+			fillPagination(data.pageNo, data.pageTotal);
+
+			$('.toPage').each(function() {
+				$(this).on('click', function() {
+					showApplicationTagListPage($(this).text());
+				});
+			});
+
+			// !!! remove handlers before bind again
+			$('#previous').off();
+			$('#previous').on('click', function() {
+				if (data.pageNo == 1) {
+					return false;
+				} else {
+					showApplicationTagListPage(data.pageNo - 1);
+				}
+			});
+
+			$('#next').off();
+			$('#next').click(function() {
+				if (data.pageNo == data.pageTotal) {
+					return false;
+				} else {
+					showApplicationTagListPage(data.pageNo + 1);
+				}
+			});
+		}
+
+		function openAddApplicationTagDialog() {
+			// remove class the jquery validation added
+			$("#addApplicationTagForm .form-group").removeClass("has-error").removeClass("has-success");
+
+			// reset content before show
+			$("#addApplicationTagDialog input").val("");
+
+			$("#addApplicationTagAlertDiv ul").empty().hide();
+			$("#addApplicationTagAlertDiv").hide();
+
+			$("#addApplicationTagButton").prop("disabled", false);
+
+			$("#addApplicationTagDialog").modal("show");
+		}
+
+		function validateAddApplicationTagInput() {
+			$("#addApplicationTagForm").validate({
+				// add class for control
+				validClass : "has-success",
+				errorClass : "has-error",
+
+				highlight : function(element, errorClass, validClass) {
+					$(element).closest('.form-group').addClass(errorClass).removeClass(validClass);
+				},
+				unhighlight : function(element, errorClass, validClass) {
+					$(element).closest('.form-group').removeClass(errorClass).addClass(validClass);
+				},
+
+				rules : {
+					// use control name as rules					
+					addApplicationTagNameText : {
+						required : true,
+						trimMinLength : 3,
+					},
+				},
+
+				messages : {
+					// use control name as rules				
+					addApplicationTagNameText : {
+						required : "请输入标签名称；",
+						trimMinLength : "标签名称长度至少为{0}；",
+					},
+				},
+
+				errorContainer : "#addApplicationTagAlertDiv",
+				errorLabelContainer : "#addApplicationTagAlertDiv ul",
+				wrapper : "li",
+
+				submitHandler : function() {
+					addApplicationTag();
+				},
+			});
+
+			return;
+		}
+
+		var pageApplicationTagExistence;
+		function addApplicationTag() {
+			var name = $.trim($("#addApplicationTagNameText").val());
+			var description = $.trim($("#addApplicationTagDescriptionText").val());
+
+			$("#addApplicationTagButton").prop("disabled", true);
+
+			pageApplicationTagExistence = false;
+			checkExistenceByName(name);
+			if (true == pageApplicationTagExistence) {
+				$("#addApplicationTagAlertDiv ul").empty();
+				$("<li>").append("业务系统标签" + name + "已经存在").appendTo("#addApplicationTagAlertDiv ul");
+				$("#addApplicationTagAlertDiv").show();
+				$("#addApplicationTagAlertDiv ul").show();
+
+				$("#addApplicationTagButton").prop("disabled", false);
+
+				return;
+			}
+
+			// add application tag
+			var pData = new Object();
+			pData.name = name;
+			pData.description = description;
+			callAjax("${ applicationTagUrl }", "POST", true, pData, null, addApplicationTagSuccessHandler,
+					addApplicationTagErrorHandler, "${ loginUrl }");
+		}
+
+		function checkExistenceByName(name) {
+			var name = $.trim($("#addApplicationTagNameText").val());
+
+			var pData = new Object();
+			pData.name = name;
+			callAjax("${ applicationTagUrl }/check-existence-by-name", "GET", false, pData, null,
+					checkExistenceByNameSuccessHandler, checkExistenceByNameErrorHandler, "${ loginUrl }");
+		}
+
+		function checkExistenceByNameSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				pageApplicationTagExistence = data.existence;
+			} else {
+				console.log(data.message);
+
+				pageApplicationTagExistence = false;
+
+				$("#addApplicationTagAlertDiv ul").empty();
+				$("<li>").append(data.message).appendTo("#addApplicationTagAlertDiv ul");
+				$("#addApplicationTagAlertDiv").show();
+				$("#addApplicationTagAlertDiv ul").show();
+			}
+		}
+
+		function checkExistenceByNameErrorHandler(XMLHttpRequest, textStatus, errorThrown) {
+			pageApplicationTagExistence = false;
+
+			$("#addApplicationTagAlertDiv ul").empty();
+			$("<li>").append("访问WEB服务发生异常").appendTo("#addApplicationTagAlertDiv ul");
+			$("#addApplicationTagAlertDiv").show();
+			$("#addApplicationTagAlertDiv ul").show();
+		}
+
+		function addApplicationTagSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				location.reload(true);
+			} else {
+				console.log(data.message);
+
+				$("#addApplicationTagAlertDiv ul").empty();
+				$("<li>").append(data.message).appendTo("#addApplicationTagAlertDiv ul");
+				$("#addApplicationTagAlertDiv").show();
+				$("#addApplicationTagAlertDiv ul").show();
+			}
+		}
+
+		function addApplicationTagErrorHandler(XMLHttpRequest, textStatus, errorThrown) {
+			$("#addApplicationTagAlertDiv ul").empty();
+			$("<li>").append("访问WEB服务发生异常").appendTo("#addApplicationTagAlertDiv ul");
+			$("#addApplicationTagAlertDiv").show();
+			$("#addApplicationTagAlertDiv ul").show();
+		}
+
+		var pageShowApplicationTagId;
+		function showApplicationTag(index) {
+			// remove class the jquery validation added
+			$("#modifyApplicationTagForm .form-group").removeClass("has-error").removeClass("has-success");
+
+			// clear dialog box content
+			$("#showApplicationTagDialog input").val("");
+
+			$("#showApplicationTagAlertDiv ul").empty().hide();
+			$("#showApplicationTagAlertDiv").hide();
+
+			var applicaionTag = pageApplicationTags[index];
+			pageShowApplicationTagId = applicaionTag.id;
+			$("#showApplicationTagNameText").val(applicaionTag.name);
+			$("#showApplicationTagDescriptionText").val(applicaionTag.description);
+			$("#showApplicationTagDialog").modal("show");
+		}
+
+		function validateModifyApplicationTagInput() {
+			$("#modifyApplicationTagForm").validate({
+				// add class for control
+				validClass : "has-success",
+				errorClass : "has-error",
+
+				highlight : function(element, errorClass, validClass) {
+					$(element).closest('.form-group').addClass(errorClass).removeClass(validClass);
+				},
+				unhighlight : function(element, errorClass, validClass) {
+					$(element).closest('.form-group').removeClass(errorClass).addClass(validClass);
+				},
+
+				rules : {
+					// use control name as rules					
+					showApplicationTagNameText : {
+						required : true,
+						trimMinLength : 3,
+					},
+				},
+
+				messages : {
+					// use control name as rules				
+					showApplicationTagNameText : {
+						required : "请输入标签名称；",
+						trimMinLength : "标签名称长度至少为{0}；",
+					},
+				},
+
+				errorContainer : "#showApplicationTagAlertDiv",
+				errorLabelContainer : "#showApplicationTagAlertDiv ul",
+				wrapper : "li",
+
+				submitHandler : function() {
+					modifyApplicationTag();
+				},
+			});
+
+			return;
+		}
+
+		function modifyApplicationTag() {
+			var id = pageShowApplicationTagId;
+			var name = $.trim($("#showApplicationTagNameText").val());
+			var description = $.trim($("#showApplicationTagDescriptionText").val());
+
+			var pData = new Object();
+			pData.name = name;
+			pData.description = description;
+
+			callAjax("${ applicationTagUrl }/" + id, "PUT", true, pData, null, modifyApplicationTagSuccessHandler,
+					modifyApplicationTagErrorHandler, "${ loginUrl }");
+		}
+
+		function modifyApplicationTagSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				location.reload(true);
+			} else {
+				console.log(data.message);
+
+				$("#showApplicationTagAlertDiv ul").empty();
+				$("<li>").append(data.message).appendTo("#showApplicationTagAlertDiv ul");
+				$("#showApplicationTagAlertDiv").show();
+				$("#showApplicationTagAlertDiv ul").show();
+			}
+		}
+
+		function modifyApplicationTagErrorHandler(XMLHttpRequest, textStatus, errorThrown) {
+			$("#showApplicationTagAlertDiv ul").empty();
+			$("<li>").append("访问WEB服务发生异常").appendTo("#showApplicationTagAlertDiv ul");
+			$("#showApplicationTagAlertDiv").show();
+			$("#showApplicationTagAlertDiv ul").show();
+		}
+
+		function openDeleteApplicationTagDialog() {
+			$("#deleteApplicationTagAlertDiv").text("你真的要删除所选的业务系统标签吗？").show();
+			$("#deleteApplicationTagButton").prop("disabled", false);
+			$("#deleteApplicationTagDialog").modal("show");
+		}
+
+		function deleteApplicationTag() {
+			$("#deleteApplicationTagButton").prop("disabled", true);
+
+			$(".item-checkbox:checked").each(
+					function() {
+						var id = $(this).val();
+						var pData = new Object();
+						pData.id = id;
+
+						callAjax("${ applicationTagUrl }/" + id, "DELETE", true, pData, null,
+								deleteApplicationTagSuccessHandler, null, "${ loginUrl }");
+					});
+		}
+
+		function deleteApplicationTagSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				location.reload(true);
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		]]>
+	</script>
+
+</div>

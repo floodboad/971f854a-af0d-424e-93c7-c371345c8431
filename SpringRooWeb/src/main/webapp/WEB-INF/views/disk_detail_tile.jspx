@@ -1,0 +1,1124 @@
+﻿
+<div class="main-content" xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page">
+
+	<spring:url value="/virtual-machine" var="virtualMachineUrl" />
+	<spring:url value="/disk" var="diskUrl" />
+	<spring:url value="/user" var="userUrl" />
+	<spring:url value="/login" var="loginUrl" />
+	<spring:url value="/operation-log" var="operationLogUrl" />
+
+	<spring:url value="/resources/img" var="img" />
+
+	<div class="row">
+		<div class="col-md-12">
+			<ol class="breadcrumb content-shadow">
+				<li><i class="fa fa-list-alt"> <!-- ph -->
+				</i> <a href="${ diskUrl }/list">云硬盘列表</a></li>
+				<li><i class="fa fa-hdd-o"> <!-- ph -->
+				</i> <a id="diskNameLink" href="">
+						<!-- ph -->
+					</a></li>
+			</ol>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2>
+						<i class="fa fa-cogs blue"> <!-- ph -->
+						</i><strong>基本信息</strong>
+					</h2>
+
+					<div class="action-block">
+						<sec:authorize ifAnyGranted="ROLE_MANAGER">
+							<a id="openModifyDiskDialogButton" href="javascript:void(0)">修改信息</a>
+							<a id="openAdjustDiskManagerDialogButton" href="javascript:void(0)">设置管理员</a>
+							<a id="openChangeValidTimeDialogButton" href="javascript:void(0)">续期</a>
+						</sec:authorize>
+					</div>
+				</div>
+				<div class="panel-body">
+					<table id="diskInfoTable" class="table table-striped table-condensed table-bordered table-hover">
+						<tbody>
+							<!-- ph -->
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<sec:authorize ifAnyGranted="ROLE_USER">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h2>
+							<i class="fa fa-server blue"> <!-- ph -->
+							</i><strong>挂载信息</strong>
+						</h2>
+
+						<div class="action-block">
+							<a id="openAttachToVmDialogButton" href="javascript:void(0)" style="display: none">挂载</a>
+							<a id="openDetachFromVmDialogButton" href="javascript:void(0)" style="display: none">卸载</a>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div id="attachInfoTableMessageDiv" class="text-primary" style="margin-left: 20px">
+							<!-- ph -->
+						</div>
+						<table id="attachInfoTable" class="table table-striped table-condensed table-bordered table-hover">
+							<tbody>
+								<tr>
+									<th>挂载主机</th>
+									<th>挂载点</th>
+									<th>挂载状态</th>
+									<th>挂载时间</th>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</sec:authorize>
+
+	<sec:authorize ifAnyGranted="ROLE_MANAGER">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h2>
+							<i class="fa fa-hand-pointer-o blue"> <!-- ph -->
+							</i><strong>操作日志</strong>
+						</h2>
+					</div>
+					<div class="panel-body">
+						<div id="operationLogTableMessageDiv" class="text-primary" style="margin-left: 20px">
+							<!-- ph -->
+						</div>
+						<table id="operationLogTable" class="table table-striped table-condensed table-bordered">
+							<tbody>
+								<tr>
+									<th>ID</th>
+									<th>操作者</th>
+									<th>操作时间</th>
+									<th>操作</th>
+									<th>操作状态</th>
+									<th>重要性</th>
+								</tr>
+							</tbody>
+						</table>
+
+						<!-- start pagination -->
+						<div style="align: right">
+							<ul id="operationLogPagination" class="pagination" style="position: static; float: right;">
+								<li><a href="javascript:void(0)">上一页</a></li>
+								<li><a href="javascript:void(0)">下一页</a></li>
+							</ul>
+						</div>
+						<!-- end pagination -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</sec:authorize>
+
+	<!-- Modal -->
+	<div class="modal fade" id="modifyDiskDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<form id="modifyDiskForm" action="">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+						<h5 class="modal-title" id="myModalLabel">
+							<strong>修改云硬盘信息</strong>
+						</h5>
+					</div>
+					<div class="modal-body">
+						<div class="row form-group">
+							<div class="col-md-3" align="right">
+								<label class="form-label">名称</label>
+							</div>
+							<div class="col-md-6">
+								<input type="text" id="modifyDiskNameText" name="modifyDiskNameText" class="form-control input-sm"
+									placeholder="云硬盘名称" />
+							</div>
+							<div class="col-md-3">
+								<label class="text-danger" style="margin: 5px 0px">*</label>
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-3" align="right">
+								<label class="form-label">描述</label>
+							</div>
+							<div class="col-md-6">
+								<input type="text" id="modifyDiskDescriptionText" class="form-control input-sm" placeholder="云硬盘描述" />
+							</div>
+							<div class="col-md-3">
+								<!-- ph -->
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div id="modifyDiskAlertDiv" class="col-md-8 col-md-offset-2" style="display: none; color: #ba0000;">
+								<ul>
+									<!-- ph -->
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+						<button type="submit" class="btn btn-primary btn-sm" id="modifyDiskButton">确定</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="adjustDiskManagerDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="myModalLabel">
+						<strong>设置管理员</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group">
+						<div class="col-md-3" align="right">
+							<label class="form-label">管理员</label>
+						</div>
+						<div class="col-md-6">
+							<select id="managerSelect" class="form-control input-sm" style="width: 290px">
+								<!-- ph -->
+							</select>
+						</div>
+						<div class="col-md-3">
+							<!-- ph -->
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div id="adjustDiskManagerAlertDiv" class="col-md-8 col-md-offset-2 alert alert-danger alert-sm"
+							style="display: none">
+							<ul>
+								<!-- ph -->
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary btn-sm" id="adjustDiskManagerButton">设置</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="changeValidTimeDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<form id="changeValidTimeForm" action="">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+						<h5 class="modal-title" id="myModalLabel">
+							<strong>云硬盘续期</strong>
+						</h5>
+					</div>
+					<div class="modal-body">
+						<div class="row form-group">
+							<div class="col-md-3" align="right">
+								<label class="form-label">追加有效期</label>
+							</div>
+							<div class="col-md-6">
+								<select id="validTimeSelect" class="form-control input-sm">
+									<option value="3">3天</option>
+									<option value="10">10天</option>
+									<option value="30">30天</option>
+									<option value="0">自定义</option>
+								</select>
+							</div>
+							<div class="col-md-3">
+								<!-- ph -->
+							</div>
+						</div>
+
+						<div id="customValidTimeDiv" class="row form-group" style="display: none">
+							<div class="col-md-3" align="right">
+								<label class="form-label">
+									<!-- ph -->
+								</label>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group  input-group-sm">
+									<input id="customValidTimeText" name="customValidTimeText" class="form-control" type="text" />
+									<span class="input-group-addon">天</span>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<label class="text-danger" style="margin: 5px 0px">*</label>
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div id="changeValidTimeAlertDiv" class="col-md-8 col-md-offset-2" style="display: none; color: #ba0000;">
+								<ul>
+									<!-- ph -->
+								</ul>
+							</div>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+						<button type="submit" class="btn btn-primary btn-sm">确定</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="attachToVmDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="myModalLabel">
+						<strong>挂载到虚拟机</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group">
+						<div class="col-md-2 col-md-offset-2">
+							<label style="margin: 5px 0px">虚拟机</label>
+						</div>
+						<div class="col-md-6">
+							<select id="vmSelect" class="form-control" style="width: 290px">
+								<!-- ph -->
+							</select>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div id="attachToVmAlertDiv" class="col-md-8 col-md-offset-2 alert alert-danger alert-sm" style="display: none">
+							<ul>
+								<!-- ph -->
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary btn-sm" id="attachToVmButton">挂载</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="detachFromVmDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="myModalLabel">
+						<strong>卸载云硬盘</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group">
+						<div class="col-md-8 col-md-offset-2 alert alert-danger alert-sm" align="center">你真的要从虚拟机卸载云硬盘吗？</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-danger btn-sm" id="detachFromVmButton">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="operationDetailDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="myModalLabel">
+						<strong>操作日志信息</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group">
+						<div class="col-md-2 col-md-offset-2">
+							<label style="margin: 5px 0px">服务名称</label>
+						</div>
+						<div class="col-md-6">
+							<label id="serviceNameLabel" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-2 col-md-offset-2">
+							<label style="margin: 5px 0px">操作者</label>
+						</div>
+						<div class="col-md-6">
+							<label id="operatorLabel" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-2 col-md-offset-2">
+							<label style="margin: 5px 0px">所在部门</label>
+						</div>
+						<div class="col-md-6">
+							<label id="operatorDeparmentLabel" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-2 col-md-offset-2">
+							<label style="margin: 5px 0px">操作时间</label>
+						</div>
+						<div class="col-md-6">
+							<label id="operationTimeLabel" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-2 col-md-offset-2">
+							<label style="margin: 5px 0px">操作</label>
+						</div>
+						<div class="col-md-6">
+							<label id="operationLabel" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-2 col-md-offset-2">
+							<label style="margin: 5px 0px">操作对象</label>
+						</div>
+						<div class="col-md-6">
+							<label id="objectLabel" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+
+					<div id="domainAndGroupDiv" class="row form-group">
+						<div class="col-md-2 col-md-offset-2">
+							<label style="margin: 5px 0px">所在域组</label>
+						</div>
+						<div class="col-md-2">
+							<label id="domainAndGroupLabel" style="margin: 5px 0px"> ph </label>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-2 col-md-offset-2">
+							<label style="margin: 5px 0px">操作状态</label>
+						</div>
+						<div class="col-md-6">
+							<label id="operationStatusLabel" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-2 col-md-offset-2">
+							<label style="margin: 5px 0px">操作结果</label>
+						</div>
+						<div class="col-md-6">
+							<label id="operationResultLabel" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-2 col-md-offset-2">
+							<label style="margin: 5px 0px">重要性</label>
+						</div>
+						<div class="col-md-6">
+							<label id="severityLevelLabel" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="ajaxWaitingDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="myModalLabel">
+						<strong>操作进行中...</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group" align="center">
+						<img alt="waiting..." src="${ img }/ajax-waiting.gif" />
+					</div>
+					<div class="row form-group">
+						<div id="ajaxWaitingMessageDiv" class="col-md-8 col-md-offset-2" align="center">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<!-- ph -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="errorDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="errorDialogTitle">
+						<strong>错误</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group">
+						<div id="errorDialogMessageDiv" class="col-md-8 col-md-offset-2 alert alert-danger alert-sm" align="center">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<spring:url value="/resources/js/pagination.js" var="pagination_js" />
+
+	<script type="text/javascript" src="${ pagination_js }">
+	<!-- d -->
+		
+	</script>
+
+	<script type="text/javascript">
+		<![CDATA[
+		var pDisk;
+		$(document).ready(function() {
+			jQuery.validator.addMethod("trimMinLength", function(value, element, param) {
+				return this.optional(element) || value.trim().length >= param;
+			}, "长度不足");
+
+			showDiskDetail();
+
+			$('#validTimeSelect').change(function() {
+				if ($('#validTimeSelect').val() == 0) {
+					$("#customValidTimeDiv").show();
+				} else {
+					$("#customValidTimeDiv").hide();
+				}
+			});
+
+			$("#openModifyDiskDialogButton").click(openModifyDiskDialog);
+			validateDiskInput();
+
+			$("#openAdjustDiskManagerDialogButton").click(openAdjustDiskManagerDialog);
+			$("#adjustDiskManagerButton").click(adjustDiskManager);
+
+			$("#openChangeValidTimeDialogButton").click(openChangeValidTimeDialog);
+			validateValidTimeInput();
+
+			$("#openAttachToVmDialogButton").click(openAttachToVmDialog);
+			$("#attachToVmButton").click(attachToVm);
+
+			$("#openDetachFromVmDialogButton").click(openDetachFromVmDialog);
+			$("#detachFromVmButton").click(detachFromVm);
+		});
+
+		function showDiskDetail() {
+			showDiskInfo();
+
+			showOperationLogPage(1);
+		}
+
+		function showDiskInfo() {
+			var diskId = getDiskIdFromUrl();
+
+			callAjax("${ diskUrl }/" + diskId + "/json-detail", "GET", true, null, null, showDiskInfoSuccessHandler,
+					null, "${ loginUrl }");
+		}
+
+		function showDiskInfoSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				pDisk = data.disk;
+
+				$("#diskNameLink").text(pDisk.name);
+
+				showBasicInfo();
+				showAttachInfo();
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		function showBasicInfo() {
+			$("#diskInfoTable tbody").empty();
+
+			var row = $("<tr>");
+			$("<th>").addClass("col-md-1").text("Id").appendTo(row);
+			$("<td>").addClass("col-md-3").text(pDisk.id).appendTo(row);
+			$("<th>").addClass("col-md-1").text("名称").appendTo(row);
+			$("<td>").addClass("col-md-3").text(pDisk.name).appendTo(row);
+			$("<th>").addClass("col-md-1").text("描述").appendTo(row);
+			$("<td>").addClass("col-md-3").text(pDisk.description).appendTo(row);
+			row.appendTo($("#diskInfoTable tbody"));
+
+			var row = $("<tr>");
+			$("<th>").addClass("col-md-1").text("管理员").appendTo(row);
+			$("<td>").addClass("col-md-3").text(pDisk.manager).appendTo(row);
+			$("<th>").addClass("col-md-1").text("容量").appendTo(row);
+			$("<td>").addClass("col-md-3").text(pDisk.capacity + "GB").appendTo(row);
+			$("<th>").addClass("col-md-1").text("状态").appendTo(row);
+			$("<td>").addClass("col-md-3").text(pDisk.status).appendTo(row);
+			row.appendTo($("#diskInfoTable tbody"));
+
+			var row = $("<tr>");
+			$("<th>").addClass("col-md-1").text("创建时间").appendTo(row);
+			$("<td>").addClass("col-md-3").text(pDisk.create_time).appendTo(row);
+			$("<th>").addClass("col-md-1").text("使用截止时间").appendTo(row);
+			$("<td>").addClass("col-md-3").text(pDisk.valid_time).appendTo(row);
+			$("<th>").addClass("col-md-1").text("").appendTo(row);
+			$("<td>").addClass("col-md-3").text("").appendTo(row);
+			row.appendTo($("#diskInfoTable tbody"));
+		}
+
+		function showAttachInfo() {
+			if (("已挂载" == pDisk.status) || ("挂载中" == pDisk.status) || ("卸载中" == pDisk.status)) {
+				$("#attachInfoTableMessageDiv").text("").hide();
+
+				$("#attachInfoTable tbody tr:gt(0)").empty();
+
+				var row = $("<tr>");
+				$("<td>").text(pDisk.attach_host).appendTo(row);
+				$("<td>").text(pDisk.attach_point).appendTo(row);
+				$("<td>").text(pDisk.status).appendTo(row);
+				$("<td>").text(pDisk.attach_time).appendTo(row);
+				row.appendTo($("#attachInfoTable tbody"));
+
+				$("#attachInfoTable").show();
+
+				if ("已挂载" == pDisk.status) {
+					// the attach operation is related to virtual machine, so not show button here
+					// $("#openDetachFromVmDialogButton").show()
+				}
+			} else {
+				$("#attachInfoTableMessageDiv").text("当前云硬盘没有被挂载到任何虚拟机").show();
+				$("#attachInfoTable").hide();
+			}
+
+			if ("可用" == pDisk.status) {
+				// the attach operation is related to virtual machine, so not show button here
+				// $("#openAttachToVmDialogButton").show()
+			}
+		}
+
+		function showOperationLogPage(pageNo) {
+			var diskId = getDiskIdFromUrl();
+
+			var pData = new Object();
+			pData.pageNo = pageNo;
+			pData.pageSize = 10;
+			pData.serviceName = "";
+			pData.operator = "";
+			pData.operationStatus = "";
+			pData.severityLevel = "";
+			pData.objectId = diskId;
+			pData.startTime = "";
+			pData.endTime = "";
+
+			pageCallShowOperationLogPage = callAjax("${ operationLogUrl }/json-list", "GET", true, pData, null,
+					showOperationLogPageSuccessHandler, null, "${ loginUrl }");
+		}
+
+		var pageOperationLogs;
+		function showOperationLogPageSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				pageOperationLogs = data.operation_logs;
+
+				if (pageOperationLogs.length > 0) {
+					$("#operationLogTableMessageDiv").text("").hide();
+
+					// show log table
+					showOperationLogTable();
+
+					// show navigation
+					showPagination("operationLogPagination", data.pageNo, data.pageTotal, showOperationLogPage);
+				} else {
+					$("#operationLogTableMessageDiv").text("当前云硬盘没有对应的操作日志").show();
+					$("#operationLogTable").hide();
+				}
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		function showOperationLogTable() {
+			$("#operationLogTable tbody tr:gt(0)").empty();
+
+			var operationLogs = pageOperationLogs;
+			for (var i = 0; i < operationLogs.length; i++) {
+				var operationLog = operationLogs[i];
+
+				var row = $("<tr>");
+				var showLogLink = $("<a>", {
+					text : operationLog.id,
+					href : "javascript:showOperationLog(" + i + ")"
+				});
+				$("<td>").append(showLogLink).addClass("showDetail").appendTo(row);
+				$("<td>").text(operationLog.operator).appendTo(row);
+				$("<td>").text(operationLog.operation_time).appendTo(row);
+				$("<td>").text(operationLog.operation).appendTo(row);
+
+				if (operationLog.operation_status == "成功") {
+					$("<td>").text(operationLog.operation_status).addClass("text-success").appendTo(row);
+				} else if (operationLog.operation_status == "失败") {
+					$("<td>").text(operationLog.operation_status).addClass("text-danger").appendTo(row);
+				} else {
+					$("<td>").text(operationLog.operation_status).appendTo(row);
+				}
+
+				if (operationLog.severity_level == "低") {
+					$("<td>").text(operationLog.severity_level).addClass("text-success").appendTo(row);
+				} else if (operationLog.severity_level == "中") {
+					$("<td>").text(operationLog.severity_level).addClass("text-warning").appendTo(row);
+
+				} else if (operationLog.severity_level == "高") {
+					$("<td>").text(operationLog.severity_level).addClass("text-danger").appendTo(row);
+				}
+
+				row.appendTo($("#operationLogTable tbody"));
+			}
+		}
+
+		function showOperationLog(index) {
+			var operationLog = pageOperationLogs[index]
+
+			$("#domainAndGroupDiv").hide();
+
+			$("#serviceNameLabel").text(operationLog.service_name);
+			$("#operatorLabel").text(operationLog.operator);
+			$("#operatorDeparmentLabel").text(operationLog.operator_department);
+			$("#operationTimeLabel").text(operationLog.operation_time);
+			$("#objectLabel").text(operationLog.object_name);
+			if (operationLog.service_name == "虚拟机管理") {
+				$("#domainAndGroupLabel").text(operationLog.domain_name + "/" + operationLog.group_name);
+				$("#domainAndGroupDiv").show();
+			}
+			$("#operationLabel").text(operationLog.operation);
+			$("#operationStatusLabel").text(operationLog.operation_status);
+			$("#operationResultLabel").text(operationLog.operation_result);
+			$("#severityLevelLabel").text(operationLog.severity_level);
+
+			$("#operationDetailDialog").modal("show");
+		}
+
+		function openModifyDiskDialog() {
+			// remove class the jquery validation added
+			$("#modifyDiskForm .form-group").removeClass("has-error").removeClass("has-success");
+
+			$("#modifyDiskNameText").val(pDisk.name);
+			$("#modifyDiskDescriptionText").val(pDisk.description);
+
+			$("#modifyDiskAlertDiv ul").empty();
+			$("#modifyDiskAlertDiv").hide();
+
+			$("#modifyDiskButton").prop("disabled", false);
+
+			$("#modifyDiskDialog").modal("show");
+		}
+
+		function validateDiskInput() {
+			$("#modifyDiskForm").validate({
+				// add class for control
+				validClass : "has-success",
+				errorClass : "has-error",
+
+				highlight : function(element, errorClass, validClass) {
+					$(element).closest('.form-group').addClass(errorClass).removeClass(validClass);
+				},
+				unhighlight : function(element, errorClass, validClass) {
+					$(element).closest('.form-group').removeClass(errorClass).addClass(validClass);
+				},
+
+				rules : {
+					// use control name as rules					
+					modifyDiskNameText : {
+						required : true,
+						trimMinLength : 3,
+					},
+				},
+
+				messages : {
+					// use control name as rules				
+					modifyDiskNameText : {
+						required : "请输入云硬盘名称；",
+						trimMinLength : "云硬盘名称长度至少为{0}；",
+					},
+				},
+
+				errorContainer : "#modifyDiskAlertDiv",
+				errorLabelContainer : "#modifyDiskAlertDiv ul",
+				wrapper : "li",
+
+				submitHandler : function() {
+					modifyDisk();
+				},
+			});
+
+			return;
+		}
+
+		function modifyDisk() {
+			$("#modifyDiskButton").prop("disabled", true);
+
+			var diskId = pDisk.id;
+			var diskName = $("#modifyDiskNameText").val();
+			var description = $("#modifyDiskDescriptionText").val();
+			var pData = new Object();
+			pData.diskName = diskName;
+			pData.description = description;
+
+			callAjax("${ diskUrl }/" + diskId, "PUT", true, pData, null, modifyDiskSuccessHandler,
+					modifyDiskErrorHandler, "${ loginUrl }");
+		}
+
+		function modifyDiskSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				location.reload(true);
+			} else {
+				console.log(data.message);
+
+				$("#modifyDiskAlertDiv ul").empty();
+				$("<li>").append(data.message).appendTo("#modifyDiskAlertDiv ul");
+				$("#modifyDiskAlertDiv").show();
+				$("#modifyDiskAlertDiv ul").show();
+			}
+		}
+
+		function modifyDiskErrorHandler(XMLHttpRequest, textStatus, errorThrown) {
+			$("#modifyDiskAlertDiv ul").empty();
+			$("<li>").append("访问WEB服务发生异常").appendTo("#modifyDiskAlertDiv ul");
+			$("#modifyDiskAlertDiv").show();
+			$("#modifyDiskAlertDiv ul").show();
+		}
+
+		function openAdjustDiskManagerDialog() {
+			$("#managerSelect").empty();
+			$("<option>").val("none").text("不分配管理员").appendTo($("#managerSelect"));
+
+			$("#adjustDiskManagerAlertDiv ul").empty();
+			$("#adjustDiskManagerAlertDiv").hide();
+
+			$("#adjustDiskManagerButton").prop("disabled", false);
+
+			callAjax("${ userUrl }/virtual-machine-manager-list", "GET", true, null, "正在获取管理员列表...",
+					openAdjustDiskManagerDialogSuccessHandler, null, "${ loginUrl }");
+		}
+
+		function openAdjustDiskManagerDialogSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				var manager = pDisk.manager;
+				var users = data.users;
+				for (var i = 0; i < users.length; i++) {
+					var appOption = $("<option>").val(users[i].username).text(users[i].username);
+					appOption.appendTo($("#managerSelect"));
+				}
+
+				// select item
+				if ((manager == "") || (manager == null)) {
+					$("#managerSelect").val("none");
+				} else {
+					$("#managerSelect").val(manager);
+				}
+
+				$("#adjustDiskManagerDialog").modal("show");
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		function adjustDiskManager() {
+			$("#adjustDiskManagerButton").prop("disabled", true);
+
+			var diskId = pDisk.id;
+			var manager = $("#managerSelect").val();
+			var pData = new Object();
+			pData.manager = manager;
+
+			callAjax("${ diskUrl }/" + diskId + "/manager", "PUT", true, pData, null, adjustDiskManagerSuccessHandler,
+					adjustDiskManagerErrorHandler, "${ loginUrl }");
+		}
+
+		function adjustDiskManagerSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				location.reload(true);
+			} else {
+				console.log(data.message);
+
+				$("#adjustDiskManagerAlertDiv ul").empty();
+				$("<li>").append(data.message).appendTo("#adjustDiskManagerAlertDiv ul");
+				$("#adjustDiskManagerAlertDiv").show();
+				$("#adjustDiskManagerAlertDiv ul").show();
+			}
+		}
+
+		function adjustDiskManagerErrorHandler(XMLHttpRequest, textStatus, errorThrown) {
+			$("#adjustDiskManagerAlertDiv ul").empty();
+			$("<li>").append("访问WEB服务发生异常").appendTo("#adjustDiskManagerAlertDiv ul");
+			$("#adjustDiskManagerAlertDiv").show();
+			$("#adjustDiskManagerAlertDiv ul").show();
+		}
+
+		function openChangeValidTimeDialog() {
+			// remove class the jquery validation added
+			$("#changeValidTimeForm .form-group").removeClass("has-error").removeClass("has-success");
+
+			$("#validTimeSelect").val("3");
+			$("#customValidTimeText").val("");
+			$("#customValidTimeDiv").hide();
+
+			$("#changeValidTimeAlertDiv ul").empty();
+			$("#changeValidTimeAlertDiv").hide();
+
+			$("#changeValidTimeDialog").modal("show");
+		}
+
+		function validateValidTimeInput() {
+			$("#changeValidTimeForm").validate({
+				// add class for control
+				validClass : "has-success",
+				errorClass : "has-error",
+
+				highlight : function(element, errorClass, validClass) {
+					$(element).closest('.form-group').addClass(errorClass).removeClass(validClass);
+				},
+				unhighlight : function(element, errorClass, validClass) {
+					$(element).closest('.form-group').removeClass(errorClass).addClass(validClass);
+				},
+
+				rules : {
+					// use control name as rules
+					customValidTimeText : {
+						required : {
+							depends : function(element) {
+								return $("#validTimeSelect").val() == 0;
+							},
+						},
+						number : true,
+						min : 1,
+					},
+				},
+
+				messages : {
+					// use control name as rules
+					customValidTimeText : {
+						required : "请输入自定义天数；",
+						number : "自定义天数必须是整数；",
+						min : "自定义天数至少为{0}；",
+					},
+				},
+
+				errorContainer : "#changeValidTimeAlertDiv",
+				errorLabelContainer : "#changeValidTimeAlertDiv ul",
+				wrapper : "li",
+
+				submitHandler : function() {
+					changeValidTime();
+				},
+			});
+
+			return;
+		}
+
+		function changeValidTime() {
+			var diskId = pDisk.id;
+			var aliveDays = $('#validTimeSelect').val();
+			if (aliveDays == 0) {
+				aliveDays = $('#customValidTimeText').val();
+			}
+
+			var pData = new Object();
+			pData.aliveDays = aliveDays;
+
+			callAjax("${ diskUrl }/" + diskId + "/valid-time", "POST", true, pData, null,
+					changeValidTimeSuccessHandler, changeValidTimeErrorHandler, "${ loginUrl }");
+		}
+
+		function changeValidTimeSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				location.reload(true);
+			} else {
+				console.log(data.message);
+
+				$("#changeValidTimeAlertDiv ul").empty();
+				$("<li>").append(data.message).appendTo("#changeValidTimeAlertDiv ul");
+				$("#changeValidTimeAlertDiv").show();
+				$("#changeValidTimeAlertDiv ul").show();
+			}
+		}
+
+		function changeValidTimeErrorHandler(XMLHttpRequest, textStatus, errorThrown) {
+			$("#changeValidTimeAlertDiv ul").empty();
+			$("<li>").append("访问WEB服务发生异常").appendTo("#changeValidTimeAlertDiv ul");
+			$("#changeValidTimeAlertDiv").show();
+			$("#changeValidTimeAlertDiv ul").show();
+		}
+
+		function openAttachToVmDialog() {
+			$("#vmSelect").empty();
+
+			$("#attachToVmAlertDiv ul").empty();
+			$("#attachToVmAlertDiv").hide();
+
+			$("#attachToVmButton").prop("disabled", false);
+
+			callAjax("${ virtualMachineUrl }/list-by-manager", "GET", true, null, "正在获取可用的虚拟机列表...",
+					openAttachToVmDialogSuccessHandler, null, "${ loginUrl }");
+		}
+
+		function openAttachToVmDialogSuccessHandler(data, textStatus) {
+			if ((data != null) && (data.machineList != null)) {
+				var machines = data.machineList;
+				for (var i = 0; i < machines.length; i++) {
+					var vmOption = $("<option>", {
+						val : machines[i].id,
+						text : machines[i].name
+					});
+					vmOption.appendTo($("#vmSelect"));
+				}
+			}
+
+			$("#attachToVmDialog").modal("show");
+		}
+
+		function attachToVm() {
+			$("#attachToVmButton").prop("disabled", true);
+
+			var diskId = pDisk.id;
+			var vmId = $("#vmSelect").val();
+			var pData = new Object();
+			pData.vmId = vmId;
+
+			callAjax("${ diskUrl }/" + diskId + "/attach", "PUT", true, pData, null, attachToVmSuccessHandler,
+					attachToVmErrorHandler, "${ loginUrl }");
+		}
+
+		function attachToVmSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				location.reload(true);
+			} else {
+				console.log(data.message);
+
+				$("#attachToVmAlertDiv ul").empty();
+				$("<li>").append(data.message).appendTo("#attachToVmAlertDiv ul");
+				$("#attachToVmAlertDiv").show();
+				$("#attachToVmAlertDiv ul").show();
+			}
+		}
+
+		function attachToVmErrorHandler(XMLHttpRequest, textStatus, errorThrown) {
+			$("#attachToVmAlertDiv ul").empty();
+			$("<li>").append("访问WEB服务发生异常").appendTo("#attachToVmAlertDiv ul");
+			$("#attachToVmAlertDiv").show();
+			$("#attachToVmAlertDiv ul").show();
+		}
+
+		function openDetachFromVmDialog() {
+			$("#detachFromVmButton").prop("disabled", false);
+			$("#detachFromVmDialog").modal("show");
+		}
+
+		function detachFromVm() {
+			$("#detachFromVmButton").prop("disabled", true);
+
+			var diskId = pDisk.id;
+
+			callAjax("${ diskUrl }/" + diskId + "/detach", "PUT", true, null, null, detachFromVmSuccessHandler, null,
+					"${ loginUrl }");
+		}
+
+		function detachFromVmSuccessHandler(data, textStatus) {
+			$("#detachFromVmDialog").modal("hide");
+
+			if ("ok" == data.status) {
+				location.reload(true);
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		//
+		// Helper method
+		//
+		function getDiskIdFromUrl() {
+			var slices = $(location).attr("pathname").split("/");
+			var id = slices[slices.length - 2];
+
+			return id;
+		}
+
+		]]>
+	</script>
+</div>

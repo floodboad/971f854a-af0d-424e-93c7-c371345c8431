@@ -1,0 +1,936 @@
+﻿
+<div class="main-content" xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page">
+
+	<spring:url value="/virtual-machine" var="virtualMachineUrl" />
+	<spring:url value="/domain" var="domainUrl" />
+	<spring:url value="/domain/group" var="groupUrl" />
+	<spring:url value="/image" var="imageUrl" />
+	<spring:url value="/user" var="userUrl" />
+	<spring:url value="/application-tag" var="applicationTagUrl" />
+	<spring:url value="/login" var="loginUrl" />
+
+	<spring:url value="/resources/img" var="img" />
+
+	<div class="row">
+		<div class="col-md-12">
+			<ol class="breadcrumb content-shadow">
+				<li><i class="fa fa-list-alt"> <!-- ph -->
+				</i> <a href="${ virtualMachineUrl }/list?pageNo=1">虚拟机列表</a></li>
+				<li><i class="fa fa-server"> <!-- ph -->
+				</i> <a href="">新建虚拟机</a></li>
+			</ol>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-9">
+			<div class="content-block height-constraint-block-600 content-shadow">
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<div class="page-header col-md-8 col-md-offset-1">
+							<h6 style="text-align: left">基本信息</h6>
+						</div>
+						<div class="col-md-3">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<div class="col-md-2 col-md-offset-1" align="right">
+							<label style="margin: 5px 0px">主机名</label>
+						</div>
+						<div class="col-md-6">
+							<input id="createVmHostName" class="form-control input-sm" type="text" />
+						</div>
+						<div class="col-md-3">
+							<label class="text-danger" style="margin: 5px 0px">*</label>
+						</div>
+					</div>
+
+					<div class="col-md-12 form-group">
+						<div class="col-md-2 col-md-offset-1" align="right">
+							<label style="margin: 5px 0px">描述</label>
+						</div>
+						<div class="col-md-6">
+							<input id="createVmDescription" class="form-control input-sm" type="text" />
+						</div>
+						<div class="col-md-3">
+							<label class="text-danger" style="margin: 5px 0px">*</label>
+						</div>
+					</div>
+
+					<div class="col-md-12 form-group">
+						<div class="col-md-2 col-md-offset-1" align="right">
+							<label style="margin: 5px 0px">虚拟机域</label>
+						</div>
+						<div class="col-md-6">
+							<span class="option-list single-selection" id="createVmDomain">
+								<!-- ph  -->
+							</span>
+						</div>
+						<div class="col-md-3">
+							<div id="domainAlertDiv" class="alert alert-danger alert-sm" style="display: none">
+								<!-- ph -->
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-12 form-group">
+						<div class="col-md-2 col-md-offset-1" align="right">
+							<label style="margin: 5px 0px">虚拟机组</label>
+						</div>
+						<div class="col-md-6">
+							<span class="option-list single-selection" id="createVmGroup">
+								<!-- ph -->
+							</span>
+						</div>
+						<div class="col-md-3">
+							<div id="groupAlertDiv" class="alert alert-danger alert-sm" style="display: none">
+								<!-- ph -->
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<div class="page-header col-md-8 col-md-offset-1">
+							<h6 style="text-align: left">镜像信息</h6>
+						</div>
+						<div class="col-md-3">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div id="images" class="col-md-12 form-group">
+						<div class="col-md-2 col-md-offset-1" align="right">
+							<label style="margin: 5px 0px">镜像名称</label>
+						</div>
+						<div class="col-md-6">
+							<select id="imageSelect" class="form-control input-sm">
+								<!-- ph -->
+							</select>
+						</div>
+						<div class="col-md-3">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<div class="page-header col-md-8 col-md-offset-1">
+							<h6 style="text-align: left">配置信息</h6>
+						</div>
+						<div class="col-md-3">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<div class="col-md-2 col-md-offset-1" align="right">
+							<label style="margin: 5px 0px">处理器</label>
+						</div>
+						<div class="col-md-6">
+							<span class="option-list single-selection" id="createVmCpu">
+								<a href="javascript:void(0)" class="btn btn-default btn-sm active" role="button">1核</a>
+								<a href="javascript:void(0)" class="btn btn-default btn-sm " role="button">2核</a>
+								<a href="javascript:void(0)" class="btn btn-default btn-sm " role="button">4核</a>
+								<a href="javascript:void(0)" class="btn btn-default btn-sm " role="button">8核</a>
+							</span>
+						</div>
+						<div class="col-md-3">
+							<!-- ph -->
+						</div>
+					</div>
+
+					<div class="col-md-12 form-group">
+						<div class="col-md-2 col-md-offset-1" align="right">
+							<label style="margin: 5px 0px">内存</label>
+						</div>
+						<div class="col-md-6">
+							<span class="option-list single-selection" id="createVmMemory">
+								<a href="javascript:void(0)" class="btn btn-default btn-sm active" role="button">1GB</a>
+								<a href="javascript:void(0)" class="btn btn-default btn-sm " role="button">2GB</a>
+								<a href="javascript:void(0)" class="btn btn-default btn-sm " role="button">4GB</a>
+								<a href="javascript:void(0)" class="btn btn-default btn-sm " role="button">8GB</a>
+							</span>
+						</div>
+						<div class="col-md-3">
+							<!-- ph -->
+						</div>
+					</div>
+
+					<div class="col-md-12 form-group">
+						<div class="col-md-2 col-md-offset-1" align="right">
+							<label style="margin: 5px 0px">硬盘</label>
+						</div>
+						<div class="col-md-6">
+							<div class="input-group input-group-sm">
+								<input type="text" id="createVmHarddisk" class="form-control" placeholder="" />
+								<span class="input-group-addon">GB</span>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<label class="text-danger" style="margin: 5px 0px">*</label>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<div class="page-header col-md-8 col-md-offset-1">
+							<h6 style="text-align: left">业务系统标签信息</h6>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<!-- ph -->
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<div class="col-md-2 col-md-offset-1" align="right">
+							<label style="margin: 5px 0px">业务系统标签</label>
+						</div>
+						<div class="col-md-6">
+							<div id="applicationTagMessageDiv" class="text-primary" style="margin-left: 20px; margin-top: 5px">
+								<!-- ph -->
+							</div>
+							<span id="applicationTagSpan" class="option-list multiple-selection">
+								<!-- ph -->
+							</span>
+						</div>
+						<div class="col-md-3">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<div class="page-header col-md-8 col-md-offset-1">
+							<h6 style="text-align: left">虚拟机管理员信息</h6>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<!-- ph -->
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<div class="col-md-2 col-md-offset-1" align="right">
+							<label style="margin: 5px 0px">管理员</label>
+						</div>
+						<div class="col-md-6">
+							<select id="managerSelect" class="form-control input-sm">
+								<option value="none">不分配管理员</option>
+							</select>
+						</div>
+						<div class="col-md-3">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div id="createVmAlertDiv" class="col-md-8 col-md-offset-2 alert alert-danger alert-sm" style="display: none">
+						<ul>
+							<!-- ph -->
+						</ul>
+					</div>
+				</div>
+
+				<div class="row" style="margin-top: 30px">
+					<div class="col-md-12 form-group">
+						<div class="col-md-2 col-md-offset-1" align="right">
+							<label style="margin: 5px 0px"></label>
+						</div>
+						<div class="col-md-3" align="center">
+							<button class="btn btn-default btn-sm" onclick="back();">取消</button>
+							<button id="createVmButton" class="btn btn-primary btn-sm">创建</button>
+						</div>
+						<div class="col-md-6">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-3">
+			<div class="content-block height-constraint-block-600 content-shadow">
+				<!-- 				<div class="row"> -->
+				<!-- 					<div class="col-md-10 col-md-offset-1 form-group"> -->
+				<!-- 						<div class="page-header"> -->
+				<!-- 							<h6 style="text-align: left">域资源使用量</h6> -->
+				<!-- 						</div> -->
+				<!-- 					</div> -->
+				<!-- 				</div> -->
+				<!-- 				<div class="row"> -->
+				<!-- 					<div class="col-md-10 col-md-offset-1 form-group"> -->
+				<!-- 						<h6 id="domainCpuUsageInfo">处理器</h6> -->
+				<!-- 						<div class="progress"> -->
+				<!-- 							<div id="domainCpuUsageDiv" class="progress-bar progress-bar-default" role="progressbar" aria-valuenow="0" -->
+				<!-- 								aria-valuemin="0" aria-valuemax="100" style="width: 0px;"> -->
+				<!-- 								ph -->
+				<!-- 							</div> -->
+				<!-- 						</div> -->
+				<!-- 						<h6 id="domainMemoryUsageInfo">内存</h6> -->
+				<!-- 						<div class="progress"> -->
+				<!-- 							<div id="domainMemoryUsageDiv" class="progress-bar progress-bar-default" role="progressbar" aria-valuenow="0" -->
+				<!-- 								aria-valuemin="0" aria-valuemax="100" style="width: 0px;"> -->
+				<!-- 								ph -->
+				<!-- 							</div> -->
+				<!-- 						</div> -->
+				<!-- 						<h6 id="domainDiskUsageInfo">磁盘</h6> -->
+				<!-- 						<div class="progress"> -->
+				<!-- 							<div id="domainDiskUsageDiv" class="progress-bar progress-bar-default" role="progressbar" aria-valuenow="0" -->
+				<!-- 								aria-valuemin="0" aria-valuemax="100" style="width: 0px;"> -->
+				<!-- 								ph -->
+				<!-- 							</div> -->
+				<!-- 						</div> -->
+				<!-- 					</div> -->
+				<!-- 				</div> -->
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1 form-group">
+						<div class="page-header">
+							<h6 style="text-align: left">组资源使用量</h6>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1 form-group">
+						<h6 id="groupCpuUsageInfo">处理器</h6>
+						<div class="progress">
+							<div id="groupCpuUsageDiv" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0"
+								aria-valuemin="0" aria-valuemax="100" style="width: 0px;">
+								<!-- ph -->
+							</div>
+						</div>
+						<h6 id="groupMemoryUsageInfo">内存</h6>
+						<div class="progress">
+							<div id="groupMemoryUsageDiv" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0"
+								aria-valuemin="0" aria-valuemax="100" style="width: 0px;">
+								<!-- ph -->
+							</div>
+						</div>
+						<h6 id="groupDiskUsageInfo">磁盘</h6>
+						<div class="progress">
+							<div id="groupDiskUsageDiv" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0"
+								aria-valuemin="0" aria-valuemax="100" style="width: 0px;">
+								<!-- ph -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="confirmCreateVmDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="myModalLabel">
+						<strong>确认输入的虚拟机参数</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group">
+						<div class="col-md-3 col-md-offset-3">
+							<label style="margin: 5px 0px">主机名：</label>
+						</div>
+						<div class="col-md-6">
+							<label id="confirmHostname" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-3 col-md-offset-3">
+							<label style="margin: 5px 0px">描述：</label>
+						</div>
+						<div class="col-md-6">
+							<label id="confirmDescription" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-3 col-md-offset-3">
+							<label style="margin: 5px 0px">虚拟机域：</label>
+						</div>
+						<div class="col-md-6">
+							<label id="confirmDomain" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-3 col-md-offset-3">
+							<label style="margin: 5px 0px">虚拟机组：</label>
+						</div>
+						<div class="col-md-6">
+							<label id="confirmGroup" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-3 col-md-offset-3">
+							<label style="margin: 5px 0px">镜像名称：</label>
+						</div>
+						<div class="col-md-6">
+							<label id="confirmSource" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-3 col-md-offset-3">
+							<label style="margin: 5px 0px">处理器：</label>
+						</div>
+						<div class="col-md-6">
+							<label id="confirmCpu" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-3 col-md-offset-3">
+							<label style="margin: 5px 0px">内存：</label>
+						</div>
+						<div class="col-md-6">
+							<label id="confirmMemory" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-3 col-md-offset-3">
+							<label style="margin: 5px 0px">磁盘：</label>
+						</div>
+						<div class="col-md-6">
+							<label id="confirmHarddisk" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-3 col-md-offset-3">
+							<label style="margin: 5px 0px">业务系统标签：</label>
+						</div>
+						<div class="col-md-6">
+							<label id="confirmApplication" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-3 col-md-offset-3">
+							<label style="margin: 5px 0px">管理员：</label>
+						</div>
+						<div class="col-md-6">
+							<label id="confirmManager" style="margin: 5px 0px">
+								<!-- ph -->
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary btn-sm" id="confirmCreateVmButton">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="ajaxWaitingDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="myModalLabel">
+						<strong>操作进行中...</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group" align="center">
+						<img alt="waiting..." src="${ img }/ajax-waiting.gif" />
+					</div>
+					<div class="row form-group">
+						<div id="ajaxWaitingMessageDiv" class="col-md-8 col-md-offset-2" align="center">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<!-- ph -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="errorDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="errorDialogTitle">
+						<strong>错误</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group">
+						<div id="errorDialogMessageDiv" class="col-md-8 col-md-offset-2 alert alert-danger alert-sm" align="center">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<spring:url value="/resources/js/echarts/dist/echarts.js" var="echarts" />
+	<spring:url value="/resources/js/echarts/dist" var="echarts_config_path" />
+
+	<script type="text/javascript" src="${ echarts }">
+	<!-- d -->
+		
+	</script>
+
+	<script type="text/javascript">
+		<![CDATA[
+
+		var groupResource;
+		$(document).ready(function() {
+			$(".single-selection").on("click", "a", toggleSingleSelection);
+
+			$(".multiple-selection").on("click", "a", toggleMultipleSelection);
+
+			$("#createVmButton").click(openConfirmCreateVmDialog);
+
+			$("#confirmCreateVmButton").click(createVm);
+
+			loadPage();
+
+			// put this setting on all pages at the end of document ready
+			var nav_menu_height = $(".nav-menu").height();
+			var main_content_height = $(".main-content").height();
+			if (main_content_height > nav_menu_height) {
+				$(".nav-menu").height(main_content_height);
+			}
+		});
+
+		var pageCallShowDomains, pageCallShowImages, pageCallShowManagers, pageCallShowApplicationTags;
+		function loadPage() {
+			$("#ajaxWaitingMessageDiv").text("页面加载中...");
+			$("#ajaxWaitingDialog").modal("show");
+
+			$("#createVmButton").prop("disabled", true);
+
+			showDomains();
+
+			showImages();
+
+			$("#imageSelect").change(changeImageOption);
+
+			showManagers();
+
+			showApplicationTags();
+
+			// use Deferred Object to show dialog when do multiple ajax call. 
+			// these ajax calls must be asynchronous.
+			$.when(pageCallShowDomains, pageCallShowImages, pageCallShowManagers, pageCallShowApplicationTags).always(
+					function() {
+						$("#ajaxWaitingDialog").modal("hide");
+					});
+
+			$("#createVmButton").prop("disabled", false);
+		}
+
+		function showDomains() {
+			pageCallShowDomains = callAjax("${ domainUrl }/json-list", "GET", true, null, null,
+					showDomainsSuccessHandler, null, "${ loginUrl }");
+		}
+
+		function showDomainsSuccessHandler(data, textStatus) {
+			var domains = data.domains;
+			if (domains.length == 0) {
+				$("#domainAlertDiv").text("请联系超级管理员创建域");
+				$("#domainAlertDiv").show();
+				return;
+			}
+
+			for (var i = 0; i < domains.length; i++) {
+				var domainLink = $("<a>", {
+					id : domains[i].domainId,
+					text : domains[i].domainName,
+					href : "javascript:showDomainInfo('" + domains[i].domainId + "')",
+					class : "btn btn-default btn-sm",
+					role : "button"
+				});
+
+				domainLink.appendTo("#createVmDomain");
+
+				// set the first domain as active 
+				if (i == 0) {
+					domainLink.addClass("active");
+
+					// show group of the first domain
+					showDomainInfo(domains[i].domainId);
+				}
+			}
+		}
+
+		function showDomainInfo(domainId) {
+			$("#createVmGroup").empty();
+
+			$("#groupAlertDiv").text("");
+			$("#groupAlertDiv").hide();
+
+			var pData = new Object();
+			pData.domainId = domainId;
+			callAjax("${ groupUrl }/json-list", "GET", true, pData, null, showDomainInfoSuccessHandler, null,
+					"${ loginUrl }");
+		}
+
+		function showDomainInfoSuccessHandler(data, textStatus) {
+			if (data.groups.length == 0) {
+				$("#groupAlertDiv").text("请联系超级管理员创建组");
+				$("#groupAlertDiv").show();
+				return;
+			}
+
+			for (var i = 0; i < data.groups.length; i++) {
+				var groupLink = $("<a>", {
+					id : data.groups[i].groupId,
+					text : data.groups[i].groupName,
+					href : "javascript:showGroupInfo('" + data.groups[i].groupId + "')",
+					class : "btn btn-default btn-sm",
+					role : "button"
+				});
+
+				// set the first group as active 
+				if (i == 0) {
+					groupLink.addClass("active");
+
+					// show resource of the first group
+					showGroupInfo(data.groups[i].groupId);
+				}
+
+				groupLink.appendTo("#createVmGroup");
+			}
+		}
+
+		function showGroupInfo(groupId) {
+			// show resource usage
+			callAjax("${ groupUrl }/" + groupId + "/reource-usage", "GET", true, null, null,
+					showGroupInfoSuccessHandler, null, "${ loginUrl }");
+		}
+
+		function showGroupInfoSuccessHandler(data, textStatus) {
+			groupResource = data.resource_usage;
+
+			if ("ok" == data.status) {
+				var cpuUsagePercent = Math.round(100 * data.resource_usage.cpu.used / data.resource_usage.cpu.quota);
+				var memoryUsagePercent = Math.round(100 * data.resource_usage.memory.used
+						/ data.resource_usage.memory.quota);
+				var diskUsagePercent = Math.round(100 * data.resource_usage.disk.used / data.resource_usage.disk.quota);
+
+				$("#groupCpuUsageInfo").text(
+						"处理器：总计" + data.resource_usage.cpu.quota + "颗，已用" + data.resource_usage.cpu.used + "个");
+				$("#groupCpuUsageDiv").width(cpuUsagePercent + "%");
+				$("#groupCpuUsageDiv").text(cpuUsagePercent + "%");
+				$("#groupMemoryUsageInfo").text(
+						"内存：总计" + data.resource_usage.memory.quota + "GB，已用" + data.resource_usage.memory.used + "GB");
+				$("#groupMemoryUsageDiv").width(memoryUsagePercent + "%");
+				$("#groupMemoryUsageDiv").text(memoryUsagePercent + "%");
+				$("#groupDiskUsageInfo").text(
+						"磁盘：总计" + data.resource_usage.disk.quota + "GB，已用" + data.resource_usage.disk.used + "GB");
+				$("#groupDiskUsageDiv").width(diskUsagePercent + "%");
+				$("#groupDiskUsageDiv").text(diskUsagePercent + "%");
+			} else {
+				console.log(data.message);
+			}
+		}
+
+		function showImages() {
+			pageCallShowImages = callAjax("${ imageUrl }/all-in-one-list", "GET", true, null, null,
+					showImagesSuccessHandler, null, "${ loginUrl }");
+		}
+
+		function showImagesSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				var images = data.images;
+				for (var i = 0; i < images.length; i++) {
+					// use larger one of minDisk and size as the requited disk
+					var minDisk = images[i].min_disk;
+					if (minDisk < images[i].size) {
+						minDisk = images[i].size;
+					}
+
+					// to GB unit
+					minDisk = Math.ceil(minDisk / 1024 / 1024 / 1024);
+
+					if (0 == i) {
+						$("<option>").val(images[i].id).attr("data-min-disk", minDisk).prop("selected", "selected")
+								.text(images[i].name).appendTo("#imageSelect");
+					} else {
+						$("<option>").val(images[i].id).attr("data-min-disk", minDisk).text(images[i].name).appendTo(
+								"#imageSelect");
+					}
+				}
+
+				changeImageOption();
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		function changeImageOption() {
+			var minDisk = $("#imageSelect").find("option:selected").data("min-disk");
+			$("#createVmHarddisk").attr("placeholder", "所选镜像至少需要" + minDisk + "GB硬盘");
+		}
+
+		function showManagers() {
+			pageCallShowManagers = callAjax("${ userUrl }/virtual-machine-manager-list", "GET", true, null, null,
+					showManagersSuccessHandler, null, "${ loginUrl }");
+		}
+
+		function showManagersSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				var users = data.users;
+				for (var i = 0; i < users.length; i++) {
+					var appOption = $("<option>").val(users[i].username).text(users[i].username);
+					appOption.appendTo($("#managerSelect"));
+				}
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		function showApplicationTags() {
+			pageCallShowApplicationTags = callAjax("${ applicationTagUrl }/json-list", "GET", true, null, null,
+					showApplicationTagsSuccessHandler, null, "${ loginUrl }");
+		}
+
+		function showApplicationTagsSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				var applicationTags = data.application_tags;
+				if (applicationTags.length > 0) {
+					for (var i = 0; i < applicationTags.length; i++) {
+						var applicationTag = applicationTags[i];
+
+						var applicationTagLink = $("<a>", {
+							id : applicationTag.id,
+							text : applicationTag.name,
+							class : "btn btn-default btn-sm",
+							role : "button"
+						});
+
+						applicationTagLink.appendTo($("#applicationTagSpan"));
+
+						$("#applicationTagMessageDiv").text("").hide();
+						$("#applicationTagSpan").show();
+					}
+				} else {
+					$("#applicationTagMessageDiv").text("没有可用的业务系统标签").show();
+					$("#applicationTagSpan").hide();
+				}
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		function toggleSingleSelection() {
+			$(this).siblings().removeClass("active");
+			$(this).addClass("active");
+		}
+
+		function toggleMultipleSelection() {
+			$(this).toggleClass("active");
+		}
+
+		function openConfirmCreateVmDialog() {
+			if (checkInputValidity() == false) {
+				return;
+			}
+
+			$("#confirmCreateVmButton").prop("disabled", false);
+			$("#confirmHostname").text($("#createVmHostName").val());
+			$("#confirmDescription").text($("#createVmDescription").val());
+			$("#confirmDomain").text($("#createVmDomain .active").text());
+			$("#confirmGroup").text($("#createVmGroup .active").text());
+			$("#confirmCpu").text($("#createVmCpu .active").text());
+			$("#confirmMemory").text($("#createVmMemory .active").text());
+			$("#confirmHarddisk").text($("#createVmHarddisk").val() + "GB");
+
+			var applications = "";
+			$("#applicationTagSpan a.active").each(function() {
+				applications = applications + $(this).text() + ", ";
+			});
+			if (applications.length > 0) {
+				applications = applications.substring(0, applications.length - 2);
+			}
+			// console.log(applications);
+
+			$("#confirmApplication").text(applications); // ($("#applicationSelect").find("option:selected").text());
+			if ("none" != $("#managerSelect").val()) {
+				$("#confirmManager").text($("#managerSelect").val());
+			}
+			$("#confirmSource").text($("#imageSelect").find("option:checked").text());
+			$("#confirmCreateVmDialog").modal("show");
+		}
+
+		function checkInputValidity() {
+			$("#createVmAlertDiv ul").empty();
+			$("#createVmAlertDiv").hide();
+
+			var checkResult = true;
+
+			if ($("#createVmHostName").val().trim().length < 3) {
+				($("<li>")).append($("<label>").text("虚拟机主机名长度至少为3")).appendTo("#createVmAlertDiv ul");
+				checkResult = false;
+			}
+
+			if (!$("#createVmDescription").val()) {
+				($("<li>")).append($("<label>").text("请填写虚拟机描述")).appendTo("#createVmAlertDiv ul");
+				checkResult = false;
+			}
+
+			if ($("#createVmDomain .active").length != 1) {
+				($("<li>")).append($("<label>").text("请选择一个虚拟机域")).appendTo("#createVmAlertDiv ul");
+				checkResult = false;
+			}
+
+			if ($("#createVmGroup .active").length != 1) {
+				($("<li>")).append($("<label>").text("请选择一个虚拟机组")).appendTo("#createVmAlertDiv ul");
+				checkResult = false;
+			}
+
+			if (!$("#imageSelect").val()) {
+				($("<li>")).append($("<label>").text("请选择一个镜像")).appendTo("#createVmAlertDiv ul");
+				checkResult = false;
+			}
+
+			var cpu = parseInt($("#createVmCpu .active").text());
+			var memory = parseInt($("#createVmMemory .active").text());
+			var harddisk = parseInt($("#createVmHarddisk").val());
+			if (cpu > groupResource.cpu.unused) {
+				($("<li>")).append($("<label>").text("当前选择的组中没有足够的处理器")).appendTo("#createVmAlertDiv ul");
+				checkResult = false;
+			}
+			if (memory > groupResource.memory.unused) {
+				($("<li>")).append($("<label>").text("当前选择的组中没有足够的内存")).appendTo("#createVmAlertDiv ul");
+				checkResult = false;
+			}
+			if (harddisk > groupResource.disk.unused) {
+				($("<li>")).append($("<label>").text("当前选择的组中没有足够的硬盘")).appendTo("#createVmAlertDiv ul");
+				checkResult = false;
+			}
+
+			if (parseInt($("#createVmHarddisk").val()) != $("#createVmHarddisk").val()) {
+				($("<li>")).append($("<label>").text("虚拟机硬盘大小必须是整数")).appendTo("#createVmAlertDiv ul");
+				checkResult = false;
+			} else {
+				var minDisk = $("#imageSelect").find("option:selected").data("min-disk");
+				if ($("#createVmHarddisk").val() < minDisk) {
+					($("<li>")).append($("<label>").text("虚拟机硬盘大小至少为" + minDisk + "GB")).appendTo(
+							"#createVmAlertDiv ul");
+					checkResult = false;
+				}
+			}
+
+			if (checkResult == false) {
+				$("#createVmAlertDiv").show();
+			}
+
+			return checkResult;
+		}
+
+		function createVm() {
+			$("#confirmCreateVmButton").prop("disabled", true);
+
+			var tenantId = $("#createVmDomain .active").attr("id");
+			var groupId = $("#createVmGroup .active").attr("id");
+
+			var applicationIds = "";
+			$("#applicationTagSpan a.active").each(function() {
+				applicationIds = applicationIds + $(this).attr("id") + ", ";
+			});
+			if (applicationIds.length > 0) {
+				applicationIds = applicationIds.substring(0, applicationIds.length - 2);
+			}
+			// console.log(applicationIds);
+
+			var pData = new Object();
+			pData.hostName = $("#createVmHostName").val();
+			pData.description = $("#createVmDescription").val();
+			pData.cpu = parseInt($("#createVmCpu .active").text());
+			pData.memory = parseInt($("#createVmMemory .active").text());
+			pData.disk = parseInt($("#createVmHarddisk").val());
+			pData.domainId = tenantId;
+			pData.groupId = groupId;
+			pData.applicationIds = applicationIds;
+			pData.manager = $("#managerSelect").val();
+			pData.imageId = $("#imageSelect").val();
+			callAjax("${ virtualMachineUrl }", "POST", true, pData, null, createVmSuccessHandler, null, "${ loginUrl }");
+		}
+
+		function createVmSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				location.href = "${ virtualMachineUrl }/list?pageNo=1";
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		function back() {
+			history.go(-1);
+		}
+
+		]]>
+	</script>
+</div>

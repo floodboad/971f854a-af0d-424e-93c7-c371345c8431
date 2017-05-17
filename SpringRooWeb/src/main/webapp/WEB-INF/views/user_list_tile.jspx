@@ -1,0 +1,1282 @@
+﻿
+<div class="main-content" xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt">
+
+	<spring:url value="/user" var="userUrl" />
+	<spring:url value="/login" var="loginUrl" />
+
+	<spring:url value="/resources/img" var="img" />
+
+	<sec:authentication property="name" var="currentUser" />
+
+	<div class="row">
+		<div class="col-md-12">
+			<ol class="breadcrumb content-shadow">
+				<li><i class="fa fa-list-alt"> <!-- ph -->
+				</i> <a href="${ userUrl }/list">用户列表</a></li>
+			</ol>
+		</div>
+	</div>
+
+	<div class="row">
+		<div id="buttonsNav" class="col-md-12">
+			<div class="col-md-6" style="padding-left: 0px">
+				<button id="openEnableUserDialogButton" class="btn btn-default btn-sm first-button toggle-button"
+					disabled="disabled">启用账号</button>
+				<button id="openDisableUserDialogButton" class="btn btn-default btn-sm toggle-button" disabled="disabled">停用账号</button>
+				<button id="openUndeleteUserDialogButton" class="btn btn-default btn-sm toggle-button" disabled="disabled" style="display: none;">恢复账号</button>
+				<button id="openResetPasswordDialogButton" class="btn btn-default btn-sm toggle-button" disabled="disabled">重置密码</button>
+			</div>
+			<div class="col-md-6" style="padding-right: 0px" align="right">
+				<button id="openSearchUserDialogButton" class="btn btn-success btn-sm">查询账号</button>
+				<button id="openAddUserDialogButton" class="btn btn-success btn-sm">新建账号</button>
+				<button id="openDeleteUserDialogButton" class="btn btn-default btn-sm last-button" disabled="disabled" style="display: none;">注销账号</button>
+			</div>
+		</div>
+
+		<div class="col-md-12">
+			<div class="content-block height-constraint-block-600 content-shadow">
+				<table id="userTable" class="table table-striped table-condensed table-bordered table-hover">
+					<thead>
+						<tr>
+							<th style="width: 5%"><input type="checkbox" id="selectAllCheckbox" /></th>
+							<th style="width: 15%">账号</th>
+							<th style="width: 10%">姓名</th>
+							<th style="width: 10%">角色</th>
+							<th style="width: 10%">状态</th>
+							<th style="width: 10%">部门</th>
+							<th style="width: 10%">联系电话</th>
+							<th style="width: 10%">邮箱</th>
+							<th style="width: 20%">创建时间</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- ph -->
+					</tbody>
+				</table>
+				<div style="margin: 20px">
+					<span id="userCountSpan">
+						<!-- ph -->
+					</span>
+				</div>
+
+				<!-- start pagination -->
+				<ul class="pagination" id="pagination">
+					<li id="previous"><a href="javascript:void(0)">上一页</a></li>
+					<li id="next"><a href="javascript:void(0)">下一页</a></li>
+				</ul>
+				<!-- end pagination -->
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="searchUserDialog" style="top: 5%" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="myModalLabel">
+						<strong>查询账号</strong>
+					</h5>
+				</div>
+
+				<div class="modal-body">
+					<div class="row form-group">
+						<div class="col-md-3">
+							<label class="form-label">账号</label>
+						</div>
+						<div class="col-md-6">
+							<input type="text" id="searchUserUsernameText" class="form-control input-sm" />
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-3">
+							<label class="form-label">角色</label>
+						</div>
+						<div class="col-md-6">
+							<select id="searchUserRoleSelect" class="form-control input-sm">
+								<option value="ROLE_NONE"><!-- ph --></option>
+								<sec:authorize ifAnyGranted="ROLE_ADMIN">
+									<option value="ROLE_ADMIN">超级管理员</option>
+									<option value="ROLE_MANAGER">云平台管理员</option>
+								</sec:authorize>
+								<sec:authorize ifAnyGranted="ROLE_MANAGER">
+									<option value="ROLE_USER">虚拟机管理员</option>
+								</sec:authorize>
+							</select>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-3">
+							<label class="form-label">姓名</label>
+						</div>
+						<div class="col-md-6">
+							<input type="text" id="searchUserRealNameText" class="form-control input-sm" />
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-3">
+							<label class="form-label">部门</label>
+						</div>
+						<div class="col-md-6">
+							<input type="text" id="searchUserDepartmentText" class="form-control input-sm" />
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-3">
+							<label class="form-label">状态</label>
+						</div>
+						<div class="col-md-6">
+							<select id="searchUserStatusSelect" class="form-control input-sm">
+								<option value="NONE"><!-- ph --></option>
+								<option value="ENABLED">启用</option>
+								<option value="DISABLED">停用</option>
+								<!-- <option value="DELETED">注销</option> -->
+							</select>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-3" align="right">
+							<label style="margin: 10px 0px">创建时间不早于</label>
+						</div>
+						<div class="col-md-6">
+							<div class="input-group date form-date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input1"
+								data-link-format="yyyy-mm-dd">
+								<input type="text" id="searchBeginningCreateTimeText" name="searchBeginningCreateTimeText"
+									class="form-control input-sm" value="" readonly="readonly" />
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar">
+										<!-- ph -->
+									</span>
+								</span>
+							</div>
+							<input type="hidden" id="dtp_input1" value="" />
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-md-3" align="right">
+							<label style="margin: 10px 0px">创建时间不晚于</label>
+						</div>
+						<div class="col-md-6">
+							<div class="input-group date form-date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2"
+								data-link-format="yyyy-mm-dd">
+								<input type="text" id="searchEndCreateTimeText" name="searchEndCreateTimeText" class="form-control input-sm"
+									value="" readonly="readonly" />
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar">
+										<!-- ph -->
+									</span>
+								</span>
+							</div>
+							<input type="hidden" id="dtp_input2" value="" />
+						</div>
+					</div>
+
+					<div class="row">
+						<div id="searchUserAlertDiv" class="col-md-8 col-md-offset-2" style="display: none; color: #ba0000;">
+							<ul>
+								<!-- ph -->
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary btn-sm" id="searchUserButton">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="addUserDialog" style="top: 5%" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form id="addUserForm" action="">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+						<h5 class="modal-title" id="myModalLabel">
+							<strong>新建账号</strong>
+						</h5>
+					</div>
+
+					<div class="modal-body">
+						<div class="row form-group">
+							<div class="col-md-3">
+								<label class="form-label">账号</label>
+							</div>
+							<div class="col-md-6">
+								<input type="text" id="addUserUsernameText" name="addUserUsernameText" class="form-control input-sm" />
+							</div>
+							<div class="col-md-3">
+								<label class="text-danger" style="margin: 5px 0px">*</label>
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-3">
+								<label class="form-label">角色</label>
+							</div>
+							<div class="col-md-6">
+								<select id="addUserRoleSelect" name="addUserRoleSelect" class="form-control input-sm">
+									<option value="ROLE_NONE"><!-- ph --></option>
+									<sec:authorize ifAnyGranted="ROLE_ADMIN">
+										<option value="ROLE_ADMIN">超级管理员</option>
+										<option value="ROLE_MANAGER">云平台管理员</option>
+									</sec:authorize>
+									<sec:authorize ifAnyGranted="ROLE_MANAGER">
+										<option value="ROLE_USER">虚拟机管理员</option>
+									</sec:authorize>
+								</select>
+							</div>
+							<div class="col-md-1">
+								<label class="text-danger" style="margin: 5px 0px">*</label>
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-3">
+								<label class="form-label">姓名</label>
+							</div>
+							<div class="col-md-6">
+								<input type="text" id="addUserRealNameText" name="addUserRealNameText" class="form-control input-sm" />
+							</div>
+							<div class="col-md-1">
+								<label class="text-danger" style="margin: 5px 0px">*</label>
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-3">
+								<label class="form-label">部门</label>
+							</div>
+							<div class="col-md-6">
+								<input type="text" id="addUserDepartmentText" name="addUserDepartmentText" class="form-control input-sm" />
+							</div>
+							<div class="col-md-1">
+								<label class="text-danger" style="margin: 5px 0px">*</label>
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-3">
+								<label class="form-label">电话</label>
+							</div>
+							<div class="col-md-6">
+								<input type="text" id="addUserPhoneText" name="addUserPhoneText" class="form-control input-sm" />
+							</div>
+							<div class="col-md-1">
+								<label class="text-danger" style="margin: 5px 0px">*</label>
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-3">
+								<label class="form-label">邮箱</label>
+							</div>
+							<div class="col-md-6">
+								<input type="text" id="addUserEmailText" name="addUserEmailText" class="form-control input-sm" />
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-3">
+								<label class="form-label">快照数量</label>
+							</div>
+							<div class="col-md-6">
+								<input type="text" id="addUserSnapshotQuotaText" name="addUserSnapshotQuotaText" class="form-control input-sm" />
+							</div>
+						</div>
+
+						<div class="row">
+							<div id="addUserAlertDiv" class="col-md-8 col-md-offset-2" style="display: none; color: #ba0000;">
+								<ul>
+									<!-- ph -->
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+						<button type="submit" class="btn btn-primary btn-sm">确定</button>
+					</div>
+				</form>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="showUserDialog" style="top: 5%" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form id="changeUserForm" action="">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+						<h5 class="modal-title" id="myModalLabel">
+							<strong>账号信息</strong>
+						</h5>
+					</div>
+
+					<div class="modal-body">
+						<div class="row form-group">
+							<div class="col-md-3">
+								<label class="form-label">账号</label>
+							</div>
+							<div class="col-md-6">
+								<label id="changeUserUsernameLabel" style="margin: 5px 0px">
+									<!-- ph -->
+								</label>
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-3">
+								<label class="form-label">角色</label>
+							</div>
+							<div class="col-md-6">
+								<select id="changeUserRoleSelect" class="form-control input-sm">
+									<!-- 									<option value="ROLE_NONE">无</option> -->
+									<sec:authorize ifAnyGranted="ROLE_ADMIN">
+										<option value="ROLE_ADMIN">超级管理员</option>
+										<option value="ROLE_MANAGER">云平台管理员</option>
+									</sec:authorize>
+									<sec:authorize ifAnyGranted="ROLE_MANAGER">
+										<option value="ROLE_USER">虚拟机管理员</option>
+									</sec:authorize>
+								</select>
+							</div>
+							<div class="col-md-1">
+								<label class="text-danger" style="margin: 5px 0px">*</label>
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-3">
+								<label class="form-label">姓名</label>
+							</div>
+							<div class="col-md-6">
+								<input type="text" id="changeUserRealNameText" name="changeUserRealNameText" class="form-control input-sm" />
+							</div>
+							<div class="col-md-1">
+								<label class="text-danger" style="margin: 5px 0px">*</label>
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-3">
+								<label class="form-label">部门</label>
+							</div>
+							<div class="col-md-6">
+								<input type="text" id="changeUserDepartmentText" name="changeUserDepartmentText" class="form-control input-sm" />
+							</div>
+							<div class="col-md-1">
+								<label class="text-danger" style="margin: 5px 0px">*</label>
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-3">
+								<label class="form-label">电话</label>
+							</div>
+							<div class="col-md-6">
+								<input type="text" id="changeUserPhoneText" name="changeUserPhoneText" class="form-control input-sm" />
+							</div>
+							<div class="col-md-1">
+								<label class="text-danger" style="margin: 5px 0px">*</label>
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-3">
+								<label class="form-label">邮箱</label>
+							</div>
+							<div class="col-md-6">
+								<input type="text" id="changeUserEmailText" name="changeUserEmailText" class="form-control input-sm" />
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-3">
+								<label class="form-label">快照数量</label>
+							</div>
+							<div class="col-md-6">
+								<input type="text" id="changeUserSnapshotQuotaText" name="changeUserSnapshotQuotaText"
+									class="form-control input-sm" />
+							</div>
+						</div>
+
+						<div class="row">
+							<div id="changeUserAlertDiv" class="col-md-8 col-md-offset-2" style="display: none; color: #ba0000;">
+								<ul>
+									<!-- ph -->
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+						<button type="submit" class="btn btn-primary btn-sm">保存</button>
+					</div>
+				</form>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="confirmationDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="confirmationDialogTitle">
+						<strong>注销账号</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group">
+						<div id="confirmationDialogMessageDiv" class="col-md-8 col-md-offset-2 alert alert-danger alert-sm" align="center">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-danger btn-sm" id="confirmationButton">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="ajaxWaitingDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="myModalLabel">
+						<strong>操作进行中...</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group" align="center">
+						<img alt="waiting..." src="${ img }/ajax-waiting.gif" />
+					</div>
+					<div class="row form-group">
+						<div id="ajaxWaitingMessageDiv" class="col-md-8 col-md-offset-2" align="center">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<!-- ph -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="errorDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="errorDialogTitle">
+						<strong>错误</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group">
+						<div id="errorDialogMessageDiv" class="col-md-8 col-md-offset-2 alert alert-danger alert-sm" align="center">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<spring:url value="/resources/js/pagination.js" var="pagination_js" />
+	<spring:url value="/resources/js/bootstrap-datetimepicker/bootstrap-datetimepicker.js"
+		var="bootstrap_datetimepicker_js" />
+	<spring:url value="/resources/js/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"
+		var="bootstrap_datetimepicker_zh_cn_js" />
+
+	<script type="text/javascript" src="${ pagination_js }">
+	<!-- d -->
+		
+	</script>
+
+	<script type="text/javascript" src="${ bootstrap_datetimepicker_js }">
+	<!-- d -->
+		
+	</script>
+
+	<script type="text/javascript" src="${ bootstrap_datetimepicker_zh_cn_js }">
+	<!-- d -->
+		
+	</script>
+	<script type="text/javascript">
+		var searchUsername = "", searchRealName = "", searchRoleName = "", searchStatus = "", searchDepartment = "", searchBeginningCreateTime = "", searchEndCreateTime = "";
+		<![CDATA[
+		$(document).ready(function() {
+			showUserPage(1);
+
+			$('.form-date').datetimepicker({
+				language : 'zh-CN',
+				weekStart : 1,
+				todayBtn : false,
+				autoclose : true,
+				todayHighlight : true,
+				startView : 2,
+				minView : 2,
+				forceParse : 0
+			});
+
+			jQuery.validator.addMethod("valueNotEqualsTo", function(value, element, param) {
+				return this.optional(element) || value != param;
+			}, "Invalid select option");
+
+			// fixed-phone, format xxx(x)-xxxxxxx(x)
+			jQuery.validator.addMethod("isTelePhone", function(value, element) {
+				var telephoneFormat = /^(\d{3,4}-)?\d{7,8}$/;
+				return this.optional(element) || (telephoneFormat.test(value));
+			}, "请正确填写固定电话号码");
+
+			// mobile-phone, isMobilPhone
+			jQuery.validator.addMethod("isMobilPhone", function(value, element) {
+				var mobilePhoneFormat = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0-9]|170)\d{8}$/;
+				return this.optional(element) || mobilePhoneFormat.test(value);
+
+			}, "请正确填写移动电话号码");
+
+			// fixed-phone or mobile-phone,
+			jQuery.validator.addMethod("isPhone", function(value, element) {
+				var mobilePhoneFormat = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0-9]|170)\d{8}$/;
+				var telephoneFormat = /^(\d{3,4}-)?\d{7,8}$/;
+				return this.optional(element) || (telephoneFormat.test(value) || mobilePhoneFormat.test(value));
+
+			}, "请正确填写联系电话号码");
+
+			// mobile-phone, isMobilPhone
+			jQuery.validator.addMethod("isEmail", function(value, element) {
+				var emailFormat = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+				return this.optional(element) || emailFormat.test(value);
+
+			}, "请正确填写移动电话号码");
+
+			$("#openSearchUserDialogButton").click(openSearchUserDialog);
+			$("#searchUserButton").click(searchUser);
+
+			$("#openAddUserDialogButton").click(openAddUserDialog);
+			validateAddUserInfo();
+
+			validateChangeUserInfo();
+
+			$('#selectAllCheckbox').click(function() {
+				var checkFlag = $(this).is(':checked');
+				$(".item-checkbox:enabled").prop("checked", checkFlag);
+
+				initButtonStatus(checkFlag);
+				if (checkFlag == true) {
+					changeButtonStatus();
+				}
+
+				changeButtonColor();
+			});
+
+			$("#openDeleteUserDialogButton").click(openDeleteUserDialog);
+			$("#openEnableUserDialogButton").click(openEnableUserDialog);
+			$("#openDisableUserDialogButton").click(openDisableUserDialog);
+			$("#openUndeleteUserDialogButton").click(openUndeleteUserDialog);
+			$("#openResetPasswordDialogButton").click(openResetPasswordDialog);
+		});
+
+		// set initial button enable status
+		function initButtonStatus(enabled) {
+			$("#openEnableUserDialogButton").prop("disabled", !enabled);
+			$("#openDisableUserDialogButton").prop("disabled", !enabled);
+			$("#openUndeleteUserDialogButton").prop("disabled", !enabled);
+			$("#openResetPasswordDialogButton").prop("disabled", !enabled);
+			$("#openDeleteUserDialogButton").prop("disabled", !enabled);
+		}
+
+		// change button enable status after initialization, if necessary
+		function changeButtonStatus() {
+			var enableEnableUser = true, enableDisalbeUser = true, enableUnDeleteUser = true, enableResetPassword = true, enableDeleteUser = true;
+			$(".item-checkbox:checked").each(function() {
+				var userStatus = $(this).parent().siblings(".user-status").text()
+
+				if ((userStatus == "启用") || (userStatus == "注销")) {
+					enableEnableUser = false;
+				}
+				if ((userStatus == "停用") || (userStatus == "注销")) {
+					enableDisalbeUser = false;
+				}
+				if ((userStatus == "启用") || (userStatus == "停用")) {
+					enableUnDeleteUser = false;
+				}
+				if (userStatus == "注销") {
+					enableResetPassword = false;
+					enableDeleteUser = false;
+				}
+			})
+
+			$("#openEnableUserDialogButton").prop("disabled", !enableEnableUser);
+			$("#openDisableUserDialogButton").prop("disabled", !enableDisalbeUser);
+			$("#openUndeleteUserDialogButton").prop("disabled", !enableUnDeleteUser);
+			$("#openResetPasswordDialogButton").prop("disabled", !enableResetPassword);
+			$("#openDeleteUserDialogButton").prop("disabled", !enableDeleteUser);
+		}
+
+		// change button color after set button status
+		function changeButtonColor() {
+			$(".toggle-button").each(function() {
+				if ($(this).prop("disabled") == true) {
+					$(this).removeClass("btn-primary").addClass("btn-default");
+				} else {
+					$(this).removeClass("btn-default").addClass("btn-primary");
+				}
+			});
+
+			if ($("#openDeleteUserDialogButton").prop("disabled") == true) {
+				$("#openDeleteUserDialogButton").removeClass("btn-danger").addClass("btn-default");
+			} else {
+				$("#openDeleteUserDialogButton").removeClass("btn-default").addClass("btn-danger");
+			}
+		}
+
+		function showUserPage(pageNo) {
+			var pData = new Object();
+			pData.pageNo = pageNo;
+			pData.pageSize = 10;
+			pData.username = searchUsername;
+			pData.realName = searchRealName;
+			pData.roleName = searchRoleName;
+			pData.status = searchStatus;
+			pData.department = searchDepartment;
+			pData.beginningCreateTime = searchBeginningCreateTime;
+			pData.endCreateTime = searchEndCreateTime;
+
+			callAjax("${ userUrl }/pagination-json-list", "GET", true, pData, null, showUserPageSuccessHandler, null,
+					"${ loginUrl }");
+		}
+
+		function showUserPageSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				// show user table
+				showUserTable(data);
+
+				$("#userCountSpan").text("用户数：" + data.user_count + "个");
+
+				// show navigation
+				showNaviationPanel(data);
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		function showUserTable(data) {
+			// console.log("current user: " + "${currentUser}");
+
+			$("#userTable tbody").empty();
+
+			for (var i = 0; i < data.users.length; i++) {
+				var user = data.users[i];
+
+				var row = $("<tr>");
+
+				var userCheckbox = $("<input>", {
+					type : "checkbox",
+					value : user.username,
+					class : "item-checkbox"
+				});
+				// not allowed to change current login user
+				if ("${currentUser}" == user.username) {
+					userCheckbox.attr("disabled", "disabled");
+				}
+				$("<td>").append(userCheckbox).appendTo(row);
+				var showUserLink = $("<a>", {
+					text : user.username,
+					href : "javascript:showUser('" + user.username + "', '" + user.role.roleName + "', '"
+							+ user.realName + "', '" + user.department + "', '" + user.phone + "', '" + user.email
+							+ "', '" + user.snapshotQuota + "')"
+				});
+				if ("${currentUser}" == user.username) {
+					showUserLink.text(user.username + "(*)");
+				}
+				$("<td>").append(showUserLink).addClass("showDetail").appendTo(row);
+				$("<td>").text(user.realName).appendTo(row);
+				$("<td>").text(user.role.description).appendTo(row);
+				if (user.status == "ENABLED") {
+					$("<td>").text("启用").addClass("user-status").addClass("text-success").appendTo(row);
+				} else if (user.status == "DISABLED") {
+					$("<td>").text("停用").addClass("user-status").addClass("text-warning").appendTo(row);
+
+				} else if (user.status == "DELETED") {
+					$("<td>").text("注销").addClass("user-status").addClass("text-danger").appendTo(row);
+				}
+				$("<td>").text(user.department).appendTo(row);
+				$("<td>").text(user.phone).appendTo(row);
+				$("<td>").text(user.email).appendTo(row);
+				$("<td>").text(user.createTime).appendTo(row);
+
+				row.appendTo($("#userTable tbody"));
+			}
+
+			// add click handler here
+			$(".item-checkbox").click(function() {
+				if ($(".item-checkbox:checked").length == 0) {
+					initButtonStatus(false);
+				} else {
+					initButtonStatus(true);
+
+					changeButtonStatus();
+				}
+
+				changeButtonColor();
+			});
+		}
+
+		function showNaviationPanel(data) {
+			// remove current page links
+			$(".pageBox").remove();
+
+			// add page links
+			fillPagination(data.page_no, data.page_count);
+
+			$('.toPage').each(function() {
+				$(this).on('click', function() {
+					showUserPage($(this).text());
+				});
+			});
+
+			// !!! remove handlers before bind again
+			$('#previous').off();
+			$('#previous').on('click', function() {
+				if (data.page_no == 1) {
+					return false;
+				} else {
+					showUserPage(data.page_no - 1);
+				}
+			});
+
+			$('#next').off();
+			$('#next').click(function() {
+				if (data.page_no == data.page_count) {
+					return false;
+				} else {
+					showUserPage(data.page_no + 1);
+				}
+			});
+		}
+
+		function openSearchUserDialog() {
+			$("#searchUserUsernameText").val("");
+			$("#searchUserUsernameText").val("");
+			$("#searchUserRealNameText").val("");
+			$("#searchUserRoleSelect").val("ROLE_NONE");
+			$("#searchUserStatusSelect").val("NONE");
+			$("#searchUserDepartmentText").val("");
+			$("#searchBeginningCreateTimeText").val("");
+			$("#searchEndCreateTimeText").val("");
+
+			$("#searchUserAlertDiv ul").empty().hide();
+			$("#searchUserAlertDiv").hide();
+
+			$("#searchUserButton").prop("disabled", false);
+
+			$("#searchUserDialog").modal("show");
+		}
+
+		function searchUser() {
+			$("#searchUserButton").prop("disabled", true);
+
+			searchUsername = $("#searchUserUsernameText").val();
+			searchUsername = $("#searchUserUsernameText").val();
+			searchRealName = $("#searchUserRealNameText").val();
+			searchRoleName = $("#searchUserRoleSelect").val();
+			searchStatus = $("#searchUserStatusSelect").val();
+			searchDepartment = $("#searchUserDepartmentText").val();
+			searchBeginningCreateTime = $("#searchBeginningCreateTimeText").val();
+			searchEndCreateTime = $("#searchEndCreateTimeText").val();
+
+			// TODO jquery validate?
+			if (("" != searchBeginningCreateTime) && ("" != searchEndCreateTime)) {
+				if (searchEndCreateTime < searchBeginningCreateTime) {
+					$("#searchUserAlertDiv ul").empty();
+					$("<li>").append("查询结束时间不能早于查询开始时间").appendTo("#searchUserAlertDiv ul");
+					$("#searchUserAlertDiv").show();
+					$("#searchUserAlertDiv ul").show();
+
+					$("#searchUserButton").prop("disabled", false);
+
+					return;
+				}
+			}
+
+			showUserPage(1);
+
+			$("#searchUserDialog").modal("hide");
+		}
+
+		function openAddUserDialog() {
+			// remove class the jquery validation added
+			$("#addUserForm .form-group").removeClass("has-error").removeClass("has-success");
+
+			$("#addUserUsernameText").val("");
+			$("#addUserRoleSelect").val("ROLE_NONE");
+			$("#addUserRealNameText").val("");
+			$("#addUserDepartmentText").val("");
+			$("#addUserPhoneText").val("");
+			$("#addUserEmailText").val("");
+			$("#addUserSnapshotQuotaText").val("");
+
+			$("#addUserAlertDiv ul").empty().hide();
+			$("#addUserAlertDiv").hide();
+
+			$("#addUserDialog").modal("show");
+		}
+
+		function validateAddUserInfo() {
+			$("#addUserForm").validate({
+				// add class for control
+				validClass : "has-success",
+				errorClass : "has-error",
+
+				highlight : function(element, errorClass, validClass) {
+					$(element).closest('.form-group').addClass(errorClass).removeClass(validClass);
+				},
+				unhighlight : function(element, errorClass, validClass) {
+					$(element).closest('.form-group').removeClass(errorClass).addClass(validClass);
+				},
+
+				rules : {
+					// use control name as rules
+					addUserUsernameText : {
+						required : true,
+					},
+
+					addUserRoleSelect : {
+						valueNotEqualsTo : "ROLE_NONE",
+					},
+
+					addUserRealNameText : {
+						required : true,
+					},
+
+					addUserDepartmentText : {
+						required : true,
+					},
+
+					addUserPhoneText : {
+						required : true,
+						isPhone : true,
+					},
+
+					addUserEmailText : {
+						isEmail : true,
+					},
+
+					addUserSnapshotQuotaText : {
+						// required : true,
+						range : [ 0, 10 ],
+					},
+				},
+
+				messages : {
+					// use control name as rules
+					addUserUsernameText : {
+						required : "请输入账号名称；",
+					},
+
+					addUserRoleSelect : {
+						valueNotEqualsTo : "请选择账号角色；",
+					},
+
+					addUserRealNameText : {
+						required : "请输入用户姓名；",
+					},
+
+					addUserDepartmentText : {
+						required : "请输入部门名称；",
+					},
+
+					addUserPhoneText : {
+						required : "请输入电话号码；",
+						isPhone : "电话号码格式不正确；",
+					},
+
+					addUserEmailText : {
+						isEmail : "邮箱格式不正确；",
+					},
+
+					addUserSnapshotQuotaText : {
+						// required : "请输入允许创建的虚拟机快照数量；",
+						range : "虚拟机快照数量必须介于{0}和{1}之间；",
+					},
+				},
+
+				errorContainer : "#addUserAlertDiv",
+				errorLabelContainer : "#addUserAlertDiv ul",
+				wrapper : "li",
+
+				submitHandler : function() {
+					addUser();
+				},
+
+			});
+		}
+
+		function addUser() {
+			var username = $('#addUserUsernameText').val().trim();
+			var realName = $('#addUserRealNameText').val().trim();
+			var roleName = $('#addUserRoleSelect').val();
+			var department = $('#addUserDepartmentText').val().trim();
+			var phone = $('#addUserPhoneText').val().trim();
+			var email = $('#addUserEmailText').val().trim();
+			var snapshotQuota = 0;
+			if ($('#addUserSnapshotQuotaText').val().trim() != "") {
+				snapshotQuota = $('#addUserSnapshotQuotaText').val().trim();
+			}
+
+			if (username == "admin") {
+				$("#addUserAlertDiv ul").empty();
+				$("<li>").text("不允许使用admin作为账户名").appendTo($("#addUserAlertDiv ul"));
+				$("#addUserAlertDiv").show();
+				$("#addUserAlertDiv ul").show();
+
+				return;
+			}
+
+			var pData = new Object();
+			pData.username = username;
+			pData.roleName = roleName;
+			pData.realName = realName;
+			pData.department = department;
+			pData.phone = phone;
+			pData.email = email;
+			pData.snapshotQuota = snapshotQuota;
+
+			callAjax("${ userUrl }", "POST", true, pData, null, addUserSuccessHandler, addUserErrorHandler,
+					"${ loginUrl }");
+		}
+
+		function addUserSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				location.reload(true);
+			} else {
+				console.log(data.message);
+
+				$("#addUserAlertDiv ul").empty();
+				$("<li>").append(data.message).appendTo("#addUserAlertDiv ul");
+				$("#addUserAlertDiv").show();
+				$("#addUserAlertDiv ul").show();
+			}
+		}
+
+		function addUserErrorHandler(XMLHttpRequest, textStatus, errorThrown) {
+			$("#addUserAlertDiv ul").empty();
+			$("<li>").append("访问WEB服务发生异常").appendTo("#addUserAlertDiv ul");
+			$("#addUserAlertDiv").show();
+			$("#addUserAlertDiv ul").show();
+		}
+
+		function showUser(username, roleName, realName, department, phone, email, snapshotQuota) {
+			// remove class the jquery validation added
+			$("#changeUserForm .form-group").removeClass("has-error").removeClass("has-success");
+
+			$('#changeUserUsernameLabel').html(username);
+			$('#changeUserRoleSelect').val(roleName);
+			$('#changeUserRealNameText').val(realName);
+			$('#changeUserDepartmentText').val(department);
+			$('#changeUserPhoneText').val(phone);
+			$('#changeUserEmailText').val(email);
+			$('#changeUserSnapshotQuotaText').val(snapshotQuota);
+
+			$("#changeUserAlertDiv ul").empty().hide();
+			$("#changeUserAlertDiv").hide();
+
+			$('#showUserDialog').modal('show');
+
+			return;
+		}
+
+		function validateChangeUserInfo() {
+			$("#changeUserForm").validate({
+				// add class for control
+				validClass : "has-success",
+				errorClass : "has-error",
+
+				highlight : function(element, errorClass, validClass) {
+					$(element).closest('.form-group').addClass(errorClass).removeClass(validClass);
+				},
+				unhighlight : function(element, errorClass, validClass) {
+					$(element).closest('.form-group').removeClass(errorClass).addClass(validClass);
+				},
+
+				rules : {
+					// use control name as rules					
+					changeUserRealNameText : {
+						required : true,
+					},
+
+					changeUserDepartmentText : {
+						required : true,
+					},
+
+					changeUserPhoneText : {
+						isPhone : true,
+						required : true,
+					},
+
+					changeUserEmailText : {
+						isEmail : true,
+					},
+
+					changeUserSnapshotQuotaText : {
+						// required : true,
+						range : [ 0, 10 ],
+					},
+				},
+
+				messages : {
+					// use control name as rules					
+					changeUserRealNameText : {
+						required : "请输入用户姓名；",
+					},
+
+					changeUserDepartmentText : {
+						required : "请输入部门名称；",
+					},
+
+					changeUserPhoneText : {
+						isPhone : "电话号码格式不正确；",
+						required : "请输入电话号码；",
+					},
+
+					changeUserEmailText : {
+						isEmail : "邮箱格式不正确；",
+					},
+
+					changeUserSnapshotQuotaText : {
+						// required : "请输入允许创建的虚拟机快照数量；",
+						range : "虚拟机快照数量必须介于{0}和{1}之间；",
+					},
+				},
+
+				errorContainer : "#changeUserAlertDiv",
+				errorLabelContainer : "#changeUserAlertDiv ul",
+				wrapper : "li",
+
+				submitHandler : function() {
+					changeUser();
+				},
+
+			});
+
+			return;
+		}
+
+		function changeUser() {
+			var username = $('#changeUserUsernameLabel').html();
+			var roleName = $('#changeUserRoleSelect').val();
+			var realName = $('#changeUserRealNameText').val().trim();
+			var department = $('#changeUserDepartmentText').val().trim();
+			var phone = $('#changeUserPhoneText').val().trim();
+			var email = $('#changeUserEmailText').val().trim();
+			var snapshotQuota = 0;
+			if ($('#changeUserSnapshotQuotaText').val().trim() != "") {
+				snapshotQuota = $('#changeUserSnapshotQuotaText').val().trim();
+			}
+
+			var pData = new Object();
+			pData.roleName = roleName;
+			pData.realName = realName;
+			pData.department = department;
+			pData.phone = phone;
+			pData.email = email;
+			pData.snapshotQuota = snapshotQuota;
+
+			callAjax("${ userUrl }/" + username, "PUT", true, pData, null, changeUserSuccessHandler,
+					changeUserErrorHandler, "${ loginUrl }");
+		}
+
+		function changeUserSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				location.reload(true);
+			} else {
+				console.log(data.message);
+
+				$("#changeUserAlertDiv ul").empty();
+				$("<li>").append(data.message).appendTo("#changeUserAlertDiv ul");
+				$("#changeUserAlertDiv").show();
+				$("#changeUserAlertDiv ul").show();
+			}
+		}
+
+		function changeUserErrorHandler(XMLHttpRequest, textStatus, errorThrown) {
+			$("#changeUserAlertDiv ul").empty();
+			$("<li>").append("访问WEB服务发生异常").appendTo("#changeUserAlertDiv ul");
+			$("#changeUserAlertDiv").show();
+			$("#changeUserAlertDiv ul").show();
+		}
+
+		function openDeleteUserDialog() {
+			$("#confirmationDialogTitle strong").text("注销账号");
+			$("#confirmationDialogMessageDiv").text("确定注销当前选择的账号吗？");
+			$("#confirmationButton").prop("disabled", false);
+			$("#confirmationButton").click(function() {
+				changeUserStatus("DELETED");
+			});
+
+			$("#confirmationDialog").modal("show");
+		}
+
+		function openEnableUserDialog() {
+			$("#confirmationDialogTitle strong").text("启用账号");
+			$("#confirmationDialogMessageDiv").text("确定启用当前选择的账号吗？");
+			$("#confirmationButton").prop("disabled", false);
+			$("#confirmationButton").click(function() {
+				changeUserStatus("ENABLED");
+			});
+
+			$("#confirmationDialog").modal("show");
+		}
+
+		function openDisableUserDialog() {
+			$("#confirmationDialogTitle strong").text("停用账号");
+			$("#confirmationDialogMessageDiv").text("确定停用当前选择的账号吗？");
+			$("#confirmationButton").prop("disabled", false);
+			$("#confirmationButton").click(function() {
+				changeUserStatus("DISABLED");
+			});
+
+			$("#confirmationDialog").modal("show");
+		}
+
+		function openUndeleteUserDialog() {
+			$("#confirmationDialogTitle strong").text("恢复账号");
+			$("#confirmationDialogMessageDiv").text("确定恢复当前选择的账号吗？");
+			$("#confirmationButton").prop("disabled", false);
+			// reset to disabled status first
+			$("#confirmationButton").click(function() {
+				changeUserStatus("DISABLED");
+			});
+
+			$("#confirmationDialog").modal("show");
+		}
+
+		function openResetPasswordDialog() {
+			$("#confirmationDialogTitle strong").text("重置账号密码");
+			$("#confirmationDialogMessageDiv").text("确定重置当前选择账号的密码吗？");
+			$("#confirmationButton").prop("disabled", false);
+			$("#confirmationButton").click(resetUserPassword);
+
+			$("#confirmationDialog").modal("show");
+		}
+
+		function changeUserStatus(status) {
+			var usernames = getSelectedItems();
+			if (null == usernames) {
+				return;
+			}
+
+			$("#confirmationButton").prop("disabled", true);
+
+			var pData = new Object();
+			pData.usernames = usernames;
+			pData.status = status;
+
+			callAjax("${ userUrl }/status", "PUT", true, pData, null, changeUserStatusSuccessHandler, null,
+					"${ loginUrl }");
+		}
+
+		function changeUserStatusSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				location.reload(true);
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		function resetUserPassword() {
+			var usernames = getSelectedItems();
+			if (null == usernames) {
+				return;
+			}
+
+			$("#confirmationButton").prop("disabled", true);
+
+			var password = $.md5("12345");
+			var pData = new Object();
+			pData.usernames = usernames;
+			pData.password = password;
+
+			callAjax("${ userUrl }/user-password", "PUT", true, pData, null, resetUserPasswordSuccessHandler, null,
+					"${ loginUrl }");
+		}
+
+		function resetUserPasswordSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				location.reload(true);
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		//
+		// helper method
+		//
+		function getSelectedItems() {
+			if ($(".item-checkbox:checked").length == 0) {
+				return null;
+			}
+
+			var ids = "";
+			$(".item-checkbox:checked").each(function() {
+				ids = ids + $(this).val() + ',';
+			});
+			ids = ids.substring(0, ids.length - 1);
+			return ids;
+		}
+
+		]]>
+	</script>
+
+</div>

@@ -1,0 +1,140 @@
+@CHARSET "UTF-8";
+
+body {
+	background: #e5ebf0;
+	font-size: 12px;
+	font-family: "微软雅黑", "宋体", Arial, Helvetica, sans-serif;
+}
+
+/* ******** ******** table start ******** ******** */
+table.table {
+	margin-top: 0px !important;
+	margin-bottom: 0px !important;
+	text-align: center;
+}
+
+.table th {
+	text-align: center;
+}
+
+/* .table-striped>tbody>tr:nth-child(odd)>th { */
+/* 	background-color: #3d556c; */
+/* 	color: #ffffff; */
+/* } */
+
+/* .table-striped>tbody>tr:nth-child(even)>th { */
+/* 	background-color: #3d556c; */
+/* 	color: #ffffff; */
+/* } */
+.table-striped>thead>tr:nth-child(odd)>th {
+	background-color: #3d556c;
+	color: #ffffff;
+}
+
+.table-striped>thead>tr:nth-child(even)>th {
+	background-color: #3d556c;
+	color: #ffffff;
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td {
+	background-color: #f2f2f2;
+}
+
+.table-striped>tbody>tr:nth-child(even)>td {
+	background-color: #ffffff;
+}
+
+.table-hover>tbody>tr:hover>td {
+	background-color: #f9f9f9;
+}
+
+.table-bordered {
+	border: 0px solid #ffffff;
+}
+
+.table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td,
+	.table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td {
+	border: 2px solid #ffffff;
+}
+
+.table-bordered>tbody>tr:first-child>th, .table-bordered>tfoot>tr:first-child>th, .table-bordered>tbody>tr:first-child>td,
+	.table-bordered>tfoot>tr:first-child>td {
+	border-top: 0;
+}
+
+.table-bordered>tbody>tr:last-child>th, .table-bordered>tfoot>tr:last-child>th, .table-bordered>tbody>tr:last-child>td,
+	.table-bordered>tfoot>tr:last-child>td {
+	border-bottom: 0;
+}
+
+.table-bordered>thead>tr>th:first-child, .table-bordered>tbody>tr>th:first-child, .table-bordered>tfoot>tr>th:first-child,
+	.table-bordered>thead>tr>td:first-child, .table-bordered>tbody>tr>td:first-child, .table-bordered>tfoot>tr>td:first-child
+	{
+	border-left: 0;
+}
+
+.table-bordered>thead>tr>th:last-child, .table-bordered>tbody>tr>th:last-child, .table-bordered>tfoot>tr>th:last-child,
+	.table-bordered>thead>tr>td:last-child, .table-bordered>tbody>tr>td:last-child, .table-bordered>tfoot>tr>td:last-child
+	{
+	border-right: 0;
+}
+
+/* ******** ******** table end ******** ******** */
+.alert-sm {
+	padding: 5px;
+	margin-bottom: 0px;
+}
+
+.text-link:hover {
+	cursor: pointer;
+}
+
+.btn {
+	margin-left: 5px;
+	margin-right: 5px;
+	min-width: 60px;
+}
+
+/* override .btn setting */
+.first-button {
+	margin-left: 0px;
+}
+
+.last-button {
+	margin-right: 0px;
+}
+
+.option-list a {
+	min-width: 60px;
+	margin-bottom: 5px;
+}
+
+.option-list .active {
+	color: #fff;
+	background-color: #428bca;
+}
+
+.page-header {
+	padding: 0px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.hide-content {
+	display: none;
+}
+
+.breadcrumb {
+	background-color: #ffffff;
+}
+.form-control:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+          box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+	cursor : auto;
+	background-color: #ffffff;
+}

@@ -1,0 +1,361 @@
+﻿<html xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:tiles="http://tiles.apache.org/tags-tiles" xmlns:spring="http://www.springframework.org/tags"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util">
+
+<jsp:output doctype-root-element="HTML" doctype-system="about:legacy-compat" />
+
+<jsp:directive.page contentType="text/html;charset=UTF-8" />
+<jsp:directive.page pageEncoding="UTF-8" />
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=8" />
+
+<util:load-scripts />
+
+<spring:url value="/resources/css/bootstrap.css" var="bootstrap_css" />
+<spring:url value="/resources/css/jquery.mmenu.css" var="jquery_mmenu_css" />
+<spring:url value="/resources/css/font-awesome.min.css" var="font_awesome_css" />
+<spring:url value="/resources/plugins/jquery-ui/css/jquery-ui-1.10.4.min.css" var="jquery_ui_css" />
+<spring:url value="/resources/css/style.css" var="sytle_css" />
+<spring:url value="/resources/css/add-ons.css" var="add_ons_css" />
+<spring:url value="/resources/css/cloud.css" var="cloud_css" />
+<spring:url value="/resources/css/bootstrap.custom.css" var="bootstrap_custom_css" />
+
+<link href="${ bootstrap_css }" type="text/css" rel="stylesheet" />
+<link href="${ jquery_mmenu_css }" type="text/css" rel="stylesheet" />
+<link href="${ font_awesome_css }" type="text/css" rel="stylesheet" />
+<link href="${ jquery_ui_css }" type="text/css" rel="stylesheet" />
+<link href="${ sytle_css }" type="text/css" rel="stylesheet" />
+<link href="${ add_ons_css }" type="text/css" rel="stylesheet" />
+<link href="${ cloud_css }" type="text/css" rel="stylesheet" />
+<link href="${ bootstrap_custom_css }" type="text/css" rel="stylesheet" />
+
+<spring:url value="/resources/img" var="img" />
+<spring:url value="/resources/j_spring_security_check" var="login" />
+<spring:url value="/user" var="userUrl" />
+
+<title>故宫博物院云平台</title>
+</head>
+
+<body class="login-body">
+	<div class="container-fluid">
+		<div class="row login-heading" align="center">
+			<span style="font-size: 36px; color: #e0bc70;">故宫博物院云平台</span>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4" align="center">
+				<form id="login_form" class="login-form" method="post" action="${ login }">
+					<div class="form-group login-form-group ">
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="fa fa-user blue"> <!-- ph -->
+								</i>
+							</span>
+							<input type="text" id="realNameText" class="form-control" placeholder="姓名" />
+						</div>
+					</div>
+					<div class="form-group login-form-group ">
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="fa fa-group blue"> <!-- ph -->
+								</i>
+							</span>
+							<select id="usernameSelect" name="j_username" class="form-control">
+								<option value="-1"></option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group login-form-group ">
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="fa fa-key blue"> <!-- ph -->
+								</i>
+							</span>
+							<input type="password" id="password" name="j_password" class="form-control" placeholder="密码" />
+						</div>
+					</div>
+					<div class="form-group login-form-group ">
+						<div id="loginAlertDiv" class="alert alert-danger alert-sm" style="display: none">
+							<ul>
+								<!-- ph -->
+							</ul>
+						</div>
+					</div>
+					<div class="form-group login-form-group form-actions" align="right">
+						<button type="button" id="loginbtn" class="btn btn-sm btn-success" style="min-width: 80px">登录</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="ajaxWaitingDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="myModalLabel">
+						<strong>操作进行中...</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group" align="center">
+						<img alt="waiting..." src="${ img }/ajax-waiting.gif" />
+					</div>
+					<div class="row form-group">
+						<div id="ajaxWaitingMessageDiv" class="col-md-8 col-md-offset-2" align="center">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<!-- ph -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="errorDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="errorDialogTitle">
+						<strong>错误</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group">
+						<div id="errorDialogMessageDiv" class="col-md-8 col-md-offset-2 alert alert-danger alert-sm" align="center">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<spring:url value="/resources/js/common.js" var="my_common_js" />
+	<spring:url value="/resources/js/jquery-1.9.1.min.js" var="jquery_js" />
+	<spring:url value="/resources/js/bootstrap.min.js" var="bootstrap_js" />
+	<spring:url value="/resources/js/md5.js" var="md5_js" />
+
+	<script type="text/javascript" src="${ my_common_js }">
+	<!-- d -->
+		
+	</script>
+	<script type="text/javascript" src="${ jquery_js }">
+	<!-- d -->
+		
+	</script>
+
+	<script type="text/javascript" src="${ bootstrap_js }">
+	<!-- d -->
+		
+	</script>
+
+	<script type="text/javascript" src="${ md5_js }">
+	<!-- d -->
+		
+	</script>
+
+	<script>
+		<![CDATA[
+		$(document).ready(function() {
+			$("#realNameText").blur(clearUsername);
+
+			$("#usernameSelect").focus(showUsername);
+						
+			$(document).keydown(monitorKeyDown);
+			
+			$("#loginbtn").click(login);
+
+			if (location.search.indexOf('login_error=t') != -1) {
+				$("#loginAlertDiv ul").empty();
+				$("<li>").append("登陆失败，用户不存在或密码错误").appendTo("#loginAlertDiv ul");
+				$("#loginAlertDiv").show();
+				$("#loginAlertDiv ul").show();
+			}
+		});
+
+		function clearUsername() {
+			$("#usernameSelect").empty();
+
+			$("#loginAlertDiv ul").empty().hide();
+			$("#loginAlertDiv").hide();
+		}
+
+		function showUsername() {
+			$("#usernameSelect").empty();
+
+			var realName = $("#realNameText").val();
+			if (realName == "") {
+				return;
+			} else if (realName == "admin") {
+				$("#usernameSelect").prepend("<option value='admin'>初始超级管理员</option>");
+				$("#password").focus();
+				return;
+			} else {
+				var pData = new Object();
+				pData.realName = realName;
+				callAjax("${ userUrl }/list-by-real-name", "GET", true, pData, "正在获取用户账号...",
+						showUsernameSuccessHandler, null, "");
+			}		
+		}
+
+		function showUsernameSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				if (data.userList.length == 0) {
+					// $("#loginAlertDiv").text("当前用户没有可用的角色").show();
+					$("#errorDialogMessageDiv").text("当前用户姓名没有可用的账号");
+					$("#errorDialog").modal("show");
+				} else {
+					for (var i = 0; i < data.userList.length; i++) {
+						$("<option>").val(data.userList[i].username).text(
+								data.userList[i].username + "_" + data.userList[i].role.description).appendTo(
+								"#usernameSelect");	
+					}
+				}
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+			
+		}
+
+		function checkOnlineCloudManager() {
+			var result = false;
+			var username = $("#usernameSelect").val();
+
+			// use synchronous call so the return value will not be "undefined"
+			$.ajax({
+				type : "GET",
+				url : "${ userUrl }/online-cloud-manager-list",
+				dataType : "json",
+				async : false, // synchronous
+				success : function(data, textStatus) {
+					if ("ok" == data.status) {
+						if (data.onlineCloudManagers.length == 0) {
+							result = true;
+						} else if ((data.onlineCloudManagers.length == 1)
+								&& (data.onlineCloudManagers[0].username == username)) {
+							// allow kick off my last login 
+							result = true;
+						} else {
+							var message = "以下云平台管理员已经登录：";
+							for (var i = 0; i < data.onlineCloudManagers.length; i++) {
+								message += "[姓名：" + data.onlineCloudManagers[i].realName + "，部门："
+										+ data.onlineCloudManagers[i].department + "，电话："
+										+ data.onlineCloudManagers[i].phone + "]";
+							}
+							// $("#loginAlertDiv").text("以下云平台管理员已经登录：" + message).show();
+
+							$("#errorDialogMessageDiv").text(message);
+							$("#errorDialog").modal("show");
+
+							result = false;
+						}
+					} else {
+						// $("#loginAlertDiv").text(data.message).show();
+						console.log(data.message);
+
+						$("#errorDialogMessageDiv").text(data.message);
+						$("#errorDialog").modal("show");
+
+						result = false;
+					}
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					console.log(XMLHttpRequest);
+					console.log(textStatus);
+					console.log(errorThrown);
+
+					$("#errorDialogMessageDiv").text("访问WEB服务发生异常");
+					$("#errorDialog").modal("show");
+
+					result = false;
+				},
+				statusCode : {
+					901 : function () {
+						location.href = "";
+					}
+				}
+			});
+
+			return result;
+		}
+
+		function login() {
+			$("#loginAlertDiv ul").empty().hide();
+			$("#loginAlertDiv").hide();
+			
+			//alert($("#realNameText").val()+" "+$("#password").val());
+
+			var realName = $.trim($("#realNameText").val());
+			if ("" == realName) {
+				$("#loginAlertDiv ul").empty();
+				$("<li>").append("请输入用户名").appendTo("#loginAlertDiv ul");
+				$("#loginAlertDiv").show();
+				$("#loginAlertDiv ul").show();
+				return;
+			}
+
+			var username = $("#usernameSelect").val();
+			if ((null == username) || ("-1" == username)) {
+				$("#loginAlertDiv ul").empty();
+				$("<li>").append("请选择用户姓名和角色").appendTo("#loginAlertDiv ul");
+				$("#loginAlertDiv").show();
+				$("#loginAlertDiv ul").show();
+				return;
+			}
+
+			var password = $.md5($("#password").val());
+			$("#password").val(password);
+
+			var usernameText = $("#usernameSelect").find("option:checked").text();
+			if (usernameText.indexOf("_云平台管理员") >= 0) {
+				var result = checkOnlineCloudManager();
+				if (result == false) {
+					return;
+				}
+			}
+			$('#login_form').submit();
+		}
+		
+	 	function monitorKeyDown(e){
+			if(navigator.appName == "Netscape"){
+				var keyCode = e.which;
+			}else{
+				var keyCode = event.keyCode;
+			}
+			
+			if(keyCode == 13){
+				if($(e.target).attr('id')=='realNameText'){
+					$("#usernameSelect").focus();
+				}else if($(e.target).attr('id')=='usernameSelect'){
+					$("#password").focus();
+				}else if($(e.target).attr('id')=='password'){
+					$("#loginbtn").focus();	
+				}else if($(e.target).attr('id')=='loginbtn'){
+
+				}else {
+					$("#realNameText").focus();
+				}
+			}
+		}
+		
+		]]>
+	</script>
+</body>
+</html>

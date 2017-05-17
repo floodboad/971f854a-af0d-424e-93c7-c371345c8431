@@ -1,0 +1,581 @@
+﻿
+<div class="main-content" xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page">
+
+	<spring:url value="/domain" var="domainUrl" />
+	<spring:url value="/virtual-machine" var="virtualMachineUrl" />
+	<spring:url value="/login" var="loginUrl" />
+
+	<spring:url value="/resources/img" var="img" />
+
+	<div class="row">
+		<div class="col-md-12">
+			<ol class="breadcrumb content-shadow">
+				<li><i class="fa fa-list-alt"> <!-- ph -->
+				</i> <a href="">虚拟机列表</a></li>
+			</ol>
+		</div>
+	</div>
+
+	<div class="row">
+		<div id="buttonsNav" class="col-md-12">
+			<div class="col-md-8" style="padding-left: 0px">
+				<button id="startVmsButton" class="btn btn-default btn-sm first-button toggle-button" disabled="disabled">启动</button>
+				<button id="openRebootVmsDialogButton" class="btn btn-default btn-sm toggle-button" disabled="disabled">重启</button>
+				<button id="openShutdownVmsDialogButton" class="btn btn-default btn-sm toggle-button" disabled="disabled">关机</button>
+			</div>
+
+			<div class="col-md-4" style="padding-right: 0px" align="right">
+				<sec:authorize ifAnyGranted="ROLE_MANAGER">
+					<button id="openCreateFormButton" class="btn btn-success btn-sm">新建</button>
+					<button id="openDeleteVmsDialogButton" class="btn btn-default btn-sm last-button" disabled="disabled">删除</button>
+				</sec:authorize>
+			</div>
+		</div>
+
+		<div class="col-md-12">
+			<div class="content-block height-constraint-block-600 content-shadow">
+				<table id="virtualMachineTable" class="table table-striped table-condensed table-bordered table-hover">
+					<thead>
+						<tr>
+							<th><input type="checkbox" id="selectAllCheckbox" /></th>
+							<th>主机名</th>
+							<th>状态</th>
+							<th>业务系统标签</th>
+							<th>镜像名称</th>
+							<th>访问地址</th>
+							<th>配置</th>
+							<th>管理员</th>
+							<th>所在域</th>
+							<th>所在组</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- ph -->
+					</tbody>
+				</table>
+				<div style="margin: 20px">
+					<span id="machineCountSpan">
+						<!-- ph -->
+					</span>
+				</div>
+
+				<!-- start pagination -->
+				<div>
+					<ul class="pagination" id="pagination">
+						<li id="previous"><a href="javascript:void(0)">上一页</a></li>
+						<li id="next"><a href="javascript:void(0)">下一页</a></li>
+					</ul>
+				</div>
+				<!-- end pagination -->
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="rebootVmsDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="myModalLabel">
+						<strong>重启虚拟机</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group">
+						<div class="col-md-8 col-md-offset-2 alert alert-danger alert-sm" align="center">你真的要重启选中的虚拟机吗？</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-danger btn-sm" id="rebootVmsButton">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="shutdownVmsDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="myModalLabel">
+						<strong>关闭虚拟机</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group">
+						<div class="col-md-8 col-md-offset-2 alert alert-danger alert-sm" align="center">你真的要关闭选中的虚拟机吗？</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-danger btn-sm" id="shutdownVmsButton">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="deleteVmsDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="myModalLabel">
+						<strong>删除虚拟机</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group">
+						<div class="col-md-8 col-md-offset-2 alert alert-danger alert-sm" align="center">你真的要删除选中的虚拟机吗？</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-danger btn-sm" id="deleteVmsButton">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="ajaxWaitingDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="myModalLabel">
+						<strong>操作进行中...</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group" align="center">
+						<img alt="waiting..." src="${ img }/ajax-waiting.gif" />
+					</div>
+					<div class="row form-group">
+						<div id="ajaxWaitingMessageDiv" class="col-md-8 col-md-offset-2" align="center">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<!-- ph -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="errorDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
+					<h5 class="modal-title" id="errorDialogTitle">
+						<strong>错误</strong>
+					</h5>
+				</div>
+				<div class="modal-body">
+					<div class="row form-group">
+						<div id="errorDialogMessageDiv" class="col-md-8 col-md-offset-2 alert alert-danger alert-sm" align="center">
+							<!-- ph -->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+	<spring:url value="/resources/js/pagination.js" var="pagination_js" />
+
+	<script type="text/javascript" src="${ pagination_js }">
+	<!-- d -->
+		
+	</script>
+
+	<script type="text/javascript">
+		<![CDATA[
+		$(document).ready(function() {
+			//点击申请跳转到申请页面
+			$("#openCreateFormButton").click(function() {
+				location.href = "${ virtualMachineUrl }/form";
+			});
+
+			showVirtualMachineListPage(1);
+
+			$('#selectAllCheckbox').click(function() {
+				var checkFlag = $(this).is(':checked');
+				$(".item-checkbox:enabled").prop("checked", checkFlag);
+
+				initButtonStatus(checkFlag);
+				if (checkFlag == true) {
+					changeButtonStatus();
+				}
+
+				changeButtonColor();
+			});
+
+			$("#startVmsButton").click(startVms);
+
+			$("#openRebootVmsDialogButton").click(openRebootVmsDialog);
+			$("#rebootVmsButton").click(rebootVms);
+
+			$("#openShutdownVmsDialogButton").click(openShutdownVmsDialog);
+			$("#shutdownVmsButton").click(shutdownVms);
+
+			$("#openDeleteVmsDialogButton").click(openDeleteVmsDialog);
+			$("#deleteVmsButton").click(deleteVms);
+
+			// 					var a = new Array();
+			// 					$('.showDetail').each(function() {
+			// 						a.push($(this).attr('id'));
+
+			// 					});
+
+			// 					setInterval(function() {
+			// 						getCurrentStatus(a)
+			// 					}, 10000);
+
+		});
+
+		// set initial button enable status
+		function initButtonStatus(enabled) {
+			$("#startVmsButton").prop("disabled", !enabled);
+			$("#openRebootVmsDialogButton").prop("disabled", !enabled);
+			$("#openShutdownVmsDialogButton").prop("disabled", !enabled);
+			$("#openDeleteVmsDialogButton").prop("disabled", !enabled);
+		}
+
+		// change button enable status after initialization, if necessary
+		function changeButtonStatus() {
+			var enableStart = true, enableReboot = true, enableShutdown = true, enableDelete = true;
+
+			$(".item-checkbox:checked").each(function() {
+				var machineStatus = $(this).parent().siblings(".machine-status").text();
+
+				if ("已关机" != machineStatus) {
+					enableStart = false;
+				}
+
+				if ("运行中" != machineStatus) {
+					enableReboot = false;
+					enableShutdown = false;
+				}
+
+				if (("运行中" != machineStatus) && ("已关机" != machineStatus) && ("错误" != machineStatus)) {
+					enableDelete = false;
+				}
+
+				// 						if (("创建中" == machineStatus) || ("运行中" == machineStatus) || ("关机中" == machineStatus)
+				// 								|| ("开机中" == machineStatus) || ("重启中" == machineStatus) || ("删除中" == machineStatus)
+				// 								|| ("错误" == machineStatus) || ("未知" == machineStatus) || ("已删除" == machineStatus)) {
+				// 							enableStart = false;
+				// 						}
+
+				// 						if (("创建中" == machineStatus) || ("关机中" == machineStatus) || ("开机中" == machineStatus)
+				// 								|| ("重启中" == machineStatus) || ("删除中" == machineStatus) || ("已关机" == machineStatus)
+				// 								|| ("错误" == machineStatus) || ("未知" == machineStatus) || ("已删除" == machineStatus)) {
+				// 							enableReboot = false;
+				// 							enableShutdown = false;
+				// 						}
+
+				// 						if (("创建中" == machineStatus) || ("关机中" == machineStatus) || ("开机中" == machineStatus)
+				// 								|| ("重启中" == machineStatus) || ("删除中" == machineStatus) || ("未知" == machineStatus)
+				// 								|| ("已删除" == machineStatus)) {
+				// 							enableDelete = false;
+				// 						}
+			})
+
+			$("#startVmsButton").prop("disabled", !enableStart);
+			$("#openRebootVmsDialogButton").prop("disabled", !enableReboot);
+			$("#openShutdownVmsDialogButton").prop("disabled", !enableShutdown);
+			$("#openDeleteVmsDialogButton").prop("disabled", !enableDelete)
+		}
+
+		// change button color after set button status
+		function changeButtonColor() {
+			$(".toggle-button").each(function() {
+				if ($(this).prop("disabled") == true) {
+					$(this).removeClass("btn-primary").addClass("btn-default");
+				} else {
+					$(this).removeClass("btn-default").addClass("btn-primary");
+				}
+			});
+
+			if ($("#openDeleteVmsDialogButton").prop("disabled") == true) {
+				$("#openDeleteVmsDialogButton").removeClass("btn-danger").addClass("btn-default");
+			} else {
+				$("#openDeleteVmsDialogButton").removeClass("btn-default").addClass("btn-danger");
+			}
+		}
+
+		function showVirtualMachineListPage(pageNo) {
+			var pData = new Object();
+			pData.pageNo = pageNo;
+
+			callAjax("${ virtualMachineUrl }/json-list", "GET", true, pData, null,
+					showVirtualMachineListPageSuccessHandler, null, "${ loginUrl }");
+		}
+
+		function showVirtualMachineListPageSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				showVirtualMachineTable(data);
+
+				$("#machineCountSpan").text("虚拟机数：" + data.total_machine_count + "个");
+
+				showNaviationPanel(data);
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		function showVirtualMachineTable(data) {
+			$("#virtualMachineTable tbody").empty();
+
+			var machines = data.machines;
+			for (var i = 0; i < machines.length; i++) {
+				var machine = machines[i];
+
+				var row = $("<tr>");
+				var machineCheckbox = $("<input>", {
+					type : "checkbox",
+					class : "item-checkbox",
+					name : "checkbox",
+					value : machine.id
+				});
+				$("<td>").append(machineCheckbox).appendTo(row);
+
+				var machineLink = $("<a>", {
+					href : "${ virtualMachineUrl }/" + machine.id + "/detail",
+					text : machine.name
+				})
+				$("<td>").append(machineLink).appendTo(row);
+
+				if ("运行中" == machine.status) {
+					$("<td>").text(machine.status).addClass("machine-status text-success").appendTo(row);
+				} else if (("删除中" == machine.status) || ("在线迁移中" == machine.status) || ("关机中" == machine.status)
+						|| ("开机中" == machine.status) || ("重启中" == machine.status) || ("创建中" == machine.status)
+						|| ("快照中" == machine.status)) {
+					$("<td>").text(machine.status).addClass("machine-status text-warning").appendTo(row);
+				} else {
+					$("<td>").text(machine.status).addClass("machine-status text-danger").appendTo(row);
+				}
+
+				var applicationNameList = "";
+				for (var j = 0; j < machine.applications.length; j++) {
+					applicationNameList += machine.applications[j].name + ", ";
+				}
+				$("<td>").append(applicationNameList).appendTo(row);
+				$("<td>").append(machine.image_name).appendTo(row);
+				$("<td>").append(machine.floating_ip).appendTo(row);
+				$("<td>").append("处理器：" + machine.cpu + "颗，内存：" + machine.memory + "GB，磁盘：" + machine.disk + "GB")
+						.appendTo(row);
+				$("<td>").append(machine.manager).appendTo(row);
+				$("<td>").append(machine.domain_name).appendTo(row);
+				$("<td>").append(machine.group_name).appendTo(row);
+
+				row.appendTo($("#virtualMachineTable tbody"));
+			}
+
+			// add click handler here
+			$(".item-checkbox").click(function() {
+				if ($(".item-checkbox:checked").length == 0) {
+					initButtonStatus(false);
+				} else {
+					initButtonStatus(true);
+
+					changeButtonStatus();
+				}
+
+				changeButtonColor();
+			});
+		}
+
+		function showNaviationPanel(data) {
+			// remove current page links
+			$(".pageBox").remove();
+
+			// add page links
+			fillPagination(data.pageNo, data.pageTotal);
+
+			$('.toPage').each(function() {
+				$(this).on('click', function() {
+					showVirtualMachineListPage($(this).text());
+				});
+			});
+
+			// !!! remove handlers before bind again
+			$('#previous').off();
+			$('#previous').on('click', function() {
+				if (data.pageNo == 1) {
+					return false;
+				} else {
+					showVirtualMachineListPage(data.pageNo - 1);
+				}
+			});
+
+			$('#next').off();
+			$('#next').click(function() {
+				if (data.pageNo == data.pageTotal) {
+					return false;
+				} else {
+					showVirtualMachineListPage(data.pageNo + 1);
+				}
+			});
+		}
+
+		function startVms() {
+			$("#startVmsButton").prop("disabled", true);
+
+			var vmIds = getSelectedItems();
+			if (null == vmIds) {
+				$("#startVmsButton").prop("disabled", false);
+				return;
+			}
+
+			var pData = new Object();
+			pData.vmIds = vmIds;
+			callAjax("${ virtualMachineUrl }/start-virtual-machines", "PUT", true, pData, "发送启动虚拟机指令...",
+					startVmsSuccessHandler, null, "${ loginUrl }");
+		}
+
+		function startVmsSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				location.reload(true);
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		function openRebootVmsDialog() {
+			$("#rebootVmsButton").prop("disabled", false);
+			$("#rebootVmsDialog").modal("show");
+		}
+
+		function rebootVms() {
+			var vmIds = getSelectedItems();
+			if (null == vmIds) {
+				return;
+			}
+
+			$("#rebootVmsButton").prop("disabled", true);
+
+			var pData = new Object();
+			pData.vmIds = vmIds;
+			callAjax("${ virtualMachineUrl }/reboot-virtual-machines", "PUT", true, pData, null,
+					rebootVmsSuccessHandler, null, "${ loginUrl }");
+		}
+
+		function rebootVmsSuccessHandler(data, textStatus) {
+			$("#rebootVmsDialog").modal("hide");
+
+			if ("ok" == data.status) {
+				location.reload(true);
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		function openShutdownVmsDialog() {
+			$("#shutdownVmsButton").prop("disabled", false);
+			$("#shutdownVmsDialog").modal("show");
+		}
+
+		function shutdownVms() {
+			var vmIds = getSelectedItems();
+			if (null == vmIds) {
+				return;
+			}
+
+			$("#shutdownVmsButton").prop("disabled", true);
+
+			var pData = new Object();
+			pData.vmIds = vmIds;
+			callAjax("${ virtualMachineUrl }/shutdown-virtual-machines", "PUT", true, pData, null, shutdownVmsHandler,
+					null, "${ loginUrl }");
+		}
+
+		function shutdownVmsHandler(data, textStatus) {
+			$("#shutdownVmsDialog").modal("hide");
+
+			if ("ok" == data.status) {
+				location.reload(true);
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		function openDeleteVmsDialog() {
+			$("#deleteVmsButton").prop("disabled", false);
+			$("#deleteVmsDialog").modal("show");
+		}
+
+		function deleteVms() {
+			var vmIds = getSelectedItems();
+			if (null == vmIds) {
+				return;
+			}
+
+			$("#deleteVmsButton").prop("disabled", true);
+
+			var pData = new Object();
+			pData.vmIds = vmIds;
+			callAjax("${ virtualMachineUrl }/delete-virtual-machines", "PUT", true, pData, null,
+					deleteVmsSuccessHandler, null, "${ loginUrl }");
+		}
+
+		function deleteVmsSuccessHandler(data, textStatus) {
+			if ("ok" == data.status) {
+				location.reload(true);
+			} else {
+				console.log(data.message);
+
+				$("#errorDialogMessageDiv").text(data.message);
+				$("#errorDialog").modal("show");
+			}
+		}
+
+		//
+		// helper method
+		//
+		function getSelectedItems() {
+			if ($(".item-checkbox:checked").length == 0) {
+				return null;
+			}
+
+			var ids = "";
+			$(".item-checkbox:checked").each(function() {
+				ids = ids + $(this).val() + ',';
+			});
+			ids = ids.substring(0, ids.length - 1);
+			return ids;
+		}
+
+		]]>
+	</script>
+
+</div>
